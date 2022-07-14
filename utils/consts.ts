@@ -19,3 +19,10 @@ export const DEFAULT_CATEGORIES = [
 ];
 
 export const ARTICLES_PER_PAGE = 10;
+
+export const SOCIALS = [
+  { slug: "fb", link: "https://www.facebook.com/pozywka/" },
+  { slug: "ig", link: "https://www.instagram.com/pozywka_/" },
+  { slug: "yt", link: "https://www.youtube.com/channel/UC3i8ccfHDUEP7M1HdqESWEA" },
+  { slug: "spotify", link: "https://open.spotify.com/show/4rplKIstn56nlTUEPgAYVT?si=c65b94dc83ef4fc1" },
+];

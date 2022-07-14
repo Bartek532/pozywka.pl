@@ -1,10 +1,12 @@
 import { memo, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./Layout.module.scss";
-import { Navbar } from "components/Navbar/Navbar";
-import { Footer } from "components/Footer/Footer";
+import { Navbar } from "components/navbar/Navbar";
+import { Footer } from "components/footer/Footer";
 //import { CookiesPopup } from "components/CookiesPopup/CookiesPopup";
 import Logo from "public/svg/logo.svg";
+import HamburgerIcon from "public/svg/hamburger.svg";
+import CloseIcon from "public/svg/close.svg";
 import clsx from "clsx";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
@@ -29,12 +31,23 @@ export const Layout = memo<LayoutProps>(({ children, title, subtitle, head, titl
     <div className={styles.content}>
       {/*<CookiesPopup />*/}
       <header className={styles.header}>
-        <Link href="/">
-          <a>
-            <Logo className={styles.logo} />
-            <span className="sr-only">strona główna</span>
-          </a>
-        </Link>
+        <div className={styles.headerContent}>
+          <Link href="/">
+            <a>
+              <Logo className={styles.logo} />
+              <span className="sr-only">strona główna</span>
+            </a>
+          </Link>
+          {isHamburgerOpen ? (
+            <CloseIcon className={styles.close} onClick={() => setIsHamburgerOpen(false)} />
+          ) : (
+            <HamburgerIcon className={styles.hamburger} onClick={() => setIsHamburgerOpen(true)} />
+          )}
+          <Navbar isHamburgerOpen={isHamburgerOpen} />
+        </div>
+
+        {/*
+        
         <button
           onClick={() => setIsHamburgerOpen((val) => !val)}
           className={clsx(styles.hamburger, {
@@ -47,13 +60,16 @@ export const Layout = memo<LayoutProps>(({ children, title, subtitle, head, titl
         >
           <span className="sr-only">{isHamburgerOpen ? "Zamknij" : "Otwórz"} menu</span>
         </button>
+        */}
       </header>
-
-      {title ? <h1 className={styles.title}>{title}</h1> : null}
-      {subtitle ? <h2 className={styles.subtitle} dangerouslySetInnerHTML={{ __html: subtitle }}></h2> : null}
       {children}
 
       <Footer />
+
+      {/*
+      {title ? <h1 className={styles.title}>{title}</h1> : null}
+      {subtitle ? <h2 className={styles.subtitle} dangerouslySetInnerHTML={{ __html: subtitle }}></h2> : null}
+        */}
 
       <NextSeo
         title={title ? titleTemplate.replace("%s", title) : titleTemplate.slice(4)}
