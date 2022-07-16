@@ -46,6 +46,9 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: Jost, sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
 a {
@@ -55,9 +58,36 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: Jost, sans-serif;
-  font-weight: 300;
-  line-height: 1.4;
+}
+
+.react-multiple-carousel__arrow {
+  background-color: var(--pink-100);
+  transition: none;
+  z-index: 10;
+
+  &:before {
+    content: "";
+    height: 16px;
+    background: url("/svg/arrow-small.svg") center no-repeat;
+  }
+
+  &.react-multiple-carousel__arrow--left {
+    &:before {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &:hover {
+    background-color: var(--white-100);
+  }
+}
+
+.react-multi-carousel-item {
+  @media (max-width: 992px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /*
