@@ -8,12 +8,13 @@ import { fetchTags } from "pages/api/posts/tags";
 import { InferGetStaticPropsType } from "types";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
-const Home = ({ instagramPosts, tags, postsBySliderTag }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({ instagramPosts, tags, placesPosts, booksPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
+      <PostsSliderSection title={"Książki"} tags={tags} posts={booksPosts} />
       <QuoteSection />
       <InstagramSection posts={instagramPosts} />
-      <PostsSliderSection title={"Miejsca"} tags={tags} posts={postsBySliderTag} />
+      <PostsSliderSection title={"Miejsca"} tags={tags} posts={placesPosts} />
     </Layout>
   );
 };
@@ -22,12 +23,14 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const instagramPosts = await fetchMyLastInstagramPosts();
     const tags = await fetchTags();
-    const postsBySliderTag = await fetchArticles({ tags: ["miejsca"] });
+    const placesPosts = await fetchArticles({ tags: ["miejsca"] });
+    const booksPosts = await fetchArticles({ tags: ["ksiazki"] });
     return {
       props: {
         instagramPosts,
         tags,
-        postsBySliderTag: postsBySliderTag.articles,
+        placesPosts: placesPosts.articles,
+        booksPosts: booksPosts.articles,
       },
       revalidate: 10,
     };

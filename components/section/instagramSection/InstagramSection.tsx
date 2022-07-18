@@ -12,7 +12,7 @@ export const InstagramSection = memo<InstagramSectionProps>(({ posts }) => {
       <span className={styles.title}>instagram</span>
       <div className={styles.images}>
         {posts.map(({ permalink, media_url }) => (
-          <a href={permalink} target="_blank" rel="noopener noreferrer">
+          <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink}>
             <div className={styles.image} style={{ backgroundImage: `url(${media_url})` }}></div>
           </a>
         ))}

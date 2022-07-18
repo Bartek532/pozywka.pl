@@ -1,0 +1,19 @@
+.label {
+  width: 100%;
+
+  .input {
+    padding: 8px 16px;
+    border: none;
+    font-size: 14px;
+    height: 18px;
+    width: auto;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--violet-100);
+    }
+  }
+}
