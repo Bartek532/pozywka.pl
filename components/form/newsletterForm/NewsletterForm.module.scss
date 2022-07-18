@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  gap: 10px;
+  .button {
+    font: inherit;
+    padding: 8px 32px;
+    background-color: var(--pink-100);
+    color: var(--violet-100);
+    font-size: 16px;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.state {
+  font-size: 14px;
+  color: rgb(236, 89, 70);
+  margin-top: 10px;
+}

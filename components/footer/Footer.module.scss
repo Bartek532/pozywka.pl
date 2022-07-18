@@ -11,8 +11,6 @@
 
     .column {
       display: flex;
-      flex-direction: column;
-
       .logo {
         width: 300px;
       }
@@ -40,14 +38,33 @@
         gap: 10px;
       }
 
+      .newsletter {
+        display: flex;
+        flex-direction: column;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        width: 285px;
+        margin-left: 100px;
+
+        .title {
+          color: var(--pink-100);
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 15px;
+        }
+      }
+
       &.first {
+        flex-direction: column;
         .links {
           display: none;
         }
       }
 
       &.second {
-        margin-left: auto;
+        display: flex;
+        justify-content: center;
         &:not(:first-child) {
           margin-left: auto;
         }
@@ -79,6 +96,10 @@
           margin-top: 35px;
           font-size: 16px;
           text-align: center;
+        }
+
+        .newsletter {
+          display: none;
         }
 
         &.first {

@@ -1,13 +1,12 @@
 .label {
   width: 100%;
-
   .input {
+    font: inherit;
     padding: 8px 16px;
     border: none;
     font-size: 14px;
-    height: 18px;
     width: auto;
-
+    width: 100%;
     &:focus {
       outline: none;
     }

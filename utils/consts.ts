@@ -1,3 +1,5 @@
+export const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
+
 export const DEFAULT_TAGS = [
   { id: 13, name: "Felietony", slug: "felietony" },
   { id: 12, name: "Fenomeny Kulinarne", slug: "fenomeny-kulinarne" },

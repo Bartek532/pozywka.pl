@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import { memo } from "react";
+import { NewsletterForm } from "components/form/newsletterForm/NewsletterForm";
 import { SOCIALS } from "utils/consts";
 import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import clsx from "clsx";
@@ -42,6 +42,10 @@ export const Footer = () => {
         </div>
         <div className={clsx(styles.column, styles.second)}>
           <FooterNav />
+          <div className={styles.newsletter}>
+            <span className={styles.title}>bądź na bieżąco</span>
+            <NewsletterForm />
+          </div>
         </div>
       </div>
       <aside className={styles.sidebar}>
