@@ -4,6 +4,7 @@ import { EMAIL_REGEX } from "utils/consts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { fetcher } from "utils/fetcher";
+import clsx from "clsx";
 
 type PromiseStatus = "pending" | "loading" | "fullfilled" | "rejected";
 
@@ -48,8 +49,16 @@ export const NewsletterForm = () => {
         />
         <button className={styles.button}>Zapisz się</button>
       </form>
-      <p className={styles.state}>
-        <br />
+      <p className={clsx(styles.state, styles[promiseStatus])}>
+        {promiseStatus === "fullfilled" ? (
+          "Twój mail został dodany do bazy"
+        ) : promiseStatus === "rejected" ? (
+          "Wypelnij poprawnie wszystkie pola"
+        ) : promiseStatus === "loading" ? (
+          "Ładowanie..."
+        ) : (
+          <br />
+        )}
       </p>
     </>
   );

@@ -23,6 +23,14 @@
 
 .state {
   font-size: 14px;
-  color: rgb(236, 89, 70);
   margin-top: 10px;
+  color: var(--white-100);
+
+  &.rejected {
+    color: rgb(236, 89, 70);
+  }
+
+  &.fullfilled {
+    color: var(--violet-100);
+  }
 }
