@@ -29,19 +29,21 @@ export const fetchMyLastInstagramPosts = async () => {
   });
 
   const posts = await Promise.all(
-    media.data.slice(0, 5).map(async (singlePost: InstagramPost) => {
+    media.data.map(async (singlePost: InstagramPost) => {
       const post = await fetcher(
-        `https://graph.instagram.com/${singlePost.id}?fields=id, media_url, username, caption, permalink&access_token=${instagramToken}`,
+        `https://graph.instagram.com/${singlePost.id}?fields=id, media_url, media_type, username, caption, permalink&access_token=${instagramToken}`,
         {
           method: "GET",
         },
       );
 
-      return post;
+      if (post.media_type === "IMAGE") {
+        return post;
+      }
     }),
   );
 
-  return posts;
+  return posts.filter(Boolean).slice(0, 5);
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
