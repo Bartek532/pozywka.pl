@@ -19,10 +19,19 @@ type BannerProps = {
 
 export const Banner = memo<BannerProps>(({ label, title, reverse = false, variant, link, description, imageSrc }) => {
   return (
-    <div className={clsx(styles.wrapper, styles[variant])}>
+    <div className={clsx(styles.wrapper, styles[variant], { [styles.reverse]: reverse })}>
       <div className={styles.content}>
         <Badge variant={variant} text={label} direction={"right"} />
         <h2 className={styles.title}>{title}</h2>
+
+        {description ? (
+          <div
+            className={styles.description}
+            dangerouslySetInnerHTML={{
+              __html: description,
+            }}
+          ></div>
+        ) : null}
 
         <Link href={link.url}>
           <a className={styles.link}>{link.title}</a>

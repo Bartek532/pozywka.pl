@@ -5,6 +5,7 @@ import { InstagramSection } from "components/section/instagramSection/InstagramS
 import { Banner } from "components/common/banner/Banner";
 import { fetchMyLastInstagramPosts } from "pages/api/ig";
 import { fetchArticles } from "pages/api/posts";
+import { fetchPage } from "utils/api-helpers";
 import { fetchTags } from "pages/api/posts/tags";
 import { InferGetStaticPropsType } from "types";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
@@ -15,6 +16,7 @@ const Home = ({
   placesPosts,
   booksPosts,
   newestPodcast,
+  about,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
@@ -25,6 +27,15 @@ const Home = ({
         link={{ url: `/post/${newestPodcast.slug}`, title: "posłuchaj" }}
         variant="green"
         imageSrc={newestPodcast.acf.image}
+      />
+      <Banner
+        label="cześć"
+        title="O mnie"
+        link={{ url: `/about-me`, title: "więcej o mnie" }}
+        variant="red"
+        imageSrc={about.image}
+        description={about.excerpt}
+        reverse
       />
       <QuoteSection />
       <InstagramSection posts={instagramPosts} />
@@ -40,8 +51,9 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { articles: placesPosts } = await fetchArticles({ tags: ["miejsca"] });
     const { articles: booksPosts } = await fetchArticles({ tags: ["ksiazki"] });
     const { articles: podcasts } = await fetchArticles({ categories: ["mówię"] });
+    const page = await fetchPage("about-me");
 
-    console.log(podcasts);
+    console.log(page);
     return {
       props: {
         instagramPosts,
@@ -49,6 +61,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         placesPosts,
         booksPosts,
         newestPodcast: podcasts[0],
+        about: { excerpt: page.excerpt.rendered, image: page.acf.profile_image },
       },
       revalidate: 10,
     };
