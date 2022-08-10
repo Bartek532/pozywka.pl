@@ -1,0 +1,28 @@
+.badge {
+  width: 100px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 0;
+  line-height: 1;
+  text-align: center;
+  display: block;
+  background-color: var(--pink-100);
+
+  &.left {
+    transform: rotate(-15deg);
+  }
+
+  &.right {
+    transform: rotate(15deg);
+  }
+
+  &.green {
+    color: var(--green-100);
+  }
+
+  &.red {
+    color: var(--red-100);
+  }
+}
