@@ -3,6 +3,8 @@
   width: 100%;
   z-index: 1000;
   position: fixed;
+  top: 0;
+  right: 0;
 
   .headerContent {
     display: flex;
@@ -31,6 +33,10 @@
   }
 }
 
+.main {
+  margin-top: 95px;
+}
+
 @media (max-width: 992px) {
   .header {
     padding-left: 0;
@@ -55,5 +61,9 @@
         display: block;
       }
     }
+  }
+
+  .main {
+    margin-top: 60px;
   }
 }

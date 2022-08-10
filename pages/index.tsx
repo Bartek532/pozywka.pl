@@ -3,6 +3,7 @@ import { Layout } from "components/layout/Layout";
 import { QuoteSection } from "components/section/quoteSection/QuoteSection";
 import { InstagramSection } from "components/section/instagramSection/InstagramSection";
 import { Banner } from "components/common/banner/Banner";
+import { Hero } from "components/common/hero/Hero";
 import { fetchMyLastInstagramPosts } from "pages/api/ig";
 import { fetchArticles } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
@@ -17,10 +18,11 @@ const Home = ({
   booksPosts,
   newestPodcast,
   about,
+  posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
-      <PostsSliderSection title={"Książki"} tags={tags} posts={booksPosts} />
+      <Hero post={posts[0]} title="logo" />
       <Banner
         label="podcast"
         title={newestPodcast.title.rendered}
@@ -28,6 +30,7 @@ const Home = ({
         variant="green"
         imageSrc={newestPodcast.acf.image}
       />
+      <PostsSliderSection title={"Książki"} tags={tags} posts={booksPosts} />
       <Banner
         label="cześć"
         title="O mnie"
@@ -51,9 +54,21 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { articles: placesPosts } = await fetchArticles({ tags: ["miejsca"] });
     const { articles: booksPosts } = await fetchArticles({ tags: ["ksiazki"] });
     const { articles: podcasts } = await fetchArticles({ categories: ["mówię"] });
-    const page = await fetchPage("about-me");
+    const { articles } = await fetchArticles();
+    const aboutPage = await fetchPage("about-me");
 
-    console.log(page);
+    const posts = articles.map((article) => {
+      const tag = tags.find((tag) => article.tags[0] === tag.slug)!.name;
+      return {
+        title: article.title.rendered,
+        slug: article.slug,
+        excerpt: article.excerpt.rendered,
+        tag,
+        id: article.id,
+        imageUrl: article.acf.image,
+      };
+    });
+
     return {
       props: {
         instagramPosts,
@@ -61,7 +76,8 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         placesPosts,
         booksPosts,
         newestPodcast: podcasts[0],
-        about: { excerpt: page.excerpt.rendered, image: page.acf.profile_image },
+        about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
+        posts,
       },
       revalidate: 10,
     };

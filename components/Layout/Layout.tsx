@@ -45,31 +45,10 @@ export const Layout = memo<LayoutProps>(({ children, title, subtitle, head, titl
           )}
           <Navbar isHamburgerOpen={isHamburgerOpen} />
         </div>
-
-        {/*
-        
-        <button
-          onClick={() => setIsHamburgerOpen((val) => !val)}
-          className={clsx(styles.hamburger, {
-            [styles.hamburgerOpen]: isHamburgerOpen,
-          })}
-          title={`${isHamburgerOpen ? "Zamknij" : "Otwórz"} menu`}
-          aria-haspopup="true"
-          aria-controls="navigation"
-          aria-expanded="false"
-        >
-          <span className="sr-only">{isHamburgerOpen ? "Zamknij" : "Otwórz"} menu</span>
-        </button>
-        */}
       </header>
-      {children}
+      <main className={styles.main}>{children}</main>
 
       <Footer />
-
-      {/*
-      {title ? <h1 className={styles.title}>{title}</h1> : null}
-      {subtitle ? <h2 className={styles.subtitle} dangerouslySetInnerHTML={{ __html: subtitle }}></h2> : null}
-        */}
 
       <NextSeo
         title={title ? titleTemplate.replace("%s", title) : titleTemplate.slice(4)}
