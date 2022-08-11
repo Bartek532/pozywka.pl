@@ -1,6 +1,6 @@
 import styles from "./PostsSliderSection.module.scss";
 import { memo } from "react";
-import type { Tag, WPPost } from "types";
+import type { Tag, Category, WPPost } from "types";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import { PostTile } from "components/tile/postTile/PostTile";
@@ -8,6 +8,7 @@ import { PostTile } from "components/tile/postTile/PostTile";
 type PostsSliderSectionProps = {
   readonly title: string;
   readonly posts: WPPost[];
+  readonly categories: Category[];
   readonly tags: Tag[];
 };
 
@@ -30,27 +31,31 @@ const responsive = {
   },
 };
 
-export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, tags }) => {
-  const tagSlug = tags.find(({ name }) => name === title)?.slug;
+export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, categories, tags }) => {
+  const tag = tags.find(({ name }) => name === title);
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>
-        <Link href={`/search?tags=${tagSlug}`}>
+        <Link href={`/search?tags=${tag!.slug}`}>
           <a>#{title}</a>
         </Link>
       </h2>
       <div className={styles.carousel}>
         <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
-          {posts.map((post) => (
-            <PostTile
-              excerpt={post.excerpt.rendered}
-              title={post.title.rendered}
-              imageUrl={post.acf.image}
-              key={post.id}
-              //category={post.category}
-              slug={post.slug}
-            />
-          ))}
+          {posts.map((post) => {
+            const category = categories.find(({ slug }) => slug === post.categories[0]);
+
+            return (
+              <PostTile
+                excerpt={post.excerpt.rendered}
+                title={post.title.rendered}
+                imageUrl={post.acf.image}
+                key={post.id}
+                slug={post.slug}
+                tag={category!.name}
+              />
+            );
+          })}
         </Carousel>
       </div>
     </section>

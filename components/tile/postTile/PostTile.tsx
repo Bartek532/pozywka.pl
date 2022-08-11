@@ -8,18 +8,19 @@ type PostTileProps = {
   readonly slug: string;
   readonly title: string;
   readonly imageUrl: string;
+  readonly tag: string;
 };
 
-export const PostTile = memo<PostTileProps>(({ excerpt, slug, title, imageUrl }) => {
+export const PostTile = memo<PostTileProps>(({ excerpt, slug, title, imageUrl, tag }) => {
   return (
-    <article className={styles.post}>
+    <article className={styles.post} key={slug}>
       <Link href={`/posts/${slug}`}>
         <a>
           <div className={styles.wrapper}>
             <div className={styles.imageWrapper}>
               <div className={styles.image} style={{ backgroundImage: `url(${imageUrl})` }}></div>
             </div>
-            <span className={styles.tag}>Jem</span>
+            <span className={styles.tag}>{tag}</span>
             <div className={styles.content}>
               <h3 className={styles.title}>{title}</h3>
               <div

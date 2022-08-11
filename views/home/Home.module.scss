@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 60px;
+  margin-bottom: 50px;
+  padding-right: 32px;
+
+  .posts {
+    display: flex;
+
+    @media (max-width: 1230px) {
+      flex-direction: column;
+      margin-left: auto;
+      margin-right: auto;
+
+      & > *:not(:first-child) {
+        margin-top: 50px;
+      }
+    }
+
+    .post {
+      margin-left: 50px;
+
+      @media (max-width: 1350px) {
+        margin-left: 10px;
+      }
+
+      @media (max-width: 1230px) {
+        margin-left: 0;
+        margin-top: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    padding-right: 0;
+  }
+}
