@@ -8,7 +8,7 @@ import clsx from "clsx";
 
 type PromiseStatus = "pending" | "loading" | "fullfilled" | "rejected";
 
-export const NewsletterForm = () => {
+export const NewsletterForm = ({ isSplitted = false }: { isSplitted: boolean }) => {
   const {
     register,
     handleSubmit,
@@ -27,33 +27,37 @@ export const NewsletterForm = () => {
   };
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
-        <Input
-          type="text"
-          placeholder="Imię"
-          {...register("name", {
-            required: "Imię jest wymagane.",
-          })}
-        />
+      <form className={clsx(styles.form, { [styles.splitted]: isSplitted })} onSubmit={handleSubmit(handleFormSubmit)}>
+        <div className={styles.inputs}>
+          <Input
+            type="text"
+            placeholder="Imię"
+            {...register("name", {
+              required: "Imię jest wymagane.",
+            })}
+          />
 
-        <Input
-          type="text"
-          placeholder="Mail"
-          {...register("email", {
-            required: "Email jest wymagany.",
-            pattern: {
-              value: EMAIL_REGEX,
-              message: "Wypełnij poprawnie wszystkie pola.",
-            },
-          })}
-        />
-        <button className={styles.button}>Zapisz się</button>
+          <Input
+            type="text"
+            placeholder="Mail"
+            {...register("email", {
+              required: "Email jest wymagany.",
+              pattern: {
+                value: EMAIL_REGEX,
+                message: "Wypełnij poprawnie wszystkie pola.",
+              },
+            })}
+          />
+        </div>
+        <div className={styles.btnWrapper}>
+          <button className={styles.button}>Zapisz się</button>
+        </div>
       </form>
       <p className={clsx(styles.state, styles[promiseStatus])}>
         {promiseStatus === "fullfilled" ? (
           "Twój mail został dodany do bazy"
         ) : promiseStatus === "rejected" ? (
-          "Wypelnij poprawnie wszystkie pola"
+          "Błąd. Spróbuj ponownie później"
         ) : promiseStatus === "loading" ? (
           "Ładowanie..."
         ) : (

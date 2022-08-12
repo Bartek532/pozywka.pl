@@ -2,6 +2,7 @@ import styles from "./Home.module.scss";
 import { memo } from "react";
 import type { Tag, InstagramPost, WPPost, Category } from "types";
 import { QuoteSection } from "components/section/quoteSection/QuoteSection";
+import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { InstagramSection } from "components/section/instagramSection/InstagramSection";
 import { Banner } from "components/common/banner/Banner";
 import { Hero } from "components/common/hero/Hero";
@@ -66,6 +67,7 @@ export const HomeView = memo<HomeViewProps>(
           reverse
         />
         <QuoteSection />
+        <NewsletterSection />
         <InstagramSection posts={instagramPosts} />
         <PostsSliderSection title={"Miejsca"} categories={categories} tags={tags} posts={placesPosts} />
       </>

@@ -3,7 +3,7 @@ import { memo } from "react";
 import clsx from "clsx";
 
 type BadgeProps = {
-  readonly variant: "red" | "green";
+  readonly variant: "red" | "green" | "violet";
   readonly text: string;
   readonly direction: "left" | "right";
 };

@@ -1,0 +1,88 @@
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--violet-100);
+    z-index: -1;
+  }
+  .content {
+    color: var(--pink-100);
+    font-weight: 500;
+    font-size: 24px;
+    margin-left: calc((100% - 1170px) / 2);
+    margin-right: 0;
+
+    @media (max-width: 1200px) {
+      margin-left: 30px;
+    }
+    .title {
+      line-height: 1.3;
+      font-weight: 500;
+      font-size: 24px;
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
+
+    .newsletter {
+      font-weight: 300;
+
+      .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        letter-spacing: 0.1em;
+        display: block;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .cakes {
+    height: 500px;
+  }
+
+  .smallCakes {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .section {
+    background-color: var(--violet-100);
+    flex-direction: column;
+    padding-top: 60px;
+    padding-bottom: 180px;
+
+    &::before {
+      display: none;
+    }
+    .content {
+      margin-left: 0;
+
+      .title {
+        text-align: center;
+      }
+    }
+
+    .cakes {
+      display: none;
+    }
+
+    .smallCakes {
+      display: block;
+      height: 150px;
+      position: absolute;
+      right: -40px;
+      bottom: 20px;
+    }
+  }
+}
