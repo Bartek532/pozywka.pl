@@ -27,7 +27,7 @@
       }
     }
 
-    .tag {
+    .category {
       position: absolute;
       display: inline-block;
       transform: rotate(-90deg) translateY(50%);
@@ -91,7 +91,7 @@
         height: 300px;
       }
 
-      .tag {
+      .category {
         position: static;
         transform: none;
         margin-top: 15px;

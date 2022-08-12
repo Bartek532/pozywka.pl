@@ -20,6 +20,10 @@
     line-height: 25px;
     min-height: 95px;
 
+    &.home {
+      justify-content: flex-end;
+    }
+
     .logo {
       width: 237px;
       display: block;

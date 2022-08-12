@@ -45,18 +45,6 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { articles } = await fetchArticles();
     const aboutPage = await fetchPage("about-me");
 
-    const posts = articles.map((article) => {
-      const tag = tags.find((tag) => article.tags[0] === tag.slug)!.name;
-      return {
-        title: article.title.rendered,
-        slug: article.slug,
-        excerpt: article.excerpt.rendered,
-        tag,
-        id: article.id,
-        imageUrl: article.acf.image,
-      };
-    });
-
     return {
       props: {
         instagramPosts,
@@ -66,7 +54,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         booksPosts,
         newestPodcast: podcasts[0],
         about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
-        posts,
+        posts: articles,
       },
       revalidate: 10,
     };

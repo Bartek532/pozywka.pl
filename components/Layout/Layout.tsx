@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import styles from "./Layout.module.scss";
 import { Navbar } from "components/navbar/Navbar";
 import { Footer } from "components/footer/Footer";
-//import { CookiesPopup } from "components/CookiesPopup/CookiesPopup";
 import Logo from "public/svg/logo.svg";
 import HamburgerIcon from "public/svg/hamburger.svg";
 import CloseIcon from "public/svg/close.svg";
@@ -11,7 +10,7 @@ import clsx from "clsx";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import type { YoastHead } from "types";
-//import { NavControls } from "components/Navbar/NavControls/NavControls";
+import { useWindowSize } from "lib/hooks/useWindowSize";
 
 import { titleTemplate as defaultTitleTemplate } from "pages/_app";
 
@@ -23,21 +22,24 @@ type LayoutProps = {
   readonly titleTemplate?: string;
 };
 
-export const Layout = memo<LayoutProps>(({ children, title, subtitle, head, titleTemplate = defaultTitleTemplate }) => {
+export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate = defaultTitleTemplate }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const { width, height } = useWindowSize();
   const router = useRouter();
 
   return (
     <div className={styles.content}>
       {/*<CookiesPopup />*/}
       <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <Link href="/">
-            <a>
-              <Logo className={styles.logo} />
-              <span className="sr-only">strona główna</span>
-            </a>
-          </Link>
+        <div className={clsx(styles.headerContent, { [styles.home]: router.pathname === "/" && width! > 992 })}>
+          {width! < 992 || router.pathname !== "/" ? (
+            <Link href="/">
+              <a>
+                <Logo className={clsx(styles.logo)} />
+                <span className="sr-only">strona główna</span>
+              </a>
+            </Link>
+          ) : null}
           {isHamburgerOpen ? (
             <CloseIcon className={styles.close} onClick={() => setIsHamburgerOpen(false)} />
           ) : (

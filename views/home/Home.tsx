@@ -13,7 +13,7 @@ type HomeViewProps = {
   readonly tags: Tag[];
   readonly instagramPosts: InstagramPost[];
   readonly newestPodcast: WPPost;
-  readonly posts: { title: string; slug: string; excerpt: string; tag: string; id: number; imageUrl: string }[];
+  readonly posts: WPPost[];
   readonly placesPosts: WPPost[];
   readonly booksPosts: WPPost[];
   readonly about: { excerpt: string; image: string };
@@ -24,20 +24,24 @@ export const HomeView = memo<HomeViewProps>(
   ({ tags, posts, newestPodcast, booksPosts, about, instagramPosts, placesPosts, categories }) => {
     return (
       <>
-        <Hero post={posts[0]} title="logo" />
+        <Hero post={posts[0]} title="logo" tags={tags} categories={categories} />
         <div className={styles.wrapper}>
           <Explore tags={tags} />
           <div className={styles.posts}>
             {posts.slice(1, 3).map((post) => {
+              const category = categories.find((category) => category.slug === post.categories[0])!;
+              const tag = tags.find((tag) => tag.slug === post.tags[0])!;
+
               return (
                 <div className={styles.post}>
                   <PostTile
-                    tag={post.tag}
-                    excerpt={post.excerpt}
+                    tag={tag.name}
+                    excerpt={post.excerpt.rendered}
                     slug={post.slug}
-                    title={post.title}
-                    imageUrl={post.imageUrl}
+                    title={post.title.rendered}
+                    imageUrl={post.acf.image}
                     key={post.id}
+                    category={category}
                   />
                 </div>
               );

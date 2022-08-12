@@ -43,7 +43,8 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
       <div className={styles.carousel}>
         <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
           {posts.map((post) => {
-            const category = categories.find(({ slug }) => slug === post.categories[0]);
+            const category = categories.find(({ slug }) => slug === post.categories[0])!;
+            const tag = tags.find(({ slug }) => slug === post.tags[0])!;
 
             return (
               <PostTile
@@ -52,7 +53,8 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
                 imageUrl={post.acf.image}
                 key={post.id}
                 slug={post.slug}
-                tag={category!.name}
+                tag={tag.name}
+                category={category}
               />
             );
           })}
