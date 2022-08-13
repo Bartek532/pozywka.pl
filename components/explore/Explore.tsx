@@ -14,13 +14,17 @@ export const Explore = memo<ExploreProps>(({ tags }) => {
       <div className={styles.header}>
         Odkrywaj <AvocadoIcon />
       </div>
-      <div className={styles.tags}>
-        {tags.map((tag) => (
-          <Link href={`search?tags=${tag.slug}`}>
-            <a className={styles.tag}>{tag.name}</a>
-          </Link>
-        ))}
-      </div>
+      <nav className={styles.nav}>
+        <ul className={styles.tags}>
+          {tags.map((tag) => (
+            <li className={styles.tag} key={tag.id}>
+              <Link href={`/search?tags=${tag.slug}`}>
+                <a>{tag.name}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 });

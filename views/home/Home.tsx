@@ -26,8 +26,10 @@ export const HomeView = memo<HomeViewProps>(
     return (
       <>
         <Hero post={posts[0]} title="logo" tags={tags} categories={categories} />
-        <div className={styles.wrapper}>
-          <Explore tags={tags} />
+        <aside className={styles.wrapper}>
+          <div className={styles.explore}>
+            <Explore tags={tags} />
+          </div>
           <div className={styles.posts}>
             {posts.slice(1, 3).map((post) => {
               const category = categories.find((category) => category.slug === post.categories[0])!;
@@ -48,11 +50,11 @@ export const HomeView = memo<HomeViewProps>(
               );
             })}
           </div>
-        </div>
+        </aside>
         <Banner
           label="podcast"
           title={newestPodcast.title.rendered}
-          link={{ url: `/post/${newestPodcast.slug}`, title: "posłuchaj" }}
+          link={{ url: `/podcasts/${newestPodcast.slug}`, title: "posłuchaj" }}
           variant="green"
           imageSrc={newestPodcast.acf.image}
         />

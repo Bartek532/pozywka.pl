@@ -8,7 +8,7 @@ import clsx from "clsx";
 
 type PromiseStatus = "pending" | "loading" | "fullfilled" | "rejected";
 
-export const NewsletterForm = ({ isSplitted = false }: { isSplitted: boolean }) => {
+export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean }) => {
   const {
     register,
     handleSubmit,

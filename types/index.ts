@@ -39,6 +39,8 @@ export type WPPost = {
   };
   readonly acf: {
     readonly image: string;
+    readonly read_more: string;
+    readonly featured: boolean;
   };
   readonly categories: (number | string)[];
   readonly tags: (number | string)[];
@@ -85,11 +87,10 @@ export type InstagramPost = {
 };
 
 export type PromiseValue<T> = T extends PromiseLike<infer R> ? R : T;
-export type InferGetStaticPropsType<T extends (...args: any) => any> =
-  PromiseValue<ReturnType<T>> extends infer Temp
-    ? Temp extends {
-        readonly props: infer P;
-      }
-      ? P
-      : never
-    : never;
+export type InferGetStaticPropsType<T extends (...args: any) => any> = PromiseValue<ReturnType<T>> extends infer Temp
+  ? Temp extends {
+      readonly props: infer P;
+    }
+    ? P
+    : never
+  : never;

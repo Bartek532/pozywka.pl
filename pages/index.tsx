@@ -37,12 +37,10 @@ const Home = ({
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const instagramPosts = await fetchMyLastInstagramPosts();
-    const tags = await fetchTags();
-    const categories = await fetchCategories();
     const { articles: placesPosts } = await fetchArticles({ tags: ["miejsca"] });
     const { articles: booksPosts } = await fetchArticles({ tags: ["ksiazki"] });
     const { articles: podcasts } = await fetchArticles({ categories: ["podcasts"] });
-    const { articles } = await fetchArticles();
+    const { articles, categories, tags } = await fetchArticles();
     const aboutPage = await fetchPage("about-me");
 
     return {

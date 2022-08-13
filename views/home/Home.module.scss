@@ -6,6 +6,14 @@
   margin-bottom: 50px;
   padding-right: 32px;
 
+  .explore {
+    margin-right: 50px;
+
+    @media (max-width: 1350px) {
+      margin-right: 10px;
+    }
+  }
+
   .posts {
     display: flex;
 

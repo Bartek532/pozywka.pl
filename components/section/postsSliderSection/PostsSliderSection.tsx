@@ -36,9 +36,13 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>
-        <Link href={`/search?tags=${tag!.slug}`}>
-          <a>#{title}</a>
-        </Link>
+        {tags.map((tag) => tag.name).includes(title) ? (
+          <Link href={`/search?tags=${tag!.slug}`}>
+            <a>#{title}</a>
+          </Link>
+        ) : (
+          <span className={styles.plain}>{title}</span>
+        )}
       </h2>
       <div className={styles.carousel}>
         <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
