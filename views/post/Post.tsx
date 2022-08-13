@@ -1,8 +1,9 @@
 import styles from "./Post.module.scss";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import type { Tag, WPPost, Category } from "types";
 import { Hero } from "components/common/hero/Hero";
 import clsx from "clsx";
+import { useViews } from "lib/hooks/useViews";
 import { Explore } from "components/explore/Explore";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import dayjs from "dayjs";
@@ -18,7 +19,10 @@ type PostViewProps = {
 };
 
 export const PostView = memo<PostViewProps>(({ tags, categories, post, newestPosts }) => {
-  console.log(newestPosts);
+  const { addViews } = useViews();
+  useEffect(() => {
+    addViews(post.slug);
+  }, []);
   return (
     <>
       <Hero post={post} tags={tags} categories={categories} />

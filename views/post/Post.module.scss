@@ -66,15 +66,15 @@
       .content {
         margin-top: 50px;
       }
-      .aside {
-        position: static;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 0;
-        .info {
-          padding-left: 0;
-        }
+    }
+    .aside {
+      position: static;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 0;
+      .info {
+        padding-left: 0;
       }
     }
   }

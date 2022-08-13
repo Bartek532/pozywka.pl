@@ -53,7 +53,6 @@ export const Hero = memo<HeroProps>(({ title, post, tags, categories }) => {
                 ></div>
               </div>
               <div className={styles.tag}>{tag.name}</div>
-              <ArrowIcon className={styles.arrow} />
             </div>
           ) : (
             <Link href={`/${category.slug}/${post.slug}`}>

@@ -16,7 +16,7 @@ export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean })
   } = useForm();
   const [promiseStatus, setPromiseStatus] = useState<PromiseStatus>("pending");
 
-  const handleFormSubmit = async ({ email, name }: { email: string; name: string }) => {
+  const handleFormSubmit = async ({ email, name }: any) => {
     setPromiseStatus("loading");
     try {
       await fetcher("/api/newsletter", { method: "POST", body: { email, name } });
