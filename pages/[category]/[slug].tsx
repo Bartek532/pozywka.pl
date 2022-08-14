@@ -4,6 +4,7 @@ import type { GetStaticPaths, GetStaticPropsContext } from "next";
 import type { InferGetStaticPropsType } from "types";
 import { Layout } from "components/layout/Layout";
 import { PostView } from "views/post/Post";
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
 const Post = ({ article, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -14,7 +15,13 @@ const Post = ({ article, tags, categories, newestPosts }: InferGetStaticPropsTyp
         og_image: [{ url: article.acf.image }],
       }}
     >
-      <PostView post={article} tags={tags} categories={categories} newestPosts={newestPosts} />
+      <PostView post={article} tags={tags} categories={categories} />
+      <PostsSliderSection
+        title={"Może Cię też zainteresować"}
+        categories={categories}
+        tags={tags}
+        posts={newestPosts}
+      />
     </Layout>
   );
 };

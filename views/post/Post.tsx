@@ -5,7 +5,6 @@ import { Hero } from "components/common/hero/Hero";
 import clsx from "clsx";
 import { useViews } from "lib/hooks/useViews";
 import { Explore } from "components/explore/Explore";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
@@ -15,10 +14,9 @@ type PostViewProps = {
   readonly tags: Tag[];
   readonly post: WPPost;
   readonly categories: Category[];
-  readonly newestPosts: WPPost[];
 };
 
-export const PostView = memo<PostViewProps>(({ tags, categories, post, newestPosts }) => {
+export const PostView = memo<PostViewProps>(({ tags, categories, post }) => {
   const { addViews } = useViews();
   useEffect(() => {
     addViews(post.slug);
@@ -49,12 +47,6 @@ export const PostView = memo<PostViewProps>(({ tags, categories, post, newestPos
           <Explore tags={tags} />
         </aside>
       </div>
-      <PostsSliderSection
-        title={"Może Cię też zainteresować"}
-        categories={categories}
-        tags={tags}
-        posts={newestPosts}
-      />
     </>
   );
 });
