@@ -13,6 +13,7 @@ export const fetchArticles = async ({
   perPage = ARTICLES_PER_PAGE,
   page = 1,
   slug = "",
+  offset = 0,
 } = {}): Promise<APIArticlesResponse> => {
   const fetchedCategories = (await fetchCategories()) || DEFAULT_CATEGORIES;
   const fetchedTags = (await fetchTags()) || DEFAULT_TAGS;
@@ -30,6 +31,7 @@ export const fetchArticles = async ({
     { key: "search", value: query },
     { key: "categories", value: categories.length && formattedCategories },
     { key: "tags", value: tags.length && formattedTags },
+    { key: "offset", value: offset },
   ]);
 
   const articles: (Omit<WPPost, "categories" & "tags"> & {
@@ -60,6 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       query: req.query.q as string,
       perPage: Number(req.query.per_page) || undefined,
       page: Number(req.query.page) || undefined,
+      offset: Number(req.query.offset) || undefined,
     });
 
     return res.status(200).json(data);

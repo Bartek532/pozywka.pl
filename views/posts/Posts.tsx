@@ -1,7 +1,8 @@
 import styles from "./Posts.module.scss";
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 import type { WPPost, Category, Tag } from "types";
 import { Hero } from "components/common/hero/Hero";
+import { LoadMore } from "components/common/loadMore/LoadMore";
 import { PostTile } from "components/tile/postTile/PostTile";
 
 type PostsViewProps = {
@@ -11,7 +12,12 @@ type PostsViewProps = {
   readonly categories: Category[];
 };
 
-export const PostsView = memo<PostsViewProps>(({ posts, category, categories, tags }) => {
+export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, categories, tags }) => {
+  const [posts, setPosts] = useState(initialPosts);
+
+  useEffect(() => {
+    setPosts(initialPosts);
+  }, [initialPosts]);
   return (
     <>
       <Hero post={posts[0]} tags={tags} categories={categories} title={category.name} />
@@ -29,6 +35,9 @@ export const PostsView = memo<PostsViewProps>(({ posts, category, categories, ta
             />
           );
         })}
+        <div className={styles.load}>
+          <LoadMore articles={posts} setArticles={setPosts} category={category.slug} />
+        </div>
       </section>
     </>
   );

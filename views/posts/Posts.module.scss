@@ -11,6 +11,15 @@
     padding-top: 50px;
     padding-left: 30px;
   }
+
+  .load {
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+    margin-top: 30px;
+  }
 }
 
 @media (max-width: 1220px) {
