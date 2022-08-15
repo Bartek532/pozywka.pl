@@ -15,7 +15,7 @@ const Posts = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={category.name}>
-      <PostsView posts={articles} category={category} tags={tags} categories={categories} />
+      <PostsView posts={articles} category={category} tags={tags} />
       <PostsSliderSection title={"Najnowsze"} categories={categories} tags={tags} posts={newestPosts} />
     </Layout>
   );

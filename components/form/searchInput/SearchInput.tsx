@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import SearchIcon from "public/svg/search.svg";
 import { useState } from "react";
 import clsx from "clsx";
+import { useWindowSize } from "lib/hooks/useWindowSize";
 
 export const SearchInput = ({
   onSearch,
@@ -11,6 +12,7 @@ export const SearchInput = ({
   onSearch: ({ query }: { query: string }) => void;
   defaultValue?: string;
 }) => {
+  const { width, height } = useWindowSize();
   const { register, handleSubmit } = useForm({
     defaultValues: { query: defaultValue || "" },
   });
@@ -22,7 +24,7 @@ export const SearchInput = ({
         <input
           type="search"
           placeholder="Szukaj..."
-          className={clsx(styles.input, { [styles.active]: isInputFocused })}
+          className={clsx(styles.input, { [styles.active]: isInputFocused || width! < 992 })}
           onFocus={() => setIsInputFocused(true)}
           {...register("query")}
         />

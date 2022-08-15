@@ -16,14 +16,14 @@ type PostViewProps = {
   readonly categories: Category[];
 };
 
-export const PostView = memo<PostViewProps>(({ tags, categories, post }) => {
+export const PostView = memo<PostViewProps>(({ tags, post }) => {
   const { addViews } = useViews();
   useEffect(() => {
     addViews(post.slug);
   }, []);
   return (
     <>
-      <Hero post={post} tags={tags} categories={categories} />
+      <Hero post={post} tags={tags} />
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div

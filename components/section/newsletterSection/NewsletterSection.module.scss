@@ -61,6 +61,7 @@
     flex-direction: column;
     padding-top: 60px;
     padding-bottom: 180px;
+    overflow: hidden;
 
     &::before {
       display: none;

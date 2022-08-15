@@ -9,7 +9,7 @@ type PostsViewProps = {
   readonly posts: WPPost[];
   readonly category?: Category;
   readonly tags: Tag[];
-  readonly title: string;
+  readonly title?: string;
 };
 
 export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, tags, title }) => {
@@ -20,7 +20,7 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
   }, [initialPosts]);
   return (
     <>
-      <Hero post={posts[0]} tags={tags} title={title} />
+      <Hero post={posts[0]} tags={tags} title={title || category?.name} />
       <section className={styles.posts}>
         {posts.slice(1).map((post) => {
           return <PostTile post={post} key={post.id} tags={tags} />;
