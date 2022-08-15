@@ -7,12 +7,12 @@ import { PostTile } from "components/tile/postTile/PostTile";
 
 type PostsViewProps = {
   readonly posts: WPPost[];
-  readonly category: Category;
+  readonly category?: Category;
   readonly tags: Tag[];
-  readonly categories: Category[];
+  readonly title: string;
 };
 
-export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, categories, tags }) => {
+export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, tags, title }) => {
   const [posts, setPosts] = useState(initialPosts);
 
   useEffect(() => {
@@ -20,23 +20,13 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
   }, [initialPosts]);
   return (
     <>
-      <Hero post={posts[0]} tags={tags} categories={categories} title={category.name} />
+      <Hero post={posts[0]} tags={tags} title={title} />
       <section className={styles.posts}>
         {posts.slice(1).map((post) => {
-          const tag = tags.find(({ slug }) => slug === post.tags[0]);
-          return (
-            <PostTile
-              excerpt={post.excerpt.rendered}
-              title={post.title.rendered}
-              slug={post.slug}
-              imageUrl={post.acf.image}
-              category={category}
-              tag={tag!.name}
-            />
-          );
+          return <PostTile post={post} key={post.id} tags={tags} />;
         })}
         <div className={styles.load}>
-          <LoadMore articles={posts} setArticles={setPosts} category={category.slug} />
+          <LoadMore articles={posts} setArticles={setPosts} category={category?.slug} />
         </div>
       </section>
     </>

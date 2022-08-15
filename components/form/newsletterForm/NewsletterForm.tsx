@@ -1,5 +1,5 @@
 import styles from "./NewsletterForm.module.scss";
-import { Input } from "components/common/input/Input";
+import { Input } from "components/form/input/Input";
 import { EMAIL_REGEX } from "utils/consts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";

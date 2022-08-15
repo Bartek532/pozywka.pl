@@ -31,7 +31,7 @@ const responsive = {
   },
 };
 
-export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, categories, tags }) => {
+export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, tags }) => {
   const tag = tags.find(({ name }) => name === title);
   return (
     <section className={styles.section}>
@@ -47,20 +47,7 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
       <div className={styles.carousel}>
         <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
           {posts.map((post) => {
-            const category = categories.find(({ slug }) => slug === post.categories[0])!;
-            const tag = tags.find(({ slug }) => slug === post.tags[0])!;
-
-            return (
-              <PostTile
-                excerpt={post.excerpt.rendered}
-                title={post.title.rendered}
-                imageUrl={post.acf.image}
-                key={post.id}
-                slug={post.slug}
-                tag={tag.name}
-                category={category}
-              />
-            );
+            return <PostTile post={post} key={post.id} tags={tags} />;
           })}
         </Carousel>
       </div>

@@ -25,27 +25,16 @@ export const HomeView = memo<HomeViewProps>(
   ({ tags, posts, newestPodcast, booksPosts, about, instagramPosts, placesPosts, categories }) => {
     return (
       <>
-        <Hero post={posts[0]} title="logo" tags={tags} categories={categories} />
+        <Hero post={posts[0]} title="logo" tags={tags} />
         <aside className={styles.wrapper}>
           <div className={styles.explore}>
             <Explore tags={tags} />
           </div>
           <div className={styles.posts}>
             {posts.slice(1, 3).map((post) => {
-              const category = categories.find((category) => category.slug === post.categories[0])!;
-              const tag = tags.find((tag) => tag.slug === post.tags[0])!;
-
               return (
                 <div className={styles.post}>
-                  <PostTile
-                    tag={tag.name}
-                    excerpt={post.excerpt.rendered}
-                    slug={post.slug}
-                    title={post.title.rendered}
-                    imageUrl={post.acf.image}
-                    key={post.id}
-                    category={category}
-                  />
+                  <PostTile key={post.id} post={post} tags={tags} />
                 </div>
               );
             })}

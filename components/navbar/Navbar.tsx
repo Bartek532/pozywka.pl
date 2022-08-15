@@ -1,7 +1,8 @@
 import styles from "./Navbar.module.scss";
-import { memo } from "react";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { SearchInput } from "components/form/searchInput/SearchInput";
 
 const links = [
   { path: "posts", name: "Piszę" },
@@ -12,8 +13,20 @@ const links = [
 ];
 
 export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
+  const router = useRouter();
+  const handleSearch = ({ query }: { query: string }) => {
+    if (query.trim()) {
+      router.replace(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
   return (
     <nav className={clsx(styles.nav, { [styles.active]: isHamburgerOpen })}>
+      <div className={styles.search}>
+        <SearchInput
+          onSearch={handleSearch}
+          defaultValue={router.query.q ? decodeURIComponent(router.query.q as string) : ""}
+        />
+      </div>
       <ul className={styles.list}>
         {links.map((link) => (
           <li className={styles.item} key={link.path}>

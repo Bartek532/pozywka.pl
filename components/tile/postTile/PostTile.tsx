@@ -2,33 +2,34 @@ import styles from "./PostTile.module.scss";
 import { memo } from "react";
 import Link from "next/link";
 import ArrowIcon from "public/svg/arrow.svg";
-import type { Category } from "types";
+import type { WPPost, Tag } from "types";
 
 type PostTileProps = {
-  readonly excerpt: string;
-  readonly slug: string;
-  readonly title: string;
-  readonly imageUrl: string;
-  readonly tag: string;
-  readonly category: Category;
+  readonly post: WPPost;
+  readonly tags: Tag[];
 };
 
-export const PostTile = memo<PostTileProps>(({ excerpt, slug, title, imageUrl, tag, category }) => {
+export const PostTile = memo<PostTileProps>(({ post, tags }) => {
+  const tag = tags.find(({ slug }) => slug === post.tags[0]);
   return (
-    <article className={styles.post} key={slug}>
-      <Link href={`/${category.slug}/${slug}`}>
+    <article className={styles.post} key={post.id}>
+      <Link href={`/${post.categories[0]}/${post.slug}`}>
         <a>
           <div className={styles.wrapper}>
             <div className={styles.imageWrapper}>
-              <div className={styles.image} style={{ backgroundImage: `url(${imageUrl})` }}></div>
+              <div className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></div>
             </div>
-            <span className={styles.category}>{category.name}</span>
+            <span className={styles.category}>{tag?.name}</span>
             <div className={styles.content}>
-              <h3 className={styles.title}>{title}</h3>
+              <h3 className={styles.title}>{post.title.rendered}</h3>
               <div
                 className={styles.excerpt}
                 dangerouslySetInnerHTML={{
-                  __html: excerpt ? (excerpt.length > 203 ? `${excerpt.slice(0, 200)}...` : excerpt) : "",
+                  __html: post.excerpt.rendered
+                    ? post.excerpt.rendered.length > 203
+                      ? `${post.excerpt.rendered.slice(0, 200)}...`
+                      : post.excerpt.rendered
+                    : "",
                 }}
               ></div>
             </div>

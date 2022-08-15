@@ -12,13 +12,11 @@ type HeroProps = {
   readonly title?: string;
   readonly post: WPPost;
   readonly tags: Tag[];
-  readonly categories: Category[];
 };
 
-export const Hero = memo<HeroProps>(({ title, post, tags, categories }) => {
+export const Hero = memo<HeroProps>(({ title, post, tags }) => {
   const router = useRouter();
   const tag = tags.find((tag) => tag.slug === post.tags[0])!;
-  const category = categories.find(({ slug }) => slug === post.categories[0])!;
 
   const isPostView = router.query.slug === post.slug;
   return (
@@ -27,7 +25,7 @@ export const Hero = memo<HeroProps>(({ title, post, tags, categories }) => {
         {isPostView ? (
           <div className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></div>
         ) : (
-          <Link href={`/${category.slug}/${post.slug}`}>
+          <Link href={`/${post.categories[0]}/${post.slug}`}>
             <a className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></a>
           </Link>
         )}
@@ -55,7 +53,7 @@ export const Hero = memo<HeroProps>(({ title, post, tags, categories }) => {
               <div className={styles.tag}>{tag.name}</div>
             </div>
           ) : (
-            <Link href={`/${category.slug}/${post.slug}`}>
+            <Link href={`/${post.categories[0]}/${post.slug}`}>
               <a className={styles.post}>
                 <div className={styles.postContent}>
                   <h2 className={styles.title}>{post.title.rendered}</h2>
