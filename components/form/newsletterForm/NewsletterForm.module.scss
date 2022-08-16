@@ -3,18 +3,22 @@
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
+  gap: 10px;
+
+  .inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    gap: 10px;
+    width: 100%;
+  }
 
   &.splitted {
     flex-flow: row nowrap;
     align-items: flex-end;
-    gap: 10px;
 
     .inputs {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-flow: column wrap;
-      gap: 10px;
       width: 300px;
     }
 
@@ -40,6 +44,7 @@
       border: none;
       cursor: pointer;
       width: 100%;
+      line-height: 1.2;
 
       &:focus {
         outline: none;

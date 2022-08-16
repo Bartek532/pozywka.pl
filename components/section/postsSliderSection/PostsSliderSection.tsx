@@ -8,7 +8,6 @@ import { PostTile } from "components/tile/postTile/PostTile";
 type PostsSliderSectionProps = {
   readonly title: string;
   readonly posts: WPPost[];
-  readonly categories: Category[];
   readonly tags: Tag[];
 };
 
