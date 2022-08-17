@@ -27,7 +27,26 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
           </div>
         </div>
       </div>
-      <div className={clsx(styles.container, styles.big)}></div>
+      <div className={clsx(styles.container, styles.big)}>
+        <div className={styles.things}>
+          <h2 className={styles.title}>Co robię?</h2>
+          <div className={styles.wrapper}>
+            {thingsIDo
+              .sort((a, b) => a.id - b.id)
+              .map((thing) => {
+                return (
+                  <div className={styles.thing} key={thing.id}>
+                    <div className={styles.image} style={{ backgroundImage: `url(${thing.acf.image})` }}></div>
+                    <p className={styles.description}>
+                      <strong className={styles.subtitle}>{thing.title.rendered} </strong>
+                      <span dangerouslySetInnerHTML={{ __html: thing.content.rendered }}></span>
+                    </p>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </div>
       <Banner
         label="Więcej"
         title={page.acf.collaboration_banner_text}
@@ -35,7 +54,7 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
         link={{ url: "mailto:kontakt@pozywka.pl", title: "napisz do mnie" }}
         variant="green"
       />
-      <div className={styles.container}>
+      <div className={clsx(styles.container, styles.texts)}>
         <div className="content" dangerouslySetInnerHTML={{ __html: page.content.rendered }}></div>
       </div>
     </>
