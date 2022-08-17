@@ -11,7 +11,6 @@ import { InferGetStaticPropsType } from "types";
 const Home = ({
   instagramPosts,
   tags,
-  categories,
   placesPosts,
   booksPosts,
   newestPodcast,
@@ -23,7 +22,6 @@ const Home = ({
       <HomeView
         instagramPosts={instagramPosts}
         tags={tags}
-        categories={categories}
         placesPosts={placesPosts}
         booksPosts={booksPosts}
         newestPodcast={newestPodcast}
@@ -40,14 +38,13 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { articles: placesPosts } = await fetchArticles({ tags: ["miejsca"] });
     const { articles: booksPosts } = await fetchArticles({ tags: ["ksiazki"] });
     const { articles: podcasts } = await fetchArticles({ categories: ["podcasts"] });
-    const { articles, categories, tags } = await fetchArticles();
+    const { articles, tags } = await fetchArticles();
     const aboutPage = await fetchPage("about-me");
 
     return {
       props: {
         instagramPosts,
         tags,
-        categories,
         placesPosts,
         booksPosts,
         newestPodcast: podcasts[0],

@@ -18,11 +18,10 @@ type HomeViewProps = {
   readonly placesPosts: WPPost[];
   readonly booksPosts: WPPost[];
   readonly about: { excerpt: string; image: string };
-  readonly categories: Category[];
 };
 
 export const HomeView = memo<HomeViewProps>(
-  ({ tags, posts, newestPodcast, booksPosts, about, instagramPosts, placesPosts, categories }) => {
+  ({ tags, posts, newestPodcast, booksPosts, about, instagramPosts, placesPosts }) => {
     return (
       <>
         <Hero post={posts[0]} title="logo" tags={tags} />
@@ -47,7 +46,7 @@ export const HomeView = memo<HomeViewProps>(
           variant="green"
           imageSrc={newestPodcast.acf.image}
         />
-        <PostsSliderSection title={"Książki"} categories={categories} tags={tags} posts={booksPosts} />
+        <PostsSliderSection title={"Książki"} tags={tags} posts={booksPosts} />
         <Banner
           label="cześć"
           title="O mnie"
@@ -60,7 +59,7 @@ export const HomeView = memo<HomeViewProps>(
         <QuoteSection />
         <NewsletterSection />
         <InstagramSection posts={instagramPosts} />
-        <PostsSliderSection title={"Miejsca"} categories={categories} tags={tags} posts={placesPosts} />
+        <PostsSliderSection title={"Miejsca"} tags={tags} posts={placesPosts} />
       </>
     );
   },

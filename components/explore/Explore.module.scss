@@ -24,16 +24,16 @@
       font-weight: 500;
       line-height: 1.4;
 
-      &:last-child {
-        border-bottom: 3px solid var(--red-100);
-      }
-
       &:hover {
         background-color: var(--violet-100);
         border-color: var(--violet-100);
         color: var(--pink-100);
         font-weight: 700;
       }
+    }
+
+    li:last-child .tag {
+      border-bottom: 3px solid var(--red-100);
     }
   }
 }
