@@ -27,6 +27,7 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
           </div>
         </div>
       </div>
+      <div className={clsx(styles.container, styles.big)}></div>
       <Banner
         label="Więcej"
         title={page.acf.collaboration_banner_text}
