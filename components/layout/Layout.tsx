@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./Layout.module.scss";
 import { Navbar } from "components/navbar/Navbar";
 import { Footer } from "components/footer/Footer";
+import { CookiesPopup } from "components/cookiesPopup/CookiesPopup";
 import Logo from "public/svg/logo.svg";
 import HamburgerIcon from "public/svg/hamburger.svg";
 import CloseIcon from "public/svg/close.svg";
@@ -28,7 +29,7 @@ export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate 
 
   return (
     <div className={styles.content}>
-      {/*<CookiesPopup />*/}
+      <CookiesPopup />
       <header className={styles.header}>
         <div className={clsx(styles.headerContent, { [styles.home]: router.pathname === "/" && width! > 992 })}>
           {(width! < 992 || router.pathname !== "/") && (width! > 1220 || width! < 992) ? (
