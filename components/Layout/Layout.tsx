@@ -17,14 +17,13 @@ import { titleTemplate as defaultTitleTemplate } from "pages/_app";
 type LayoutProps = {
   readonly children: React.ReactNode;
   readonly title?: string;
-  readonly subtitle?: string;
   readonly head?: YoastHead;
   readonly titleTemplate?: string;
 };
 
 export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate = defaultTitleTemplate }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const router = useRouter();
 
   return (
@@ -32,7 +31,7 @@ export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate 
       {/*<CookiesPopup />*/}
       <header className={styles.header}>
         <div className={clsx(styles.headerContent, { [styles.home]: router.pathname === "/" && width! > 992 })}>
-          {width! < 992 || router.pathname !== "/" ? (
+          {(width! < 992 || router.pathname !== "/") && (width! > 1220 || width! < 992) ? (
             <Link href="/">
               <a>
                 <Logo className={clsx(styles.logo)} />

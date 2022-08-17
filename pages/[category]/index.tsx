@@ -6,17 +6,11 @@ import { InferGetStaticPropsType } from "types";
 import { PostsView } from "views/posts/Posts";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
-const Posts = ({
-  articles,
-  category,
-  categories,
-  tags,
-  newestPosts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Posts = ({ articles, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={category.name}>
       <PostsView posts={articles} category={category} tags={tags} />
-      <PostsSliderSection title={"Najnowsze"} categories={categories} tags={tags} posts={newestPosts} />
+      <PostsSliderSection title={"Najnowsze"} tags={tags} posts={newestPosts} />
     </Layout>
   );
 };
@@ -59,7 +53,6 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       props: {
         articles,
         category,
-        categories,
         tags,
         newestPosts,
       },

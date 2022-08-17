@@ -20,6 +20,10 @@
     line-height: 25px;
     min-height: 95px;
 
+    @media (max-width: 1220px) {
+      justify-content: flex-end;
+    }
+
     &.home {
       justify-content: flex-end;
     }
@@ -54,6 +58,7 @@
       left: 0;
       right: 0;
       z-index: 10;
+      justify-content: space-between;
 
       .logo {
         display: block;

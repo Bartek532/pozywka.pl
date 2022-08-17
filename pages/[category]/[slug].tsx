@@ -2,9 +2,9 @@ import { fetchArticles } from "pages/api/posts";
 import { fetchArticle } from "pages/api/posts/[slug]";
 import type { GetStaticPaths, GetStaticPropsContext } from "next";
 import type { InferGetStaticPropsType } from "types";
-import { Layout } from "components/layout/Layout";
 import { PostView } from "views/post/Post";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
+import { Layout } from "components/layout/Layout";
 
 const Post = ({ article, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -16,12 +16,7 @@ const Post = ({ article, tags, categories, newestPosts }: InferGetStaticPropsTyp
       }}
     >
       <PostView post={article} tags={tags} categories={categories} />
-      <PostsSliderSection
-        title={"Może Cię też zainteresować"}
-        categories={categories}
-        tags={tags}
-        posts={newestPosts}
-      />
+      <PostsSliderSection title={"Może Cię też zainteresować"} tags={tags} posts={newestPosts} />
     </Layout>
   );
 };
