@@ -1,19 +1,19 @@
 import { Layout } from "components/layout/Layout";
 import { PostsView } from "views/posts/Posts";
 import { GetServerSideProps } from "next";
-import { fetchArticles } from "pages/api/posts";
+import { fetchPosts } from "pages/api/posts";
 import type { WPPost, Tag, Category } from "types";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
 const Search = ({
-  articles,
+  posts,
   tags,
   query,
   newestPosts,
   searchedTags,
   searchedCategories,
 }: {
-  articles: WPPost[];
+  posts: WPPost[];
   tags: Tag[];
   query: string;
   newestPosts: WPPost[];
@@ -35,7 +35,7 @@ const Search = ({
       }
     >
       <PostsView
-        posts={articles}
+        posts={posts}
         tags={tags}
         title={
           query
@@ -53,20 +53,20 @@ const Search = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { articles, tags, categories } = await fetchArticles({
+  const { posts, tags, categories } = await fetchPosts({
     categories: (query.categories as string)?.split(" "),
     tags: (query.tags as string)?.split(" "),
     query: query.q as string,
     perPage: 11,
   });
-  const { articles: newestPosts } = await fetchArticles();
+  const { posts: newestPosts } = await fetchPosts();
 
   const searchedTags = tags.filter(({ slug }) => (query.tags as string)?.split(" ").includes(slug));
   const searchedCategories = categories.filter(({ slug }) => (query.categories as string)?.split(" ").includes(slug));
 
   return {
     props: {
-      articles,
+      posts,
       tags,
       query: query.q || null,
       newestPosts,

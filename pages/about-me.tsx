@@ -7,14 +7,14 @@ import { NewsletterSection } from "components/section/newsletterSection/Newslett
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import type { GetStaticPropsContext } from "next";
 import { fetchPage } from "utils/api-helpers";
-import { fetchArticles } from "pages/api/posts";
+import { fetchPosts } from "pages/api/posts";
 import type { InferGetStaticPropsType } from "types";
 
-const AboutMe = ({ page, articles, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={page.title.rendered} head={page.yoast_head_json}>
       <AboutMeView page={page} />
-      <PostsSliderSection title="Najnowsze" posts={articles} tags={tags} />
+      <PostsSliderSection title="Najnowsze" posts={posts} tags={tags} />
       <NewsletterSection />
     </Layout>
   );
@@ -23,12 +23,12 @@ const AboutMe = ({ page, articles, tags }: InferGetStaticPropsType<typeof getSta
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const page = await fetchPage("about-me");
-    const { articles, tags } = await fetchArticles();
+    const { posts, tags } = await fetchPosts();
 
     return {
       props: {
         page,
-        articles,
+        posts,
         tags,
       },
       revalidate: 100,

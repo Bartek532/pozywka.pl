@@ -2,10 +2,8 @@ import type { GetStaticPropsContext } from "next";
 import { Layout } from "components/layout/Layout";
 import { HomeView } from "views/home/Home";
 import { fetchMyLastInstagramPosts } from "pages/api/ig";
-import { fetchArticles } from "pages/api/posts";
+import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
-import { fetchTags } from "pages/api/posts/tags";
-import { fetchCategories } from "pages/api/posts/categories";
 import { InferGetStaticPropsType } from "types";
 
 const Home = ({
@@ -35,10 +33,10 @@ const Home = ({
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const instagramPosts = await fetchMyLastInstagramPosts();
-    const { articles: placesPosts } = await fetchArticles({ tags: ["miejsca"] });
-    const { articles: booksPosts } = await fetchArticles({ tags: ["ksiazki"] });
-    const { articles: podcasts } = await fetchArticles({ categories: ["podcasts"] });
-    const { articles, tags } = await fetchArticles();
+    const { posts: placesPosts } = await fetchPosts({ tags: ["miejsca"] });
+    const { posts: booksPosts } = await fetchPosts({ tags: ["ksiazki"] });
+    const { posts: podcasts } = await fetchPosts({ categories: ["podcasts"] });
+    const { posts, tags } = await fetchPosts();
     const aboutPage = await fetchPage("about-me");
 
     return {
@@ -49,7 +47,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         booksPosts,
         newestPodcast: podcasts[0],
         about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
-        posts: articles,
+        posts,
       },
       revalidate: 10,
     };

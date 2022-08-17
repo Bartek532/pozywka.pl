@@ -1,18 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { fetchArticles } from ".";
+import { fetchPosts } from ".";
 
-export const fetchArticle = async (slug: string) => {
+export const fetchPost = async (slug: string) => {
   const {
-    articles: [article],
+    posts: [post],
     categories,
     tags,
-  } = await fetchArticles({ slug });
-  return { article, categories, tags };
+  } = await fetchPosts({ slug });
+  return { post, categories, tags };
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const data = await fetchArticle(req.query?.slug as string);
+    const data = await fetchPost(req.query?.slug as string);
 
     return res.status(200).json(data);
   } catch (e) {

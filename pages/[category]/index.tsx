@@ -1,15 +1,15 @@
 import { Layout } from "components/layout/Layout";
-import { fetchArticles } from "pages/api/posts";
+import { fetchPosts } from "pages/api/posts";
 import { fetchCategories } from "pages/api/posts/categories";
 import type { GetStaticPropsContext, GetStaticPaths } from "next";
 import { InferGetStaticPropsType } from "types";
 import { PostsView } from "views/posts/Posts";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
-const Posts = ({ articles, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Posts = ({ posts, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={category.name}>
-      <PostsView posts={articles} category={category} tags={tags} />
+      <PostsView posts={posts} category={category} tags={tags} />
       <PostsSliderSection title={"Najnowsze"} tags={tags} posts={newestPosts} />
     </Layout>
   );
@@ -26,15 +26,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   try {
-    const { articles, categories, tags } = await fetchArticles({
+    const { posts, categories, tags } = await fetchPosts({
       categories: [params!.category! as string],
       perPage: 11,
     });
-    const { articles: newestPosts } = await fetchArticles();
+    const { posts: newestPosts } = await fetchPosts();
 
     const category = categories.find(({ slug }) => slug === params?.category)!;
 
-    if (!articles.length || !category) {
+    if (!posts.length || !category) {
       return {
         notFound: true as const,
       };
@@ -51,7 +51,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
     return {
       props: {
-        articles,
+        posts,
         category,
         tags,
         newestPosts,

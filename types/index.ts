@@ -23,7 +23,7 @@ export type YoastHead = {
   readonly twitter_card: string;
 };
 
-//Article from WP
+//Post from WP
 export type WPPost = {
   readonly id: number;
   readonly slug: string;
@@ -70,10 +70,10 @@ export type WPPage = {
   readonly yoast_head_json: YoastHead;
 };
 
-//API with articles response
-export type APIArticlesResponse = {
+//API with posts response
+export type APIPostsResponse = {
   readonly categories: Category[];
-  readonly articles: WPPost[];
+  readonly posts: WPPost[];
   readonly tags: Tag[];
 };
 

@@ -1,20 +1,20 @@
 import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { WPPost, APIArticlesResponse } from "types";
+import type { WPPost, APIPostsResponse } from "types";
 import { fetchCategories } from "./categories";
-import { ARTICLES_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
+import { POSTS_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
 import { fetchTags } from "./tags";
 import { buildQuery } from "utils/functions";
 
-export const fetchArticles = async ({
+export const fetchPosts = async ({
   categories = [] as string[],
   tags = [] as string[],
   query = "",
-  perPage = ARTICLES_PER_PAGE,
+  perPage = POSTS_PER_PAGE,
   page = 1,
   slug = "",
   offset = 0,
-} = {}): Promise<APIArticlesResponse> => {
+} = {}): Promise<APIPostsResponse> => {
   const fetchedCategories = (await fetchCategories()) || DEFAULT_CATEGORIES;
   const fetchedTags = (await fetchTags()) || DEFAULT_TAGS;
 
@@ -34,20 +34,20 @@ export const fetchArticles = async ({
     { key: "offset", value: offset },
   ]);
 
-  const articles: (Omit<WPPost, "categories" & "tags"> & {
+  const posts: (Omit<WPPost, "categories" & "tags"> & {
     categories: number[];
     tags: number[];
   })[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/posts?${apiQuery}`, { method: "GET" });
 
   return {
-    articles: articles.map((article) => {
-      const categories = article.categories.map((category) => {
+    posts: posts.map((post) => {
+      const categories = post.categories.map((category) => {
         return fetchedCategories.find(({ id }) => category === id)?.slug || category;
       });
-      const tags = article.tags.map((tag) => {
+      const tags = post.tags.map((tag) => {
         return fetchedTags.find(({ id }) => tag === id)?.slug || tag;
       });
-      return { ...article, categories, tags };
+      return { ...post, categories, tags };
     }),
     categories: fetchedCategories,
     tags: fetchedTags,
@@ -56,7 +56,7 @@ export const fetchArticles = async ({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const data = await fetchArticles({
+    const data = await fetchPosts({
       categories: req.query.categories ? (req.query.categories as string).split(" ") : undefined,
       tags: req.query.tags ? (req.query.tags as string).split(" ") : undefined,
       query: req.query.q as string,

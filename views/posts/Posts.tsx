@@ -32,7 +32,7 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
           return <PostTile post={post} key={post.id} tags={tags} />;
         })}
         <div className={styles.load}>
-          <LoadMore articles={posts} setArticles={setPosts} category={category?.slug} />
+          <LoadMore posts={posts} setPosts={setPosts} category={category?.slug} />
         </div>
       </section>
     </>

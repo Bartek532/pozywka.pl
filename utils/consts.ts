@@ -22,7 +22,7 @@ export const DEFAULT_CATEGORIES = [
   { id: 1, name: "Piszę", slug: "posts", icon: "✏️" },
 ];
 
-export const ARTICLES_PER_PAGE = 10;
+export const POSTS_PER_PAGE = 10;
 
 export const SOCIALS = [
   { slug: "fb", link: "https://www.facebook.com/pozywka/" },

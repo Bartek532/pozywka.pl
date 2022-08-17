@@ -3,20 +3,20 @@ import { memo, useEffect } from "react";
 import type { WPPost } from "types";
 import { useRouter } from "next/router";
 import { useInfiniteScroll } from "lib/hooks/useInfiniteScroll";
-import { ARTICLES_PER_PAGE } from "utils/consts";
+import { POSTS_PER_PAGE } from "utils/consts";
 
 type LoadMoreProps = {
-  readonly articles: WPPost[];
-  readonly setArticles: React.Dispatch<React.SetStateAction<WPPost[]>>;
+  readonly posts: WPPost[];
+  readonly setPosts: React.Dispatch<React.SetStateAction<WPPost[]>>;
   readonly category?: string;
 };
 
-export const LoadMore = memo<LoadMoreProps>(({ articles, setArticles, category }) => {
+export const LoadMore = memo<LoadMoreProps>(({ posts, setPosts, category }) => {
   const router = useRouter();
   const {
     isLoading,
     isError,
-    articles: fetchedArticles,
+    posts: fetchedPosts,
     getNextPage,
     page,
   } = useInfiniteScroll({
@@ -27,10 +27,10 @@ export const LoadMore = memo<LoadMoreProps>(({ articles, setArticles, category }
   });
 
   useEffect(() => {
-    setArticles((articles) => [...articles, ...fetchedArticles]);
-  }, [fetchedArticles]);
+    setPosts((posts) => [...posts, ...fetchedPosts]);
+  }, [fetchedPosts]);
 
-  if (articles.length < page * ARTICLES_PER_PAGE) {
+  if (posts.length < page * POSTS_PER_PAGE) {
     return null;
   }
 

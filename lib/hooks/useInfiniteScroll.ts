@@ -1,19 +1,19 @@
 import type { WPPost } from "types";
-import { ARTICLES_PER_PAGE } from "utils/consts";
+import { POSTS_PER_PAGE } from "utils/consts";
 import { fetcher } from "utils/fetcher";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export const useInfiniteScroll = ({
   page = 1,
-  perPage = ARTICLES_PER_PAGE,
+  perPage = POSTS_PER_PAGE,
   categories = "",
   tags = "",
   query = "",
   offset = 0,
 }) => {
   const [fetchedPage, setFetchedPage] = useState(page);
-  const [articles, setArticles] = useState<WPPost[]>([]);
+  const [posts, setPosts] = useState<WPPost[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const router = useRouter();
@@ -21,14 +21,14 @@ export const useInfiniteScroll = ({
   const getPage = async (page: number) => {
     setIsLoading(true);
     try {
-      const { articles: fetchedArticles } = await fetcher(
+      const { posts: fetchedPosts } = await fetcher(
         `/api/posts?per_page=${perPage}&categories=${categories}&tags=${tags}&query=${query}&offset=${
           (page - 2) * perPage + offset
         }`,
         { method: "GET" },
       );
 
-      setArticles(fetchedArticles);
+      setPosts(fetchedPosts);
       setIsError(false);
       setFetchedPage((prev) => prev + 1);
     } catch {
@@ -52,7 +52,7 @@ export const useInfiniteScroll = ({
   }, [router.events]);
 
   return {
-    articles,
+    posts,
     isLoading,
     isError,
     getNextPage,
