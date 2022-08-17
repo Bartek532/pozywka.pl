@@ -36,7 +36,7 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
     <section className={styles.section}>
       <h2 className={styles.title}>
         {tags.map((tag) => tag.name).includes(title) ? (
-          <Link href={`/search?tags=${tag!.slug}`}>
+          <Link href={`/szukaj?tags=${tag!.slug}`}>
             <a>#{title}</a>
           </Link>
         ) : (

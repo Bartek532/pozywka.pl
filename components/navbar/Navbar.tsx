@@ -5,18 +5,18 @@ import Link from "next/link";
 import { SearchInput } from "components/form/searchInput/SearchInput";
 
 const links = [
-  { path: "posts", name: "Piszę" },
-  { path: "podcasts", name: "Mówię" },
+  { path: "pisze", name: "Piszę" },
+  { path: "mowie", name: "Mówię" },
   { path: "jem", name: "Jem" },
-  { path: "about-me", name: "O mnie" },
-  { path: "collaboration", name: "Współpraca" },
+  { path: "o-mnie", name: "O mnie" },
+  { path: "wspolpraca", name: "Współpraca" },
 ];
 
 export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
   const router = useRouter();
   const handleSearch = ({ query }: { query: string }) => {
     if (query.trim()) {
-      router.replace(`/search?q=${encodeURIComponent(query.trim())}`);
+      router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
     }
   };
   return (

@@ -3,7 +3,7 @@ export const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
 export const BASIC_API_URL = "https://admin.pozywka.pl/wp-json/wp/v2";
 
 export const DEFAULT_TAGS = [
-  { id: 13, name: "Felietony", slug: "felietony" },
+  { id: 13, name: "Ale cacko!", slug: "ale-cacko" },
   { id: 12, name: "Fenomeny Kulinarne", slug: "fenomeny-kulinarne" },
   { id: 11, name: "Filmy i seriale", slug: "filmy-i-seriale" },
   { id: 10, name: "Książki", slug: "ksiazki" },
