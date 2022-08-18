@@ -35,7 +35,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const instagramPosts = await fetchMyLastInstagramPosts();
     const { posts: placesPosts } = await fetchPosts({ tags: ["miejsca"] });
     const { posts: booksPosts } = await fetchPosts({ tags: ["ksiazki"] });
-    const { posts: podcasts } = await fetchPosts({ categories: ["podcasts"] });
+    const { posts: podcasts } = await fetchPosts({ categories: ["mowie"] });
     const { posts, tags } = await fetchPosts();
     const aboutPage = await fetchPage("about-me");
 

@@ -42,7 +42,7 @@ export const HomeView = memo<HomeViewProps>(
         <Banner
           label="podcast"
           title={newestPodcast.title.rendered}
-          link={{ url: `/podcasts/${newestPodcast.slug}`, title: "posłuchaj" }}
+          link={{ url: `/mowie/${newestPodcast.slug}`, title: "posłuchaj" }}
           variant="green"
           imageSrc={newestPodcast.acf.image}
         />
