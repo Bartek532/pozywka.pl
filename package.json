@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^3.3.4",
     "@supabase/supabase-js": "^1.35.4",
     "dayjs": "^1.11.5",
     "next": "12.2.2",

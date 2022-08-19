@@ -7,6 +7,7 @@ import { useViews } from "lib/hooks/useViews";
 import { Explore } from "components/explore/Explore";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { LikesCounter } from "components/likesCounter/LikesCounter";
 
 dayjs.extend(customParseFormat);
 
@@ -49,6 +50,7 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
           <Explore tags={tags} />
         </aside>
         <div className={styles.footer}>
+          <LikesCounter slug={post.slug} />
           <div className={styles.share}>
             <p className={styles.description}>Udostępnij: </p>
             <a
