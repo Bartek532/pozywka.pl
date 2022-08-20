@@ -3,6 +3,7 @@ import { memo } from "react";
 import Link from "next/link";
 import ArrowIcon from "public/svg/arrow.svg";
 import type { WPPost, Tag } from "types";
+import Image from "next/image";
 
 type PostTileProps = {
   readonly post: WPPost;
@@ -17,7 +18,9 @@ export const PostTile = memo<PostTileProps>(({ post, tags }) => {
         <a>
           <div className={styles.wrapper}>
             <div className={styles.imageWrapper}>
-              <div className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></div>
+              <div className={styles.image}>
+                <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+              </div>
             </div>
             <span className={styles.category}>{tag?.name}</span>
             <div className={styles.content}>

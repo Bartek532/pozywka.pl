@@ -5,8 +5,9 @@ import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import { SOCIALS } from "utils/consts";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
-import type { WPPost, Tag, Category } from "types";
+import type { WPPost, Tag } from "types";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 type HeroProps = {
   readonly title?: string;
@@ -23,10 +24,14 @@ export const Hero = memo<HeroProps>(({ title, post, tags }) => {
     <div className={styles.hero}>
       <div className={styles.imageWrapper}>
         {isPostView ? (
-          <div className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></div>
+          <div className={styles.image}>
+            <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+          </div>
         ) : (
           <Link href={`/${post.categories[0]}/${post.slug}`}>
-            <a className={styles.image} style={{ backgroundImage: `url(${post.acf.image})` }}></a>
+            <a className={styles.image}>
+              <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+            </a>
           </Link>
         )}
       </div>

@@ -13,9 +13,7 @@
       width: 100%;
       transition: transform 0.4s ease-in-out;
       display: block;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      position: relative;
 
       &:is(a):hover {
         transform: scale(1.1);
