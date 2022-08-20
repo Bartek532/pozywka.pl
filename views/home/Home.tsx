@@ -12,11 +12,11 @@ import { PostTile } from "components/tile/postTile/PostTile";
 
 type HomeViewProps = {
   readonly tags: Tag[];
-  readonly instagramPosts: InstagramPost[];
+  readonly instagramPosts: (InstagramPost & { blurredImage?: string })[];
   readonly newestPodcast: WPPost;
-  readonly posts: WPPost[];
-  readonly placesPosts: WPPost[];
-  readonly booksPosts: WPPost[];
+  readonly posts: (WPPost & { blurredImage?: string })[];
+  readonly placesPosts: (WPPost & { blurredImage?: string })[];
+  readonly booksPosts: (WPPost & { blurredImage?: string })[];
   readonly about: { excerpt: string; image: string };
 };
 

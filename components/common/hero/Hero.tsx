@@ -11,7 +11,7 @@ import Image from "next/image";
 
 type HeroProps = {
   readonly title?: string;
-  readonly post: WPPost;
+  readonly post: WPPost & { blurredImage?: string };
   readonly tags: Tag[];
 };
 
@@ -25,12 +25,27 @@ export const Hero = memo<HeroProps>(({ title, post, tags }) => {
       <div className={styles.imageWrapper}>
         {isPostView ? (
           <div className={styles.image}>
-            <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+            <Image
+              src={post.acf.image}
+              alt={post.title.rendered}
+              layout="fill"
+              objectFit="cover"
+              placeholder="blur"
+              blurDataURL={post.blurredImage}
+              priority
+            />
           </div>
         ) : (
           <Link href={`/${post.categories[0]}/${post.slug}`}>
             <a className={styles.image}>
-              <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+              <Image
+                src={post.acf.image}
+                alt={post.title.rendered}
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+                blurDataURL={post.blurredImage}
+              />
             </a>
           </Link>
         )}

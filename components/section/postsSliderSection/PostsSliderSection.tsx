@@ -7,7 +7,7 @@ import { PostTile } from "components/tile/postTile/PostTile";
 
 type PostsSliderSectionProps = {
   readonly title: string;
-  readonly posts: WPPost[];
+  readonly posts: (WPPost & { blurredImage?: string })[];
   readonly tags: Tag[];
 };
 

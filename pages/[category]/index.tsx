@@ -5,6 +5,7 @@ import type { GetStaticPropsContext, GetStaticPaths } from "next";
 import { InferGetStaticPropsType } from "types";
 import { PostsView } from "views/posts/Posts";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
+import { getPostsWithBlurredImages } from "utils/functions";
 
 const Posts = ({ posts, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -40,21 +41,15 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       };
     }
 
-    /*
-    const articlesWithBlurredImages = await Promise.all(
-      articles.map(async article => {
-        const result = await getPlaiceholder(encodeURI(article.acf.image));
-        return { ...article, blurredImage: result.base64 };
-      })
-    );
-    */
+    const postsWithBlurredImages = await getPostsWithBlurredImages(posts);
+    const newestPostsWithBlurredImages = await getPostsWithBlurredImages(newestPosts);
 
     return {
       props: {
-        posts,
+        posts: postsWithBlurredImages,
         category,
         tags,
-        newestPosts,
+        newestPosts: newestPostsWithBlurredImages,
       },
       revalidate: 60,
     };

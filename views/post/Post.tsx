@@ -13,7 +13,7 @@ dayjs.extend(customParseFormat);
 
 type PostViewProps = {
   readonly tags: Tag[];
-  readonly post: WPPost;
+  readonly post: WPPost & { blurredImage?: string };
   readonly categories: Category[];
 };
 

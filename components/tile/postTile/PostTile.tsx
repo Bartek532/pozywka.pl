@@ -6,7 +6,7 @@ import type { WPPost, Tag } from "types";
 import Image from "next/image";
 
 type PostTileProps = {
-  readonly post: WPPost;
+  readonly post: WPPost & { blurredImage?: string };
   readonly tags: Tag[];
 };
 
@@ -19,7 +19,14 @@ export const PostTile = memo<PostTileProps>(({ post, tags }) => {
           <div className={styles.wrapper}>
             <div className={styles.imageWrapper}>
               <div className={styles.image}>
-                <Image src={post.acf.image} alt={post.title.rendered} layout="fill" objectFit="cover" />
+                <Image
+                  src={post.acf.image}
+                  alt={post.title.rendered}
+                  layout="fill"
+                  objectFit="cover"
+                  placeholder="blur"
+                  blurDataURL={post.blurredImage}
+                />
               </div>
             </div>
             <span className={styles.category}>{tag?.name}</span>

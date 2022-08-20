@@ -5,6 +5,7 @@ import type { InferGetStaticPropsType } from "types";
 import { PostView } from "views/post/Post";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import { Layout } from "components/layout/Layout";
+import { getPostsWithBlurredImages } from "utils/functions";
 
 const Post = ({ post, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -37,12 +38,15 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     const { post, tags, categories } = await fetchPost(params?.slug as string);
     const { posts: newestPosts } = await fetchPosts({ perPage: 11, categories: [params?.category as string] });
 
+    const newestPostsWithBlurredImages = await getPostsWithBlurredImages(newestPosts);
+    const [postWithBlurredImage] = await getPostsWithBlurredImages([post]);
+
     return {
       props: {
-        post,
+        post: postWithBlurredImage,
         tags,
         categories,
-        newestPosts: newestPosts.filter(({ slug }) => slug !== (params?.slug as string)),
+        newestPosts: newestPostsWithBlurredImages.filter(({ slug }) => slug !== (params?.slug as string)),
       },
       revalidate: 60,
     };

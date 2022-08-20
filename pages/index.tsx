@@ -5,6 +5,8 @@ import { fetchMyLastInstagramPosts } from "pages/api/ig";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
+import { getPlaiceholder } from "plaiceholder";
+import { getPostsWithBlurredImages } from "utils/functions";
 
 const Home = ({
   instagramPosts,
@@ -39,15 +41,26 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { posts, tags } = await fetchPosts();
     const aboutPage = await fetchPage("about-me");
 
+    const instagramPostsWithBlurredImages = await Promise.all(
+      instagramPosts.map(async (post) => {
+        const result = await getPlaiceholder(encodeURI(post.media_url));
+        return { ...post, blurredImage: result.base64 };
+      }),
+    );
+
+    const placesPostsWithBlurredImages = await getPostsWithBlurredImages(placesPosts);
+    const booksPostsWithBlurredImages = await getPostsWithBlurredImages(booksPosts);
+    const postsWithBlurredImages = await getPostsWithBlurredImages(posts);
+
     return {
       props: {
-        instagramPosts,
+        instagramPosts: instagramPostsWithBlurredImages,
         tags,
-        placesPosts,
-        booksPosts,
+        placesPosts: placesPostsWithBlurredImages,
+        booksPosts: booksPostsWithBlurredImages,
         newestPodcast: podcasts[0],
         about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
-        posts,
+        posts: postsWithBlurredImages,
       },
       revalidate: 10,
     };

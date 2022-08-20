@@ -1,3 +1,6 @@
+import { getPlaiceholder } from "plaiceholder";
+import type { WPPost } from "types";
+
 export const buildQuery = (data: { key: string; value?: number | string }[]) => {
   const query = data
     .map(({ key, value }) => {
@@ -36,4 +39,13 @@ export const normalizeLikesCount = (likesCount: number) => {
   }
 
   return likesCount;
+};
+
+export const getPostsWithBlurredImages = async (posts: WPPost[]) => {
+  return await Promise.all(
+    posts.map(async (post) => {
+      const result = await getPlaiceholder(encodeURI(post.acf.image));
+      return { ...post, blurredImage: result.base64 };
+    }),
+  );
 };
