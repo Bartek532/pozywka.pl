@@ -40,12 +40,3 @@ export const normalizeLikesCount = (likesCount: number) => {
 
   return likesCount;
 };
-
-export const getPostsWithBlurredImages = async (posts: WPPost[]) => {
-  return await Promise.all(
-    posts.map(async (post) => {
-      const result = await getPlaiceholder(encodeURI(post.acf.image));
-      return { ...post, blurredImage: result.base64 };
-    }),
-  );
-};

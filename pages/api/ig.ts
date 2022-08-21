@@ -37,7 +37,7 @@ export const fetchMyLastInstagramPosts = async () => {
         },
       );
 
-      if (post.media_type === "IMAGE") {
+      if (post.media_type === "IMAGE" || post.media_type === "CAROUSEL_ALBUM") {
         return post;
       }
     }),

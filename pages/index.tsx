@@ -6,7 +6,6 @@ import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
 import { getPlaiceholder } from "plaiceholder";
-import { getPostsWithBlurredImages } from "utils/functions";
 
 const Home = ({
   instagramPosts,
@@ -48,9 +47,24 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
       }),
     );
 
-    const placesPostsWithBlurredImages = await getPostsWithBlurredImages(placesPosts);
-    const booksPostsWithBlurredImages = await getPostsWithBlurredImages(booksPosts);
-    const postsWithBlurredImages = await getPostsWithBlurredImages(posts);
+    const placesPostsWithBlurredImages = await Promise.all(
+      placesPosts.map(async (post) => {
+        const result = await getPlaiceholder(encodeURI(post.acf.image));
+        return { ...post, blurredImage: result.base64 };
+      }),
+    );
+    const booksPostsWithBlurredImages = await Promise.all(
+      booksPosts.map(async (post) => {
+        const result = await getPlaiceholder(encodeURI(post.acf.image));
+        return { ...post, blurredImage: result.base64 };
+      }),
+    );
+    const postsWithBlurredImages = await Promise.all(
+      posts.map(async (post) => {
+        const result = await getPlaiceholder(encodeURI(post.acf.image));
+        return { ...post, blurredImage: result.base64 };
+      }),
+    );
 
     return {
       props: {

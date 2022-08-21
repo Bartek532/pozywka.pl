@@ -5,7 +5,7 @@ import type { InferGetStaticPropsType } from "types";
 import { PostView } from "views/post/Post";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import { Layout } from "components/layout/Layout";
-import { getPostsWithBlurredImages } from "utils/functions";
+import { getPlaiceholder } from "plaiceholder";
 
 const Post = ({ post, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -38,8 +38,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     const { post, tags, categories } = await fetchPost(params?.slug as string);
     const { posts: newestPosts } = await fetchPosts({ perPage: 11, categories: [params?.category as string] });
 
-    const newestPostsWithBlurredImages = await getPostsWithBlurredImages(newestPosts);
-    const [postWithBlurredImage] = await getPostsWithBlurredImages([post]);
+    const newestPostsWithBlurredImages = await Promise.all(
+      newestPosts.map(async (post) => {
+        const result = await getPlaiceholder(encodeURI(post.acf.image));
+        return { ...post, blurredImage: result.base64 };
+      }),
+    );
+    const postWithBlurredImage = { ...post, blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64 };
 
     return {
       props: {
