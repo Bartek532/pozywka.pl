@@ -1,0 +1,27 @@
+.offline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  width: 100%;
+  min-height: 100vh;
+
+  .image {
+    width: 80%;
+    max-width: 300px;
+    padding: 2rem;
+  }
+
+  .title {
+    text-align: center;
+    line-height: 1.4;
+    padding: 2rem 1rem;
+    max-width: 500px;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  .offline .title {
+    font-size: 2.5rem;
+  }
+}
