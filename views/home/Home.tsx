@@ -32,8 +32,8 @@ export const HomeView = memo<HomeViewProps>(
           <div className={styles.posts}>
             {posts.slice(1, 3).map((post) => {
               return (
-                <div className={styles.post}>
-                  <PostTile key={post.id} post={post} tags={tags} />
+                <div className={styles.post} key={post.id}>
+                  <PostTile post={post} tags={tags} />
                 </div>
               );
             })}

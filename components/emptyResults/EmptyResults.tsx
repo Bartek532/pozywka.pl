@@ -1,13 +1,11 @@
 import styles from "./EmptyResults.module.scss";
 import { useEffect } from "react";
 import clsx from "clsx";
+import { playSound } from "utils/functions";
 
 export const EmptyResults = () => {
   useEffect(() => {
-    const audio = new Audio(`/sounds/coffee.mp3`);
-    //if (localStorage.getItem("sounds") === "enabled") {
-    audio.play();
-    //}
+    playSound("/sounds/coffee.mp3");
   }, []);
   return (
     <div className={styles.notFound}>

@@ -20,9 +20,9 @@ export const truncateText = (text: string, maxSize: number) => {
 
 export const playSound = (path: string) => {
   const audio = new Audio(path);
-  if (localStorage.getItem("sounds") === "enabled") {
-    audio.play();
-  }
+  //if (localStorage.getItem("sounds") === "enabled") {
+  audio.play();
+  //}
 };
 
 export const random = (min: number, max: number) => {
