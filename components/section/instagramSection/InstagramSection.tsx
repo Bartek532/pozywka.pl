@@ -2,6 +2,7 @@ import styles from "./InstagramSection.module.scss";
 import { useEffect, useState } from "react";
 import { fetcher } from "utils/fetcher";
 import type { InstagramPost } from "types";
+import { Loader } from "components/common/loader/Loader";
 
 export const InstagramSection = () => {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
@@ -32,13 +33,19 @@ export const InstagramSection = () => {
   return (
     <section className={styles.section}>
       <span className={styles.title}>instagram</span>
-      <div className={styles.images}>
-        {posts.map(({ permalink, media_url }) => (
-          <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink}>
-            <img className={styles.image} src={media_url} alt=""></img>
-          </a>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className={styles.loading}>
+          <Loader />
+        </div>
+      ) : (
+        <div className={styles.images}>
+          {posts.map(({ permalink, media_url }) => (
+            <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink}>
+              <img className={styles.image} src={media_url} alt=""></img>
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
