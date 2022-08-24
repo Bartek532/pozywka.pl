@@ -3,8 +3,13 @@
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
-  width: calc(1170px);
-  max-width: 100%;
+  width: 100%;
+  max-width: 1170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 
   article {
     width: 50%;
@@ -24,7 +29,7 @@
 
 @media (max-width: 1220px) {
   .posts {
-    width: 960px;
+    max-width: 960px;
   }
 }
 
@@ -36,7 +41,7 @@
     flex-direction: column;
     padding-top: 50px;
     align-items: center;
-    width: 100%;
+    max-width: 100%;
     padding-left: 50px;
     padding-right: 50px;
 

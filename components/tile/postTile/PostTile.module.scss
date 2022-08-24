@@ -12,6 +12,7 @@
       width: 250px;
       margin-right: 15px;
       overflow: hidden;
+      flex-shrink: 0;
 
       .image {
         height: 100%;
@@ -36,8 +37,7 @@
     }
 
     .content {
-      width: 200px;
-      height: 250px;
+      max-width: 280px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -67,10 +67,6 @@
   &:hover {
     .image {
       transform: scale(1.1);
-    }
-
-    .content {
-      transform: scale(1.05);
     }
   }
 }
