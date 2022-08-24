@@ -48,6 +48,14 @@
         font-weight: 500;
         line-height: 1.3;
         margin-bottom: 20px;
+
+        span {
+          background-image: linear-gradient(var(--black-100), var(--black-100));
+          background-repeat: no-repeat;
+          background-position: bottom left;
+          background-size: 0% 3px;
+          transition: background-size 400ms ease, background-color 400ms ease-in-out;
+        }
       }
 
       .excerpt {
@@ -67,6 +75,10 @@
   &:hover {
     .image {
       transform: scale(1.1);
+    }
+
+    .content .title span {
+      background-size: 100% 3px;
     }
   }
 }

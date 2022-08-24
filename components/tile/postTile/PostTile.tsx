@@ -31,7 +31,9 @@ export const PostTile = memo<PostTileProps>(({ post, tags }) => {
             </div>
             <span className={styles.category}>{tag?.name}</span>
             <div className={styles.content}>
-              <h3 className={styles.title}>{post.title.rendered}</h3>
+              <h3 className={styles.title}>
+                <span>{post.title.rendered}</span>
+              </h3>
               <div
                 className={styles.excerpt}
                 dangerouslySetInnerHTML={{
