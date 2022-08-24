@@ -1,34 +1,46 @@
 import styles from "./InstagramSection.module.scss";
-import { memo } from "react";
+import { useEffect, useState } from "react";
+import { fetcher } from "utils/fetcher";
 import type { InstagramPost } from "types";
-import Image from "next/image";
 
-type InstagramSectionProps = {
-  readonly posts: (InstagramPost & { blurredImage?: string })[];
-};
+export const InstagramSection = () => {
+  const [posts, setPosts] = useState<InstagramPost[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      try {
+        const { posts: fetchedPosts } = await fetcher("/api/ig", { method: "GET" });
+        setPosts(fetchedPosts);
+        setIsError(false);
+      } catch (e) {
+        console.log(e);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-export const InstagramSection = memo<InstagramSectionProps>(({ posts }) => {
+    fetchPosts();
+  }, []);
+
+  if (isError) {
+    return null;
+  }
+
   return (
     <section className={styles.section}>
       <span className={styles.title}>instagram</span>
       <div className={styles.images}>
-        {posts.map(({ permalink, media_url, blurredImage }) => (
+        {posts.map(({ permalink, media_url }) => (
           <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink}>
-            <div className={styles.image}>
-              <Image
-                src={media_url}
-                alt=""
-                layout="fill"
-                objectFit="cover"
-                placeholder="blur"
-                blurDataURL={blurredImage}
-              />
-            </div>
+            <img className={styles.image} src={media_url} alt=""></img>
           </a>
         ))}
       </div>
     </section>
   );
-});
+};
 
 InstagramSection.displayName = "InstagramSection";

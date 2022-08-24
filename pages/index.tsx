@@ -1,14 +1,12 @@
 import type { GetStaticPropsContext } from "next";
 import { Layout } from "components/layout/Layout";
 import { HomeView } from "views/home/Home";
-import { fetchMyLastInstagramPosts } from "pages/api/ig";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
 import { getPlaiceholder } from "plaiceholder";
 
 const Home = ({
-  instagramPosts,
   tags,
   placesPosts,
   booksPosts,
@@ -19,7 +17,6 @@ const Home = ({
   return (
     <Layout>
       <HomeView
-        instagramPosts={instagramPosts}
         tags={tags}
         placesPosts={placesPosts}
         booksPosts={booksPosts}
@@ -33,19 +30,11 @@ const Home = ({
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
-    const instagramPosts = await fetchMyLastInstagramPosts();
     const { posts: placesPosts } = await fetchPosts({ tags: ["miejsca"] });
     const { posts: booksPosts } = await fetchPosts({ tags: ["ksiazki"] });
     const { posts: podcasts } = await fetchPosts({ categories: ["podcasts"] });
     const { posts, tags } = await fetchPosts();
     const aboutPage = await fetchPage("about-me");
-
-    const instagramPostsWithBlurredImages = await Promise.all(
-      instagramPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.media_url));
-        return { ...post, blurredImage: result.base64 };
-      }),
-    );
 
     const placesPostsWithBlurredImages = await Promise.all(
       placesPosts.map(async (post) => {
@@ -68,7 +57,6 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 
     return {
       props: {
-        instagramPosts: instagramPostsWithBlurredImages,
         tags,
         placesPosts: placesPostsWithBlurredImages,
         booksPosts: booksPostsWithBlurredImages,
