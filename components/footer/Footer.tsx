@@ -34,6 +34,7 @@ export const Footer = () => {
         <div className={clsx(styles.column, styles.first)}>
           <Link href="/">
             <a>
+              <span className="sr-only">strona główna</span>
               <LogoSmall className={styles.logo} />
             </a>
           </Link>

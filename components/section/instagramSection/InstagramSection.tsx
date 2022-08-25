@@ -39,8 +39,9 @@ export const InstagramSection = () => {
         </div>
       ) : (
         <div className={styles.images}>
-          {posts.map(({ permalink, media_url }) => (
+          {posts.map(({ permalink, media_url, caption }) => (
             <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink}>
+              <span className="sr-only">{caption}</span>
               <img className={styles.image} src={media_url} alt=""></img>
             </a>
           ))}

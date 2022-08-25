@@ -14,6 +14,7 @@ export const SocialsMenu = memo<SocialsMenuProps>(({ socials }) => {
         return (
           <li className={styles.social} key={social.slug}>
             <a href={social.link} rel="noopener noreferrer" target="_blank">
+              <span className="sr-only">{social.slug}</span>
               <Icon />
             </a>
           </li>

@@ -30,6 +30,7 @@ export const SearchInput = ({
         />
       </label>
       <button className={styles.btn} onFocus={() => setIsInputFocused(true)}>
+        <span className="sr-only">szukaj</span>
         <SearchIcon />
       </button>
     </form>

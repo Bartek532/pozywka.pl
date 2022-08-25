@@ -14,12 +14,11 @@ export const Input = memo<InputProps>(
   forwardRef(
     ({ type = "text", name, onChange, onBlur, value, placeholder }, inputRef?: LegacyRef<HTMLInputElement>) => {
       return (
-        <label htmlFor={name} className={styles.label}>
+        <label className={styles.label}>
           <span className="sr-only">{placeholder || name}</span>
           <input
             type={type}
             name={name}
-            id={name}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
