@@ -18,7 +18,9 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
           </div>
         </div>
         <div className={clsx(styles.column, styles.second)}>
-          <div className={styles.image} style={{ backgroundImage: `url(${page.acf.image})` }}></div>
+          <div className={styles.image}>
+            <Image src={page.acf.image} alt="" layout="fill" objectFit="cover" />
+          </div>
           <div className={styles.label}>
             <p dangerouslySetInnerHTML={{ __html: page.acf.newsletter_label }}></p>
             <a href="mailto:kontakt@pozywka.pl" className={styles.link}>
@@ -36,7 +38,9 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
               .map((thing) => {
                 return (
                   <div className={styles.thing} key={thing.id}>
-                    <div className={styles.image} style={{ backgroundImage: `url(${thing.acf.image})` }}></div>
+                    <div className={styles.image}>
+                      <Image src={thing.acf.image} alt="" layout="fill" objectFit="cover" />
+                    </div>
                     <p className={styles.description}>
                       <strong className={styles.subtitle}>{thing.title.rendered} </strong>
                       <span dangerouslySetInnerHTML={{ __html: thing.content.rendered }}></span>

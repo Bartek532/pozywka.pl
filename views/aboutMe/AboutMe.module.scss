@@ -64,9 +64,7 @@
   height: 350px;
   margin-top: 80px;
   margin-bottom: 80px;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  position: relative;
 }
 
 .infos {
@@ -89,9 +87,6 @@
       height: 250px;
       flex-shrink: 0;
       position: relative;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
 
       &:after {
         display: block;

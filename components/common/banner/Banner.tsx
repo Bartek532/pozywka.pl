@@ -3,6 +3,7 @@ import { memo } from "react";
 import clsx from "clsx";
 import { Badge } from "components/common/badge/Badge";
 import Link from "next/link";
+import Image from "next/image";
 
 type BannerProps = {
   readonly label: string;
@@ -37,7 +38,9 @@ export const Banner = memo<BannerProps>(({ label, title, reverse = false, varian
           <a className={styles.link}>{link.title}</a>
         </Link>
       </div>
-      <div className={styles.image} style={{ backgroundImage: `url(${imageSrc})` }}></div>
+      <div className={styles.image}>
+        <Image src={imageSrc} alt="" layout="fill" objectFit="cover" />
+      </div>
     </div>
   );
 });

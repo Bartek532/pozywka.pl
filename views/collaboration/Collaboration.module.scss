@@ -75,9 +75,7 @@
       width: 350px;
       height: 350px;
       margin-top: 50px;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      position: relative;
     }
 
     .label {
@@ -174,9 +172,7 @@
         .image {
           width: 100%;
           height: calc(100% - 50px);
-          background-size: cover;
-          background-position: center center;
-          background-repeat: no-repeat;
+          position: relative;
         }
 
         &::before {
@@ -190,6 +186,7 @@
           color: var(--pink-100);
           font-family: Inconsolata, monospace;
           font-weight: 700;
+          z-index: 1;
         }
 
         &:first-child::before,
