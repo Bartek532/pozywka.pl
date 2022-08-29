@@ -7,10 +7,10 @@ import LogoSmall from "public/svg/logo-small.svg";
 import Link from "next/link";
 
 const footerLinks = [
-  { path: "about-me", name: "O mnie" },
-  { path: "collaboration", name: "Współpraca" },
-  { path: "contact", name: "Kontakt" },
-  { path: "privacy-policy", name: "Polityka Prywatności" },
+  { path: "/o-mnie", name: "O mnie" },
+  { path: "/wspolparca", name: "Współpraca" },
+  { path: "mailto:pozywkaa@gmail.com", name: "Kontakt" },
+  { path: "/polityka-prywatnosci", name: "Polityka Prywatności" },
 ];
 
 const FooterNav = () => {
