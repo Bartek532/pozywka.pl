@@ -1,0 +1,31 @@
+.wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+
+  .title {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    line-height: 1.3;
+    margin-top: 30px;
+    font-size: 2em;
+    margin: 0.67em 0;
+    font-weight: 300;
+  }
+}
+
+@media (max-width: 1220px) {
+  .wrapper {
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    max-width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

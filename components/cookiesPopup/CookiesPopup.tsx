@@ -16,7 +16,7 @@ export const CookiesPopup = () => {
     <div className={styles.cookies}>
       <p className={styles.description}>
         KOCHAM CIASTECZKA, ale dbam też o Twoje bezpieczeństwo. Więcej o ochronie danych przeczytasz{" "}
-        <Link href="/privacy-policy">
+        <Link href="/polityka-prywatnosci">
           <a className={styles.link}>TUTAJ</a>
         </Link>
         . Klikając Akceptuj, wyrażasz zgodę na używanie ciasteczek w celu usprawnienia korzystania z witryny.
