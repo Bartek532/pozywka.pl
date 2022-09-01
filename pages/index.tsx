@@ -64,7 +64,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
         posts: postsWithBlurredImages,
       },
-      revalidate: 10,
+      revalidate: 60,
     };
   } catch (e) {
     console.log(e);
