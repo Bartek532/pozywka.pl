@@ -1,6 +1,3 @@
-import { getPlaiceholder } from "plaiceholder";
-import type { WPPost } from "types";
-
 export const buildQuery = (data: { key: string; value?: number | string }[]) => {
   const query = data
     .map(({ key, value }) => {

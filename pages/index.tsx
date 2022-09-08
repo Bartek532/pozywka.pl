@@ -4,7 +4,6 @@ import { HomeView } from "views/home/Home";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
-import { getPlaiceholder } from "plaiceholder";
 
 const Home = ({
   tags,
@@ -36,33 +35,14 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     const { posts, tags } = await fetchPosts();
     const aboutPage = await fetchPage("about-me");
 
-    const placesPostsWithBlurredImages = await Promise.all(
-      placesPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
-    );
-    const booksPostsWithBlurredImages = await Promise.all(
-      booksPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
-    );
-    const postsWithBlurredImages = await Promise.all(
-      posts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
-    );
-
     return {
       props: {
         tags,
-        placesPosts: placesPostsWithBlurredImages,
-        booksPosts: booksPostsWithBlurredImages,
+        placesPosts,
+        booksPosts,
         newestPodcast: podcasts[0],
         about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
-        posts: postsWithBlurredImages,
+        posts,
       },
       revalidate: 60,
     };
