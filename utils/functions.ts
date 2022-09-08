@@ -18,6 +18,16 @@ export const truncateText = (text: string, maxSize: number) => {
   return text.length > maxSize ? text.slice(0, text.slice(0, maxSize - 3).lastIndexOf(" ")) + "..." : text;
 };
 
+export const truncateTextByWordsCount = (text: string, wordsCount: number) => {
+  const splittedText = text.split(" ");
+
+  if (splittedText.length <= wordsCount) {
+    return splittedText.join(" ");
+  }
+
+  return splittedText.slice(0, wordsCount).join(" ") + "...";
+};
+
 export const playSound = (path: string) => {
   const audio = new Audio(path);
   //if (localStorage.getItem("sounds") === "enabled") {

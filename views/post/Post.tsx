@@ -1,5 +1,5 @@
 import styles from "./Post.module.scss";
-import { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import type { Tag, WPPost, Category } from "types";
 import { Hero } from "components/common/hero/Hero";
 import clsx from "clsx";
@@ -8,6 +8,10 @@ import { Explore } from "components/explore/Explore";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { LikesCounter } from "components/likesCounter/LikesCounter";
+import { POST_LINK_REGEX } from "utils/consts";
+import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
+import { fetcher } from "utils/fetcher";
+import { createRoot } from "react-dom/client";
 
 dayjs.extend(customParseFormat);
 
@@ -21,9 +25,26 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
   const { addViews } = useViews();
   const [url, setUrl] = useState("");
   useEffect(() => {
+    replaceLinksWithEmbed();
     addViews(post.slug);
     setUrl(window.location.href);
   }, []);
+
+  const replaceLinksWithEmbed = async () => {
+    const embedLinkMatches = post.content.rendered.match(POST_LINK_REGEX);
+    if (embedLinkMatches) {
+      await Promise.all(
+        embedLinkMatches.map(async (match) => {
+          const slug = match.split("/").filter(Boolean)[3];
+          const { post: embedPost } = await fetcher(`/api/posts/${slug}`, { method: "GET" });
+
+          const root = createRoot(document.querySelector(`a[href^="https://www.pozywka.pl/post/${slug}"]`)!);
+          root.render(<EmbedPostTile post={embedPost} />);
+        }),
+      );
+    }
+  };
+
   return (
     <>
       <Hero post={post} tags={tags} />

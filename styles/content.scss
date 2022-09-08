@@ -58,7 +58,8 @@
     cursor: pointer;
     color: var(--violet-100);
 
-    &:hover {
+    &:not([href^="https://www.pozywka.pl/"]):hover
+    {
       text-decoration: underline;
     }
   }

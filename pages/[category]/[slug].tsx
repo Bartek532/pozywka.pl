@@ -44,7 +44,11 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
         return { ...post, blurredImage: result.base64 };
       }),
     );
-    const postWithBlurredImage = { ...post, blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64 };
+
+    const postWithBlurredImage = {
+      ...post,
+      blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+    };
 
     return {
       props: {
