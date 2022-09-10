@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const withReactSvg = require("next-react-svg");
-const withPWA = require("next-pwa");
+const withPWA = require("next-pwa")({
+  dest: "public",
+});
 const path = require("path");
 
 module.exports = withPWA(
@@ -12,10 +14,6 @@ module.exports = withPWA(
     reactStrictMode: true,
     images: {
       domains: ["admin.pozywka.pl"],
-    },
-    pwa: {
-      dest: "public",
-      disable: process.env.NODE_ENV === "development",
     },
     i18n: {
       locales: ["pl"],
