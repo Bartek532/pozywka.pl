@@ -2,6 +2,7 @@
 const withReactSvg = require("next-react-svg");
 const withPWA = require("next-pwa")({
   dest: "public",
+  disable: process.env.NODE_ENV !== "production",
 });
 const path = require("path");
 

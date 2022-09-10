@@ -12,6 +12,8 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import type { YoastHead } from "types";
 import { useWindowSize } from "lib/hooks/useWindowSize";
+import Image from "next/image";
+import { playSound } from "utils/functions";
 
 import { titleTemplate as defaultTitleTemplate } from "pages/_app";
 
@@ -24,14 +26,28 @@ type LayoutProps = {
 
 export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate = defaultTitleTemplate }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+
+  const [counter, setCounter] = useState(0);
+
   const { width } = useWindowSize();
   const router = useRouter();
+
+  useEffect(() => {
+    if (counter === 3) {
+      playSound("/sounds/drop.mp3");
+    }
+  }, [counter]);
 
   return (
     <div className={styles.content}>
       <CookiesPopup />
+      <div className={clsx(styles.imageEgg, { [styles.active]: counter >= 3 })}>
+        <Image src="/svg/zmn.png" width="500" height="500" alt="" />
+      </div>
       <header className={styles.header}>
         <div className={clsx(styles.headerContent, { [styles.home]: router.pathname === "/" && width! > 992 })}>
+          <button className={styles.egg} onClick={() => setCounter((oldCounter) => oldCounter + 1)}></button>
+
           {(width! < 992 || router.pathname !== "/") && (width! > 1220 || width! < 992) ? (
             <Link href="/">
               <a>

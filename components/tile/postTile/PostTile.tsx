@@ -4,6 +4,7 @@ import Link from "next/link";
 import ArrowIcon from "public/svg/arrow.svg";
 import type { WPPost, Tag } from "types";
 import Image from "next/image";
+import { truncateTextByWordsCount } from "utils/functions";
 
 type PostTileProps = {
   readonly post: WPPost & { blurredImage?: string };
@@ -37,11 +38,7 @@ export const PostTile = memo<PostTileProps>(({ post, tags }) => {
               <div
                 className={styles.excerpt}
                 dangerouslySetInnerHTML={{
-                  __html: post.excerpt.rendered
-                    ? post.excerpt.rendered.length > 203
-                      ? `${post.excerpt.rendered.slice(0, 200)}...`
-                      : post.excerpt.rendered
-                    : "",
+                  __html: truncateTextByWordsCount(post.excerpt.rendered, 29),
                 }}
               ></div>
             </div>
