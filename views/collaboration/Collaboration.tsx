@@ -1,11 +1,11 @@
 import Image from "next/image";
 import styles from "./Collaboration.module.scss";
-import type { WPPage, WPPost } from "types";
+import type { WPPage, ThingIDo } from "types";
 import { Badge } from "components/common/badge/Badge";
 import clsx from "clsx";
 import { Banner } from "components/common/banner/Banner";
 
-export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo: WPPost[] }) => {
+export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo: ThingIDo[] }) => {
   return (
     <>
       <div className={styles.hero}>
@@ -33,21 +33,19 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
         <div className={styles.things}>
           <h2 className={styles.title}>Co robię?</h2>
           <div className={styles.wrapper}>
-            {thingsIDo
-              .sort((a, b) => a.id - b.id)
-              .map((thing) => {
-                return (
-                  <div className={styles.thing} key={thing.id}>
-                    <div className={styles.image}>
-                      <Image src={thing.acf.image} alt="" layout="fill" objectFit="cover" />
-                    </div>
-                    <p className={styles.description}>
-                      <strong className={styles.subtitle}>{thing.title.rendered} </strong>
-                      <span dangerouslySetInnerHTML={{ __html: thing.content.rendered }}></span>
-                    </p>
+            {thingsIDo.map((thing) => {
+              return (
+                <div className={styles.thing} key={thing.title}>
+                  <div className={styles.image}>
+                    <Image src={thing.image} alt="" layout="fill" objectFit="cover" />
                   </div>
-                );
-              })}
+                  <p className={styles.description}>
+                    <strong className={styles.subtitle}>{thing.title} </strong>
+                    <span dangerouslySetInnerHTML={{ __html: thing.description }}></span>
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

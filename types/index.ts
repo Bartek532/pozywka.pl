@@ -86,6 +86,12 @@ export type InstagramPost = {
   readonly permalink: string;
 };
 
+export type ThingIDo = {
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
+};
+
 export type PromiseValue<T> = T extends PromiseLike<infer R> ? R : T;
 export type InferGetStaticPropsType<T extends (...args: any) => any> = PromiseValue<ReturnType<T>> extends infer Temp
   ? Temp extends {

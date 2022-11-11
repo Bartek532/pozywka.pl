@@ -2,10 +2,9 @@ import { Layout } from "components/layout/Layout";
 import { CollaborationView } from "views/collaboration/Collaboration";
 import type { GetStaticPropsContext } from "next";
 import { fetcher } from "utils/fetcher";
-import type { InferGetStaticPropsType, WPPost } from "types";
+import type { InferGetStaticPropsType, ThingIDo } from "types";
 import { fetchPage } from "utils/api-helpers";
 import { fetchPosts } from "pages/api/posts";
-import { BASIC_API_URL } from "utils/consts";
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
@@ -22,9 +21,7 @@ const Collaboration = ({ page, thingsIDo, posts, tags }: InferGetStaticPropsType
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const page = await fetchPage("collaboration");
-    const thingsIDo: WPPost[] = await fetcher(`${BASIC_API_URL}/things_i_do`, {
-      method: "GET",
-    });
+    const thingsIDo = Object.entries(page.acf.things_i_do).map(([key, value]) => value) as ThingIDo[];
     const { posts, tags } = await fetchPosts();
 
     return {
