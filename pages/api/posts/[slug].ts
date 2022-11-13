@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { fetchPosts } from ".";
+import type { Post } from "types";
 
 export const fetchPost = async (slug: string) => {
   const {
@@ -7,7 +8,7 @@ export const fetchPost = async (slug: string) => {
     categories,
     tags,
   } = await fetchPosts({ slug });
-  return { post, categories, tags };
+  return { ...post, categories, tags } as Post;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

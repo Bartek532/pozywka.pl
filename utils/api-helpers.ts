@@ -1,5 +1,6 @@
 import { BASIC_API_URL } from "utils/consts";
 import { fetcher } from "utils/fetcher";
+import { mapToPage } from "utils/wp-mappers";
 import type { WPPage } from "types";
 
 export const fetchPage = async (slug: string) => {
@@ -7,5 +8,5 @@ export const fetchPage = async (slug: string) => {
     method: "GET",
   });
 
-  return page;
+  return mapToPage(page);
 };

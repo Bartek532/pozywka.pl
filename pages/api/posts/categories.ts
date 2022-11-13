@@ -1,13 +1,14 @@
 import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Category } from "types";
+import type { WPCategory } from "types";
+import { mapToCategory } from "utils/wp-mappers";
 
 export const fetchCategories = async () => {
-  const categories: Category[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/categories`, {
+  const categories: WPCategory[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/categories`, {
     method: "GET",
   });
 
-  return categories;
+  return categories.map((category) => mapToCategory(category));
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

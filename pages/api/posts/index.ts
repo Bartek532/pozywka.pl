@@ -5,6 +5,7 @@ import { fetchCategories } from "./categories";
 import { POSTS_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
 import { fetchTags } from "./tags";
 import { buildQuery } from "utils/functions";
+import { mapToPost } from "utils/wp-mappers";
 
 export const fetchPosts = async ({
   categories = [] as string[],
@@ -34,20 +35,19 @@ export const fetchPosts = async ({
     { key: "offset", value: offset },
   ]);
 
-  const posts: (Omit<WPPost, "categories" & "tags"> & {
-    categories: number[];
-    tags: number[];
-  })[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/posts?${apiQuery}`, { method: "GET" });
+  const posts: WPPost[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/posts?${apiQuery}`, {
+    method: "GET",
+  });
 
   return {
     posts: posts.map((post) => {
       const categories = post.categories.map((category) => {
-        return fetchedCategories.find(({ id }) => category === id)?.slug || category;
+        return fetchedCategories.find(({ id }) => category === id)!;
       });
       const tags = post.tags.map((tag) => {
-        return fetchedTags.find(({ id }) => tag === id)?.slug || tag;
+        return fetchedTags.find(({ id }) => tag === id)!;
       });
-      return { ...post, categories, tags };
+      return { ...mapToPost(post), categories, tags };
     }),
     categories: fetchedCategories,
     tags: fetchedTags,

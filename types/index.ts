@@ -1,83 +1,43 @@
-//WP
-//Yoast Head
+import type { Acf } from "./wordpress";
+export * from "./wordpress";
 
-export type YoastHead = {
-  readonly robots: {
-    readonly index: string;
-    readonly follow: string;
-    readonly "max-snippet": string;
-    readonly "max-image-preview": string;
-    readonly "max-video-preview": string;
-  };
-
-  readonly canonical: string;
-  readonly og_locale: string;
-  readonly og_type: string;
-  readonly og_title: string;
-  readonly og_description: string;
-  readonly og_url: string;
-  readonly og_site_name: string;
-  readonly article_published_time: string;
-  readonly article_modified_time: string;
-  readonly og_image: { url: string }[];
-  readonly twitter_card: string;
-};
-
-//Post from WP
-export type WPPost = {
+export type Post = {
   readonly id: number;
+  readonly title: string;
   readonly slug: string;
-  readonly date: string;
-  readonly title: {
-    readonly rendered: string;
-  };
-  readonly content: {
-    readonly rendered: string;
-  };
-  readonly excerpt: {
-    readonly rendered: string;
-  };
-  readonly acf: {
-    readonly image: string;
-    readonly read_more: string;
-    readonly featured: boolean;
-  };
-  readonly categories: (number | string)[];
-  readonly tags: (number | string)[];
-  readonly yoast_head_json: YoastHead;
-};
-
-//Category from WP
-export type Category = { id: number; name: string; slug: string };
-
-//Tag from WP
-export type Tag = { id: number; name: string; slug: string };
-
-//Page from WP
-export type WPPage = {
-  readonly slug: string;
-  readonly title: {
-    readonly rendered: string;
-  };
-
-  readonly content: {
-    readonly rendered: string;
-  };
-  readonly excerpt: {
-    readonly rendered: string;
-  };
-  readonly acf: any;
-  readonly yoast_head_json: YoastHead;
-};
-
-//API with posts response
-export type APIPostsResponse = {
+  readonly excerpt: string;
+  readonly content: string;
   readonly categories: Category[];
-  readonly posts: WPPost[];
   readonly tags: Tag[];
 };
 
-//Instagram Post
+export type Page = {
+  readonly id: number;
+  readonly title: string;
+  readonly slug: string;
+  readonly excerpt: string;
+  readonly content: string;
+  readonly acf: Acf;
+};
+
+export type Category = {
+  readonly id: number;
+  readonly name: string;
+  readonly slug: string;
+};
+
+export type Tag = {
+  readonly id: number;
+  readonly name: string;
+  readonly slug: string;
+};
+
+export type APIPostsResponse = {
+  readonly categories: Category[];
+  readonly posts: Post[];
+  readonly tags: Tag[];
+};
+
 export type InstagramPost = {
   readonly id: string;
   readonly media_url: string;
