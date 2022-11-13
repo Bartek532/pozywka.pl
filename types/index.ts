@@ -1,14 +1,17 @@
-import type { Acf } from "./wordpress";
+import type { Acf, YoastHead } from "./wordpress";
 export * from "./wordpress";
 
 export type Post = {
   readonly id: number;
   readonly title: string;
   readonly slug: string;
+  readonly date: string;
   readonly excerpt: string;
   readonly content: string;
   readonly categories: Category[];
   readonly tags: Tag[];
+  readonly acf: Acf;
+  readonly yoast_head_json: YoastHead;
 };
 
 export type Page = {
@@ -18,6 +21,7 @@ export type Page = {
   readonly excerpt: string;
   readonly content: string;
   readonly acf: Acf;
+  readonly yoast_head_json: YoastHead;
 };
 
 export type Category = {

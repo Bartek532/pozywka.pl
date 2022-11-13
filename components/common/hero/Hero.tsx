@@ -5,19 +5,17 @@ import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import { SOCIALS } from "utils/consts";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
-import type { WPPost, Tag } from "types";
+import type { Post, Tag } from "types";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
 type HeroProps = {
   readonly title?: string;
-  readonly post: WPPost & { blurredImage?: string };
-  readonly tags: Tag[];
+  readonly post: Post & { blurredImage?: string };
 };
 
-export const Hero = memo<HeroProps>(({ title, post, tags }) => {
+export const Hero = memo<HeroProps>(({ title, post }) => {
   const router = useRouter();
-  const tag = tags.find((tag) => tag.slug === post.tags[0])!;
 
   const isPostView = router.query.slug === post.slug;
   return (
@@ -27,7 +25,7 @@ export const Hero = memo<HeroProps>(({ title, post, tags }) => {
           <div className={styles.image}>
             <Image
               src={post.acf.image}
-              alt={post.title.rendered}
+              alt={post.title}
               layout="fill"
               objectFit="cover"
               placeholder="blur"
@@ -36,11 +34,11 @@ export const Hero = memo<HeroProps>(({ title, post, tags }) => {
             />
           </div>
         ) : (
-          <Link href={`/${post.categories[0]}/${post.slug}`}>
+          <Link href={`/${post.categories[0].slug}/${post.slug}`}>
             <a className={styles.image}>
               <Image
                 src={post.acf.image}
-                alt={post.title.rendered}
+                alt={post.title}
                 layout="fill"
                 objectFit="cover"
                 placeholder="blur"
@@ -62,29 +60,29 @@ export const Hero = memo<HeroProps>(({ title, post, tags }) => {
           {isPostView ? (
             <div className={styles.post}>
               <div className={styles.postContent}>
-                <h2 className={styles.title}>{post.title.rendered}</h2>
+                <h2 className={styles.title}>{post.title}</h2>
                 <div
                   className={styles.description}
                   dangerouslySetInnerHTML={{
-                    __html: post.excerpt.rendered,
+                    __html: post.excerpt,
                   }}
                 ></div>
               </div>
-              <div className={styles.tag}>{tag.name}</div>
+              <div className={styles.tag}>{post.tags[0].name}</div>
             </div>
           ) : (
-            <Link href={`/${post.categories[0]}/${post.slug}`}>
+            <Link href={`/${post.categories[0].slug}/${post.slug}`}>
               <a className={styles.post}>
                 <div className={styles.postContent}>
-                  <h2 className={styles.title}>{post.title.rendered}</h2>
+                  <h2 className={styles.title}>{post.title}</h2>
                   <div
                     className={styles.description}
                     dangerouslySetInnerHTML={{
-                      __html: post.excerpt.rendered,
+                      __html: post.excerpt,
                     }}
                   ></div>
                 </div>
-                <div className={styles.tag}>{tag.name}</div>
+                <div className={styles.tag}>{post.tags[0].name}</div>
                 <ArrowIcon className={styles.arrow} />
               </a>
             </Link>

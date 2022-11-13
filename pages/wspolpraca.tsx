@@ -1,7 +1,6 @@
 import { Layout } from "components/layout/Layout";
 import { CollaborationView } from "views/collaboration/Collaboration";
 import type { GetStaticPropsContext } from "next";
-import { fetcher } from "utils/fetcher";
 import type { InferGetStaticPropsType, ThingIDo } from "types";
 import { fetchPage } from "utils/api-helpers";
 import { fetchPosts } from "pages/api/posts";
@@ -10,7 +9,7 @@ import { PostsSliderSection } from "components/section/postsSliderSection/PostsS
 
 const Collaboration = ({ page, thingsIDo, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout title={page.title.rendered} head={page.yoast_head_json}>
+    <Layout title={page.title} head={page.yoast_head_json}>
       <CollaborationView page={page} thingsIDo={thingsIDo} />
       <PostsSliderSection title="Najnowsze" posts={posts} tags={tags} />
       <NewsletterSection />

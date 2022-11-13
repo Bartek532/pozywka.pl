@@ -8,7 +8,7 @@ export const fetchPost = async (slug: string) => {
     categories,
     tags,
   } = await fetchPosts({ slug });
-  return { ...post, categories, tags } as Post;
+  return { post, categories, tags };
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

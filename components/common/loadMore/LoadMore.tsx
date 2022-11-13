@@ -1,13 +1,13 @@
 import styles from "./LoadMore.module.scss";
 import { memo, useEffect } from "react";
-import type { WPPost } from "types";
+import type { Post } from "types";
 import { useRouter } from "next/router";
 import { useInfiniteScroll } from "lib/hooks/useInfiniteScroll";
 import { POSTS_PER_PAGE } from "utils/consts";
 
 type LoadMoreProps = {
-  readonly posts: WPPost[];
-  readonly setPosts: React.Dispatch<React.SetStateAction<WPPost[]>>;
+  readonly posts: Post[];
+  readonly setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
   readonly category?: string;
 };
 

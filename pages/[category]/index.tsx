@@ -10,7 +10,7 @@ import { getPlaiceholder } from "plaiceholder";
 const Posts = ({ posts, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={category.name}>
-      <PostsView posts={posts} category={category} tags={tags} />
+      <PostsView posts={posts} category={category} />
       <PostsSliderSection title={"Najnowsze"} tags={tags} posts={newestPosts} />
     </Layout>
   );

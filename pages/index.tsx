@@ -30,10 +30,12 @@ const Home = ({
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
-    const { posts: placesPosts } = await fetchPosts({ tags: ["miejsca"] });
-    const { posts: booksPosts } = await fetchPosts({ tags: ["ksiazki"] });
-    const { posts: podcasts } = await fetchPosts({ categories: ["podcasts"] });
-    const { posts, tags } = await fetchPosts();
+    const [{ posts, tags }, { posts: placesPosts }, { posts: booksPosts }, { posts: podcasts }] = await Promise.all([
+      fetchPosts({ perPage: 5 }),
+      fetchPosts({ tags: ["miejsca"] }),
+      fetchPosts({ tags: ["ksiazki"] }),
+      fetchPosts({ categories: ["podcasts"], perPage: 1 }),
+    ]);
     const aboutPage = await fetchPage("about-me");
 
     const placesPostsWithBlurredImages = await Promise.all(
@@ -42,12 +44,14 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         return { ...post, blurredImage: result.base64 };
       }),
     );
+
     const booksPostsWithBlurredImages = await Promise.all(
       booksPosts.map(async (post) => {
         const result = await getPlaiceholder(encodeURI(post.acf.image));
         return { ...post, blurredImage: result.base64 };
       }),
     );
+
     const postsWithBlurredImages = await Promise.all(
       posts.map(async (post) => {
         const result = await getPlaiceholder(encodeURI(post.acf.image));
@@ -61,7 +65,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         placesPosts: placesPostsWithBlurredImages,
         booksPosts: booksPostsWithBlurredImages,
         newestPodcast: podcasts[0],
-        about: { excerpt: aboutPage.excerpt.rendered, image: aboutPage.acf.profile_image },
+        about: { excerpt: aboutPage.excerpt, image: aboutPage.acf.profile_image },
         posts: postsWithBlurredImages,
       },
       revalidate: 60,

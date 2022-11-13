@@ -1,13 +1,13 @@
 import styles from "./PostsSliderSection.module.scss";
 import { memo } from "react";
-import type { Tag, Category, WPPost } from "types";
+import type { Tag, Post } from "types";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import { PostTile } from "components/tile/postTile/PostTile";
 
 type PostsSliderSectionProps = {
   readonly title: string;
-  readonly posts: (WPPost & { blurredImage?: string })[];
+  readonly posts: (Post & { blurredImage?: string })[];
   readonly tags: Tag[];
 };
 
@@ -46,7 +46,7 @@ export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts,
       <div className={styles.carousel}>
         <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
           {posts.map((post) => {
-            return <PostTile post={post} key={post.id} tags={tags} />;
+            return <PostTile post={post} key={post.id} />;
           })}
         </Carousel>
       </div>

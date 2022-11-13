@@ -2,7 +2,7 @@ import { Layout } from "components/layout/Layout";
 import { PostsView } from "views/posts/Posts";
 import { GetServerSideProps } from "next";
 import { fetchPosts } from "pages/api/posts";
-import type { WPPost, Tag, Category } from "types";
+import type { Post, Tag, Category } from "types";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
 const Search = ({
@@ -13,15 +13,13 @@ const Search = ({
   searchedTags,
   searchedCategories,
 }: {
-  posts: WPPost[];
+  posts: Post[];
   tags: Tag[];
   query: string;
-  newestPosts: WPPost[];
+  newestPosts: Post[];
   searchedTags: Tag[];
   searchedCategories: Category[];
 }) => {
-  console.log(searchedCategories);
-
   return (
     <Layout
       title={
@@ -36,7 +34,6 @@ const Search = ({
     >
       <PostsView
         posts={posts}
-        tags={tags}
         title={
           query
             ? `"${query}"`

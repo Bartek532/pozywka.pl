@@ -1,11 +1,11 @@
 import Image from "next/image";
 import styles from "./Collaboration.module.scss";
-import type { WPPage, ThingIDo } from "types";
+import type { Page, ThingIDo } from "types";
 import { Badge } from "components/common/badge/Badge";
 import clsx from "clsx";
 import { Banner } from "components/common/banner/Banner";
 
-export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo: ThingIDo[] }) => {
+export const CollaborationView = ({ page, thingsIDo }: { page: Page; thingsIDo: ThingIDo[] }) => {
   return (
     <>
       <div className={styles.hero}>
@@ -57,7 +57,7 @@ export const CollaborationView = ({ page, thingsIDo }: { page: WPPage; thingsIDo
         variant="green"
       />
       <div className={clsx(styles.container, styles.texts)}>
-        <div className="content" dangerouslySetInnerHTML={{ __html: page.content.rendered }}></div>
+        <div className="content" dangerouslySetInnerHTML={{ __html: page.content }}></div>
       </div>
     </>
   );

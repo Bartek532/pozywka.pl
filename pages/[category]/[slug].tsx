@@ -10,7 +10,7 @@ import { getPlaiceholder } from "plaiceholder";
 const Post = ({ post, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout
-      title={post.title.rendered}
+      title={post.title}
       head={{
         ...post.yoast_head_json,
         og_image: [{ url: post.acf.image }],
@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: posts.map(({ slug, categories }) => ({
-      params: { slug, category: categories[0] as string },
+      params: { slug, category: categories[0].slug },
     })),
     fallback: "blocking" as const,
   };

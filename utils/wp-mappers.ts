@@ -1,12 +1,24 @@
 import type { WPPost, Post, WPTag, Tag, WPCategory, Category, WPPage, Page } from "types";
 
-export const mapToPost = ({ id, title, slug, excerpt, content }: WPPost): Omit<Post, "categories" | "tags"> => {
+export const mapToPost = ({
+  id,
+  title,
+  slug,
+  excerpt,
+  content,
+  acf,
+  date,
+  yoast_head_json,
+}: WPPost): Omit<Post, "categories" | "tags"> => {
   return {
     id,
     title: title.rendered,
+    date,
     slug,
     excerpt: excerpt.rendered,
     content: content.rendered,
+    acf,
+    yoast_head_json: yoast_head_json || {},
   };
 };
 
@@ -26,7 +38,7 @@ export const mapToCategory = ({ id, slug, name }: WPCategory): Category => {
   };
 };
 
-export const mapToPage = ({ id, slug, title, excerpt, content, acf }: WPPage): Page => {
+export const mapToPage = ({ id, slug, title, excerpt, content, acf, yoast_head_json }: WPPage): Page => {
   return {
     id,
     slug,
@@ -34,5 +46,6 @@ export const mapToPage = ({ id, slug, title, excerpt, content, acf }: WPPage): P
     content: content.rendered,
     acf,
     excerpt: excerpt.rendered,
+    yoast_head_json: yoast_head_json || {},
   };
 };

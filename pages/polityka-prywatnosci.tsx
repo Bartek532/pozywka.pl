@@ -6,7 +6,7 @@ import type { InferGetStaticPropsType } from "types";
 
 const AboutMe = ({ page }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout title={page.title.rendered} head={page.yoast_head_json}>
+    <Layout title={page.title} head={page.yoast_head_json}>
       <PrivacyPolicyView page={page} />
     </Layout>
   );

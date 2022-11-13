@@ -1,6 +1,6 @@
 import styles from "./Post.module.scss";
 import React, { memo, useEffect, useState } from "react";
-import type { Tag, WPPost, Category } from "types";
+import type { Tag, Post, Category } from "types";
 import { Hero } from "components/common/hero/Hero";
 import clsx from "clsx";
 import { useViews } from "lib/hooks/useViews";
@@ -17,7 +17,7 @@ dayjs.extend(customParseFormat);
 
 type PostViewProps = {
   readonly tags: Tag[];
-  readonly post: WPPost & { blurredImage?: string };
+  readonly post: Post & { blurredImage?: string };
   readonly categories: Category[];
 };
 
@@ -31,7 +31,7 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
   }, []);
 
   const replaceLinksWithEmbed = async () => {
-    const embedLinkMatches = post.content.rendered.match(POST_LINK_REGEX);
+    const embedLinkMatches = post.content.match(POST_LINK_REGEX);
     if (embedLinkMatches) {
       await Promise.all(
         embedLinkMatches.map(async (match) => {
@@ -47,13 +47,10 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
 
   return (
     <>
-      <Hero post={post} tags={tags} />
+      <Hero post={post} />
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <div
-            className={clsx(styles.content, "content")}
-            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-          ></div>
+          <div className={clsx(styles.content, "content")} dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
         <aside className={styles.aside}>
           <div className={styles.info}>
@@ -83,10 +80,7 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
               Facebook
             </a>
             <a
-              href={`https://twitter.com/share?url=${post.title.rendered.replace(
-                "+",
-                "%2B",
-              )} - ${url}%0A %0A&hashtags=pozywka`}
+              href={`https://twitter.com/share?url=${post.title.replace("+", "%2B")} - ${url}%0A %0A&hashtags=pozywka`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.social}

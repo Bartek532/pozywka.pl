@@ -1,11 +1,11 @@
 import styles from "./EmbedPostTile.module.scss";
 import { memo } from "react";
 import Image from "next/image";
-import type { WPPost } from "types";
+import type { Post } from "types";
 import { truncateTextByWordsCount } from "utils/functions";
 
 type EmbedPostTileProps = {
-  readonly post: WPPost;
+  readonly post: Post;
 };
 
 export const EmbedPostTile = memo<EmbedPostTileProps>(({ post }) => {
@@ -19,11 +19,11 @@ export const EmbedPostTile = memo<EmbedPostTileProps>(({ post }) => {
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>
-            <span>{post.title.rendered}</span>
+            <span>{post.title}</span>
           </h3>
           <div
             className={styles.description}
-            dangerouslySetInnerHTML={{ __html: truncateTextByWordsCount(post.excerpt.rendered, 20) }}
+            dangerouslySetInnerHTML={{ __html: truncateTextByWordsCount(post.excerpt, 20) }}
           ></div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import styles from "./Home.module.scss";
 import { memo } from "react";
-import type { Tag, WPPost } from "types";
+import type { Tag, Post } from "types";
 import { QuoteSection } from "components/section/quoteSection/QuoteSection";
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { InstagramSection } from "components/section/instagramSection/InstagramSection";
@@ -12,17 +12,17 @@ import { PostTile } from "components/tile/postTile/PostTile";
 
 type HomeViewProps = {
   readonly tags: Tag[];
-  readonly newestPodcast: WPPost;
-  readonly posts: (WPPost & { blurredImage?: string })[];
-  readonly placesPosts: (WPPost & { blurredImage?: string })[];
-  readonly booksPosts: (WPPost & { blurredImage?: string })[];
+  readonly newestPodcast: Post;
+  readonly posts: (Post & { blurredImage?: string })[];
+  readonly placesPosts: (Post & { blurredImage?: string })[];
+  readonly booksPosts: (Post & { blurredImage?: string })[];
   readonly about: { excerpt: string; image: string };
 };
 
 export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, booksPosts, about, placesPosts }) => {
   return (
     <>
-      <Hero post={posts[0]} title="logo" tags={tags} />
+      <Hero post={posts[0]} title="logo" />
       <aside className={styles.wrapper}>
         <div className={styles.explore}>
           <Explore tags={tags} />
@@ -31,7 +31,7 @@ export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, books
           {posts.slice(1, 3).map((post) => {
             return (
               <div className={styles.post} key={post.id}>
-                <PostTile post={post} tags={tags} />
+                <PostTile post={post} />
               </div>
             );
           })}
@@ -39,7 +39,7 @@ export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, books
       </aside>
       <Banner
         label="podcast"
-        title={newestPodcast.title.rendered}
+        title={newestPodcast.title}
         link={{ url: `/mowie/${newestPodcast.slug}`, title: "posłuchaj" }}
         variant="green"
         imageSrc={newestPodcast.acf.image}

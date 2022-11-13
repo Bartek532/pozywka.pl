@@ -12,7 +12,7 @@ import type { InferGetStaticPropsType } from "types";
 
 const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout title={page.title.rendered} head={page.yoast_head_json}>
+    <Layout title={page.title} head={page.yoast_head_json}>
       <AboutMeView page={page} />
       <PostsSliderSection title="Najnowsze" posts={posts} tags={tags} />
       <NewsletterSection />
