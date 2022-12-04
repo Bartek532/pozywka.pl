@@ -23,8 +23,7 @@ export const PostTile = memo<PostTileProps>(({ post }) => {
                   alt={post.title}
                   layout="fill"
                   objectFit="cover"
-                  placeholder="blur"
-                  blurDataURL={post.blurredImage}
+                  {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
                 />
               </div>
             </div>

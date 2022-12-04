@@ -104,6 +104,14 @@
       margin-left: -50px;
       margin-right: -50px;
     }
+
+    figcaption {
+      margin: 0.5rem auto 0;
+      text-align: center;
+      font-size: 0.88rem;
+      font-style: italic;
+      max-width: 85%;
+    }
   }
 
   img {

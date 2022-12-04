@@ -28,8 +28,7 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
               alt={post.title}
               layout="fill"
               objectFit="cover"
-              placeholder="blur"
-              blurDataURL={post.blurredImage}
+              {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
               priority
             />
           </div>
@@ -41,8 +40,7 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
                 alt={post.title}
                 layout="fill"
                 objectFit="cover"
-                placeholder="blur"
-                blurDataURL={post.blurredImage}
+                {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
               />
             </a>
           </Link>
