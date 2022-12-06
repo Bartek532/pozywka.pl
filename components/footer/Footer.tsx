@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const footerLinks = [
   { path: "/o-mnie", name: "O mnie" },
-  { path: "/wspolparca", name: "Współpraca" },
+  { path: "/wspolpraca", name: "Współpraca" },
   { path: "mailto:pozywkaa@gmail.com", name: "Kontakt" },
   { path: "/polityka-prywatnosci", name: "Polityka Prywatności" },
 ];

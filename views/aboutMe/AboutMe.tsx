@@ -1,16 +1,16 @@
 import Image from "next/image";
 import styles from "./AboutMe.module.scss";
-import type { WPPage } from "types";
+import type { Page } from "types";
 import clsx from "clsx";
 
-export const AboutMeView = ({ page }: { page: WPPage }) => {
+export const AboutMeView = ({ page }: { page: Page }) => {
   return (
     <>
       <div className={styles.hero}>
         <div className={styles.wrapper}>
           <div className={clsx(styles.column, styles.first)}>
             <h1 className={styles.title}>O mnie</h1>
-            <div className={styles.description} dangerouslySetInnerHTML={{ __html: page.content.rendered }}></div>
+            <div className={styles.description} dangerouslySetInnerHTML={{ __html: page.content }}></div>
           </div>
         </div>
         <div className={clsx(styles.column, styles.second)}>
