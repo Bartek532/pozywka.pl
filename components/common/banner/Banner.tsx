@@ -16,33 +16,36 @@ type BannerProps = {
   };
   readonly description?: string;
   readonly imageSrc: string;
+  readonly imageOnMobile?: boolean;
 };
 
-export const Banner = memo<BannerProps>(({ label, title, reverse = false, variant, link, description, imageSrc }) => {
-  return (
-    <div className={clsx(styles.wrapper, styles[variant], { [styles.reverse]: reverse })}>
-      <div className={styles.content}>
-        <Badge variant={variant} text={label} direction={"right"} />
-        <h2 className={styles.title}>{title}</h2>
+export const Banner = memo<BannerProps>(
+  ({ label, title, reverse = false, variant, link, description, imageSrc, imageOnMobile = true }) => {
+    return (
+      <div className={clsx(styles.wrapper, styles[variant], { [styles.reverse]: reverse })}>
+        <div className={styles.content}>
+          <Badge variant={variant} text={label} direction={"right"} />
+          <h2 className={styles.title}>{title}</h2>
 
-        {description ? (
-          <div
-            className={styles.description}
-            dangerouslySetInnerHTML={{
-              __html: description,
-            }}
-          ></div>
-        ) : null}
+          {description ? (
+            <div
+              className={styles.description}
+              dangerouslySetInnerHTML={{
+                __html: description,
+              }}
+            ></div>
+          ) : null}
 
-        <Link href={link.url}>
-          <a className={styles.link}>{link.title}</a>
-        </Link>
+          <Link href={link.url}>
+            <a className={styles.link}>{link.title}</a>
+          </Link>
+        </div>
+        <div className={clsx(styles.image, { [styles.hidden]: !imageOnMobile })}>
+          <Image src={imageSrc} alt="" layout="fill" objectFit="cover" />
+        </div>
       </div>
-      <div className={styles.image}>
-        <Image src={imageSrc} alt="" layout="fill" objectFit="cover" />
-      </div>
-    </div>
-  );
-});
+    );
+  },
+);
 
 Banner.displayName = "Banner";

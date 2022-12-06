@@ -101,6 +101,10 @@
       width: 100%;
       position: relative;
 
+      &.hidden {
+        display: none;
+      }
+
       &:after {
         content: "";
         left: 0;

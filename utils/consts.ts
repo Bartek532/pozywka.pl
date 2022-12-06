@@ -32,4 +32,4 @@ export const SOCIALS = [
   { slug: "ig", link: "https://www.instagram.com/pozywka_/" },
   { slug: "yt", link: "https://www.youtube.com/channel/UC3i8ccfHDUEP7M1HdqESWEA" },
   { slug: "spotify", link: "https://open.spotify.com/show/4rplKIstn56nlTUEPgAYVT?si=c65b94dc83ef4fc1" },
-] as const;
+];

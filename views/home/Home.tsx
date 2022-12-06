@@ -51,6 +51,7 @@ export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, books
         link={{ url: `/about-me`, title: "więcej o mnie" }}
         variant="red"
         imageSrc={about.image}
+        imageOnMobile={false}
         description={about.excerpt}
         reverse
       />
