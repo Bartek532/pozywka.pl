@@ -8,10 +8,11 @@ import { Explore } from "components/explore/Explore";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { LikesCounter } from "components/likesCounter/LikesCounter";
-import { POST_LINK_REGEX } from "utils/consts";
+import { POST_LINK_REGEX, URL_REGEX } from "utils/consts";
 import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
 import { fetcher } from "utils/fetcher";
 import { createRoot } from "react-dom/client";
+import { generateEmbedPostsSelectors } from "utils/functions";
 
 dayjs.extend(customParseFormat);
 
@@ -35,11 +36,20 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
     if (embedLinkMatches) {
       await Promise.all(
         embedLinkMatches.map(async (match) => {
-          const slug = match.split("/").filter(Boolean)[3];
+          const [url] = match.match(URL_REGEX)!;
+          const [protocol, host, category, slug] = url
+            .split("/")
+            .filter(Boolean)
+            .map((x) => x.replace(/['"]+/g, ""));
           const { post: embedPost } = await fetcher(`/api/posts/${slug}`, { method: "GET" });
 
-          const root = createRoot(document.querySelector(`a[href^="https://www.pozywka.pl/post/${slug}"]`)!);
-          root.render(<EmbedPostTile post={embedPost} />);
+          generateEmbedPostsSelectors(slug, category).forEach((selector) => {
+            const element = document.querySelector(selector);
+            if (element) {
+              const root = createRoot(element);
+              root.render(<EmbedPostTile post={embedPost} />);
+            }
+          });
         }),
       );
     }

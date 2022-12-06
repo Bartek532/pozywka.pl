@@ -47,3 +47,7 @@ export const normalizeLikesCount = (likesCount: number) => {
 
   return likesCount;
 };
+
+export const generateEmbedPostsSelectors = (slug: string, category?: string) => {
+  return [`a[href^="https://www.pozywka.pl/${category}/${slug}"]`, `a[href^="https://www.pozywka.pl/post/${slug}"]`];
+};
