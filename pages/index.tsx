@@ -34,7 +34,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
       fetchPosts({ perPage: 5 }),
       fetchPosts({ tags: ["miejsca"] }),
       fetchPosts({ tags: ["ksiazki"] }),
-      fetchPosts({ categories: ["podcasts"], perPage: 1 }),
+      fetchPosts({ categories: ["mowie"], perPage: 1 }),
     ]);
     const aboutPage = await fetchPage("about-me");
 
