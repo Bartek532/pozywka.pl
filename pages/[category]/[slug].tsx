@@ -35,8 +35,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   try {
-    const { post, tags, categories } = await fetchPost(params?.slug as string);
-    const { posts: newestPosts } = await fetchPosts({ perPage: 11, categories: [params?.category as string] });
+    const { post } = await fetchPost(params?.slug as string);
+    const {
+      posts: newestPosts,
+      tags,
+      categories,
+    } = await fetchPosts({ perPage: 11, categories: [params?.category as string] });
 
     const newestPostsWithBlurredImages = await Promise.all(
       newestPosts.map(async (post) => {

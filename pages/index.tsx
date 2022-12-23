@@ -2,14 +2,14 @@ import type { GetStaticPropsContext } from "next";
 import { Layout } from "components/layout/Layout";
 import { HomeView } from "views/home/Home";
 import { fetchPosts } from "pages/api/posts";
-import { fetchPage } from "utils/api-helpers";
+import { fetchMostViewedPosts, fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
 import { getPlaiceholder } from "plaiceholder";
 
 const Home = ({
   tags,
   placesPosts,
-  booksPosts,
+  mostViewedPosts,
   newestPodcast,
   about,
   posts,
@@ -19,7 +19,7 @@ const Home = ({
       <HomeView
         tags={tags}
         placesPosts={placesPosts}
-        booksPosts={booksPosts}
+        mostViewedPosts={mostViewedPosts}
         newestPodcast={newestPodcast}
         about={about}
         posts={posts}
@@ -30,12 +30,13 @@ const Home = ({
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
-    const [{ posts, tags }, { posts: placesPosts }, { posts: booksPosts }, { posts: podcasts }] = await Promise.all([
-      fetchPosts({ perPage: 5 }),
-      fetchPosts({ tags: ["miejsca"] }),
-      fetchPosts({ tags: ["ksiazki"] }),
-      fetchPosts({ categories: ["mowie"], perPage: 1 }),
-    ]);
+    const [{ posts, tags }, { posts: placesPosts }, { posts: mostViewedPosts }, { posts: podcasts }] =
+      await Promise.all([
+        fetchPosts({ perPage: 5 }),
+        fetchPosts({ tags: ["miejsca"] }),
+        fetchMostViewedPosts(),
+        fetchPosts({ categories: ["mowie"], perPage: 1 }),
+      ]);
     const aboutPage = await fetchPage("about-me");
 
     const placesPostsWithBlurredImages = await Promise.all(
@@ -45,8 +46,8 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
       }),
     );
 
-    const booksPostsWithBlurredImages = await Promise.all(
-      booksPosts.map(async (post) => {
+    const mostViewedPostsWithBlurredImages = await Promise.all(
+      mostViewedPosts.map(async (post) => {
         const result = await getPlaiceholder(encodeURI(post.acf.image));
         return { ...post, blurredImage: result.base64 };
       }),
@@ -63,7 +64,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
       props: {
         tags,
         placesPosts: placesPostsWithBlurredImages,
-        booksPosts: booksPostsWithBlurredImages,
+        mostViewedPosts: mostViewedPostsWithBlurredImages,
         newestPodcast: podcasts[0],
         about: { excerpt: aboutPage.excerpt, image: aboutPage.acf.profile_image },
         posts: postsWithBlurredImages,

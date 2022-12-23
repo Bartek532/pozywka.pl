@@ -46,9 +46,11 @@ export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate 
       </div>
       <header className={styles.header}>
         <div className={clsx(styles.headerContent, { [styles.home]: router.pathname === "/" && width! > 992 })}>
-          <button className={styles.egg} onClick={() => setCounter((oldCounter) => oldCounter + 1)}>
-            easter is coming
-          </button>
+          <button
+            className={styles.egg}
+            name="easter is coming"
+            onClick={() => setCounter((oldCounter) => oldCounter + 1)}
+          ></button>
 
           {(width! < 992 || router.pathname !== "/") && (width! > 1220 || width! < 992) ? (
             <Link href="/">

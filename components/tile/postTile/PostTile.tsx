@@ -27,7 +27,7 @@ export const PostTile = memo<PostTileProps>(({ post }) => {
                 />
               </div>
             </div>
-            <span className={styles.category}>{post.tags[0].name}</span>
+            {post.tags.length ? <span className={styles.category}>{post.tags[0].name}</span> : null}
             <div className={styles.content}>
               <h3 className={styles.title}>
                 <span>{post.title}</span>

@@ -17,6 +17,7 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
 
   useEffect(() => {
     setPosts(initialPosts);
+    console.log(posts);
   }, [initialPosts]);
 
   if (!posts.length) {

@@ -66,7 +66,7 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
                   }}
                 ></div>
               </div>
-              <div className={styles.tag}>{post.tags[0].name}</div>
+              {post.tags.length ? <div className={styles.tag}>{post.tags[0].name}</div> : null}
             </div>
           ) : (
             <Link href={`/${post.categories[0].slug}/${post.slug}`}>
@@ -80,7 +80,7 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
                     }}
                   ></div>
                 </div>
-                <div className={styles.tag}>{post.tags[0].name}</div>
+                {post.tags.length ? <div className={styles.tag}>{post.tags[0].name}</div> : null}
                 <ArrowIcon className={styles.arrow} />
               </a>
             </Link>

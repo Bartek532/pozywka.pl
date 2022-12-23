@@ -15,11 +15,11 @@ type HomeViewProps = {
   readonly newestPodcast: Post;
   readonly posts: (Post & { blurredImage?: string })[];
   readonly placesPosts: (Post & { blurredImage?: string })[];
-  readonly booksPosts: (Post & { blurredImage?: string })[];
+  readonly mostViewedPosts: (Post & { blurredImage?: string })[];
   readonly about: { excerpt: string; image: string };
 };
 
-export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, booksPosts, about, placesPosts }) => {
+export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, mostViewedPosts, about, placesPosts }) => {
   return (
     <>
       <Hero post={posts[0]} title="logo" />
@@ -44,11 +44,11 @@ export const HomeView = memo<HomeViewProps>(({ tags, posts, newestPodcast, books
         variant="green"
         imageSrc={newestPodcast.acf.image}
       />
-      <PostsSliderSection title={"Książki"} tags={tags} posts={booksPosts} />
+      <PostsSliderSection title={"Najczęściej czytane"} tags={tags} posts={mostViewedPosts} />
       <Banner
         label="cześć"
         title="O mnie"
-        link={{ url: `/about-me`, title: "więcej o mnie" }}
+        link={{ url: `/o-mnie`, title: "więcej o mnie" }}
         variant="red"
         imageSrc={about.image}
         imageOnMobile={false}
