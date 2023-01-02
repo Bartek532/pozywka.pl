@@ -1,4 +1,3 @@
-export const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
 export const POST_LINK_REGEX = /<a.+href=('|")https:\/\/www\.pozywka\.pl\/.+('|").+>.+<\/a>/g;
 export const URL_REGEX = /(https?:\/\/[^\s]+)/g;
 

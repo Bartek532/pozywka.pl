@@ -2,11 +2,18 @@
   width: 100%;
   .input {
     font: inherit;
-    padding: 8px 16px;
+    padding: 6px 14px;
     border: none;
     font-size: 14px;
     width: auto;
     width: 100%;
+    border-radius: 2px;
+    border: 2px solid var(--white-100);
+
+    &.error {
+      border-color: var(--red-100);
+    }
+
     &:focus {
       outline: none;
     }

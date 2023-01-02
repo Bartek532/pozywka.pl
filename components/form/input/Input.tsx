@@ -1,5 +1,6 @@
 import styles from "./Input.module.scss";
 import { memo, forwardRef, LegacyRef } from "react";
+import clsx from "clsx";
 
 type InputProps = {
   readonly type?: string;
@@ -8,11 +9,15 @@ type InputProps = {
   readonly onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   readonly onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   readonly placeholder?: string;
+  readonly isError?: boolean;
 };
 
 export const Input = memo<InputProps>(
   forwardRef(
-    ({ type = "text", name, onChange, onBlur, value, placeholder }, inputRef?: LegacyRef<HTMLInputElement>) => {
+    (
+      { type = "text", name, onChange, onBlur, value, placeholder, isError = false },
+      inputRef?: LegacyRef<HTMLInputElement>,
+    ) => {
       return (
         <label className={styles.label}>
           <span className="sr-only">{placeholder || name}</span>
@@ -22,7 +27,7 @@ export const Input = memo<InputProps>(
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            className={styles.input}
+            className={clsx(styles.input, { [styles.error]: isError })}
             placeholder={placeholder}
             ref={inputRef}
             autoCorrect="off"

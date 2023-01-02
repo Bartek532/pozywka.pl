@@ -55,12 +55,12 @@
   color: var(--white-100);
   font-weight: 500;
 
-  &.rejected {
-    color: rgb(236, 89, 70);
+  &.fullfilled {
+    color: var(--green-200);
   }
 
-  &.fullfilled {
-    color: var(--violet-100);
+  &.rejected {
+    color: var(--red-100);
   }
 }
 
