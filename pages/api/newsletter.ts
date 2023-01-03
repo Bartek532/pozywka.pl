@@ -5,7 +5,7 @@ import { subscribeNewsletterSchema } from "utils/validation";
 export const subscribeToNewsletter = async (name: string, email: string) => {
   await fetcher("https://connect.mailerlite.com/api/subscribers", {
     method: "POST",
-    body: { fields: { name }, email },
+    body: { fields: { name }, email, groups: [process.env.MAILER_LITE_GROUP_ID] },
     headers: {
       Authorization: "Bearer " + process.env.MAILER_LITE_API_KEY,
     },
