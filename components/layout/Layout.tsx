@@ -78,7 +78,7 @@ export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate 
         openGraph={{
           title: title ? titleTemplate.replace("%s", title) : titleTemplate.slice(4),
           site_name: head?.og_site_name,
-          url: head?.og_url,
+          url: head?.og_url.replace("admin.", ""),
           locale: head?.og_locale,
           type: head?.og_type,
           description: head?.og_description,
@@ -97,7 +97,7 @@ export const Layout = memo<LayoutProps>(({ children, title, head, titleTemplate 
         }}
         noindex={!(head?.robots.index ? head.robots.index === "index" : true)}
         nofollow={!(head?.robots.follow ? head.robots.follow === "follow" : true)}
-        canonical={head?.canonical}
+        canonical={head?.canonical.replace("admin.", "")}
       />
     </div>
   );
