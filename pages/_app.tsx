@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import "react-multi-carousel/lib/styles.css";
 import "../styles/globals.scss";
 import "../styles/reset.scss";
@@ -66,6 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         options={{ showSpinner: false }}
       />
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
