@@ -27,11 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           type: "website",
           title: meta.title,
           locale: "pl_PL",
-          url: `https://${process.env.NEXT_PUBLIC_URL!}${asPath}`,
+          url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL!}${asPath}`,
           description: meta.description,
           images: [
             {
-              url: `https://${process.env.NEXT_PUBLIC_URL!}/logo_lg.png`,
+              url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL!}/logo_lg.png`,
               width: 1000,
               height: 1000,
             },
