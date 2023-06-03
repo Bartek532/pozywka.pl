@@ -7,7 +7,12 @@ import { PostsSliderSection } from "components/section/postsSliderSection/PostsS
 import { Layout } from "components/layout/Layout";
 import { getPlaiceholder } from "plaiceholder";
 
-const Post = ({ post, tags, categories, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Post = ({
+  post,
+  tags,
+  categories,
+  newestPosts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout
       title={post.title}
@@ -43,15 +48,17 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     } = await fetchPosts({ perPage: 11, categories: [params?.category as string] });
 
     const newestPostsWithBlurredImages = await Promise.all(
-      newestPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      newestPosts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
 
     const postWithBlurredImage = {
       ...post,
-      blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+      blurredImage: post.acf.image && (await getPlaiceholder(encodeURI(post.acf.image))).base64,
     };
 
     return {
@@ -59,7 +66,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
         post: postWithBlurredImage,
         tags,
         categories,
-        newestPosts: newestPostsWithBlurredImages.filter(({ slug }) => slug !== (params?.slug as string)),
+        newestPosts: newestPostsWithBlurredImages.filter(
+          ({ slug }) => slug !== (params?.slug as string),
+        ),
       },
       revalidate: 60,
     };

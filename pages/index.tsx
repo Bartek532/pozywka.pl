@@ -30,34 +30,44 @@ const Home = ({
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
-    const [{ posts, tags }, { posts: placesPosts }, { posts: mostViewedPosts }, { posts: podcasts }] =
-      await Promise.all([
-        fetchPosts({ perPage: 5 }),
-        fetchPosts({ tags: ["miejsca"] }),
-        fetchMostViewedPosts(),
-        fetchPosts({ categories: ["mowie"], perPage: 1 }),
-      ]);
+    const [
+      { posts, tags },
+      { posts: placesPosts },
+      { posts: mostViewedPosts },
+      { posts: podcasts },
+    ] = await Promise.all([
+      fetchPosts({ perPage: 5 }),
+      fetchPosts({ tags: ["miejsca"] }),
+      fetchMostViewedPosts(),
+      fetchPosts({ categories: ["mowie"], perPage: 1 }),
+    ]);
     const aboutPage = await fetchPage("about-me");
 
     const placesPostsWithBlurredImages = await Promise.all(
-      placesPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      placesPosts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
 
     const mostViewedPostsWithBlurredImages = await Promise.all(
-      mostViewedPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      mostViewedPosts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
 
     const postsWithBlurredImages = await Promise.all(
-      posts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      posts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
 
     return {
@@ -66,7 +76,10 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         placesPosts: placesPostsWithBlurredImages,
         mostViewedPosts: mostViewedPostsWithBlurredImages,
         newestPodcast: podcasts[0],
-        about: { excerpt: aboutPage.excerpt, image: aboutPage.acf.profile_image },
+        about: {
+          excerpt: aboutPage.excerpt,
+          image: aboutPage.acf.profile_image,
+        },
         posts: postsWithBlurredImages,
       },
       revalidate: 60,

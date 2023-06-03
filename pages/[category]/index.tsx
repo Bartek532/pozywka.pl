@@ -7,7 +7,12 @@ import { PostsView } from "views/posts/Posts";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import { getPlaiceholder } from "plaiceholder";
 
-const Posts = ({ posts, category, tags, newestPosts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Posts = ({
+  posts,
+  category,
+  tags,
+  newestPosts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={category.name}>
       <PostsView posts={posts} category={category} />
@@ -42,16 +47,21 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
 
     const postsWithBlurredImages = await Promise.all(
-      posts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      posts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
+
     const newestPostsWithBlurredImages = await Promise.all(
-      newestPosts.map(async (post) => {
-        const result = await getPlaiceholder(encodeURI(post.acf.image));
-        return { ...post, blurredImage: result.base64 };
-      }),
+      newestPosts
+        .filter((post) => post.acf.image)
+        .map(async (post) => ({
+          ...post,
+          blurredImage: (await getPlaiceholder(encodeURI(post.acf.image))).base64,
+        })),
     );
 
     return {

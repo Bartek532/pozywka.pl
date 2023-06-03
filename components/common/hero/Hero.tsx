@@ -5,7 +5,7 @@ import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import { SOCIALS } from "utils/consts";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
-import type { Post, Tag } from "types";
+import type { Post } from "types";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -28,7 +28,9 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
               alt={post.title}
               layout="fill"
               objectFit="cover"
-              {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
+              {...(post.blurredImage
+                ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                : {})}
               priority
             />
           </div>
@@ -40,7 +42,9 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
                 alt={post.title}
                 layout="fill"
                 objectFit="cover"
-                {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
+                {...(post.blurredImage
+                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                  : {})}
               />
             </a>
           </Link>
