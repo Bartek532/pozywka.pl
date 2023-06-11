@@ -1,16 +1,18 @@
-import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+import { fetcher } from "utils/fetcher";
 import type {
   WPPost,
   ApiPostsResponse,
   ApiGetPostsResponse,
   ApiGetPostsTilesResponse,
 } from "types";
-import { fetchCategories } from "./categories";
 import { POSTS_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
-import { fetchTags } from "./tags";
 import { buildQuery } from "utils/functions";
 import { mapToPost, mapToPostTile } from "utils/wp-mappers";
+
+import { fetchTags } from "./tags";
+import { fetchCategories } from "./categories";
 
 type GetPostsParams = {
   slug?: string;
@@ -101,6 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json(data);
   } catch (e) {
     console.error(e);
-    return res.status(400).json({ message: "Bad request!" });
+    
+return res.status(400).json({ message: "Bad request!" });
   }
 }

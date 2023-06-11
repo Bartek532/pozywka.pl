@@ -1,9 +1,11 @@
-import styles from "./PostsSliderSection.module.scss";
 import { memo } from "react";
-import type { Tag, PostTileWithBlur } from "types";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
+
+import type { Tag, PostTileWithBlur } from "types";
 import { PostTile } from "components/tile/postTile/PostTile";
+
+import styles from "./PostsSliderSection.module.scss";
 
 type PostsSliderSectionProps = {
   readonly title: string;
@@ -32,7 +34,8 @@ const responsive = {
 
 export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, tags }) => {
   const tag = tags.find(({ name }) => name === title);
-  return (
+  
+return (
     <section className={styles.section}>
       <h2 className={styles.title}>
         {tags.map((tag) => tag.name).includes(title) ? (

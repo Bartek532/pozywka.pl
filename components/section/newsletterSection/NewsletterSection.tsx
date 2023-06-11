@@ -1,8 +1,9 @@
-import styles from "./NewsletterSection.module.scss";
 import { NewsletterForm } from "components/form/newsletterForm/NewsletterForm";
 import { Badge } from "components/common/badge/Badge";
 import CakesIcon from "public/svg/cakes.svg";
 import SmallCakesIcon from "public/svg/cakesSmall.svg";
+
+import styles from "./NewsletterSection.module.scss";
 
 export const NewsletterSection = () => {
   return (

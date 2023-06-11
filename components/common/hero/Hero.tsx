@@ -1,13 +1,15 @@
-import styles from "./Hero.module.scss";
 import { memo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Image from "next/image";
+
 import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import { SOCIALS } from "utils/consts";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
 import type { PostTileWithBlur } from "types";
-import { useRouter } from "next/router";
-import Image from "next/image";
+
+import styles from "./Hero.module.scss";
 
 type HeroProps = {
   readonly title?: string;
@@ -18,7 +20,8 @@ export const Hero = memo<HeroProps>(({ title, post }) => {
   const router = useRouter();
 
   const isPostView = router.query.slug === post.slug;
-  return (
+  
+return (
     <div className={styles.hero}>
       <div className={styles.imageWrapper}>
         {isPostView ? (

@@ -1,8 +1,10 @@
-import styles from "./LikesCounter.module.scss";
-import { random, playSound, normalizeLikesCount } from "utils/functions";
 import clsx from "clsx";
 import { useState, memo } from "react";
+
+import { random, playSound, normalizeLikesCount } from "utils/functions";
 import { useLikes } from "lib/hooks/useLikes";
+
+import styles from "./LikesCounter.module.scss";
 type LikesCounter = {
   readonly slug: string;
 };

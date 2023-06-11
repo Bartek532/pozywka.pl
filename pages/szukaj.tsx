@@ -1,6 +1,7 @@
+import { GetServerSideProps } from "next";
+
 import { Layout } from "components/layout/Layout";
 import { PostsView } from "views/posts/Posts";
-import { GetServerSideProps } from "next";
 import { fetchPosts } from "pages/api/posts";
 import type { Post, Tag, Category } from "types";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";

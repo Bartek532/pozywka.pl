@@ -1,8 +1,10 @@
-import styles from "./Explore.module.scss";
 import { memo } from "react";
-import type { Tag } from "types";
 import Link from "next/link";
+
+import type { Tag } from "types";
 import AvocadoIcon from "public/svg/avocado.svg";
+
+import styles from "./Explore.module.scss";
 
 type ExploreProps = {
   readonly tags: Tag[];

@@ -1,9 +1,11 @@
-import styles from "./LoadMore.module.scss";
 import { memo, useEffect } from "react";
-import type { PostTile } from "types";
 import { useRouter } from "next/router";
+
+import type { PostTile } from "types";
 import { useInfiniteScroll } from "lib/hooks/useInfiniteScroll";
 import { POSTS_PER_PAGE } from "utils/consts";
+
+import styles from "./LoadMore.module.scss";
 
 type LoadMoreProps = {
   readonly posts: PostTile[];

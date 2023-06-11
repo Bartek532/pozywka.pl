@@ -1,5 +1,6 @@
-import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+import { fetcher } from "utils/fetcher";
 import type { WPTag } from "types";
 import { mapToTag } from "utils/wp-mappers";
 
@@ -18,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json({ tags });
   } catch (e) {
     console.error(e);
-    return res.status(400).json({ message: "Bad request!" });
+    
+return res.status(400).json({ message: "Bad request!" });
   }
 }

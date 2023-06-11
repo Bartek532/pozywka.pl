@@ -1,6 +1,7 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import { supabase } from "lib/supabase";
 import type { InstagramPost } from "types";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { fetcher } from "utils/fetcher";
 
 const refreshLongLivedAccessToken = async () => {
@@ -61,9 +62,11 @@ export const fetchMyLastInstagramPosts = async () => {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const posts = await fetchMyLastInstagramPosts();
+
     return res.status(200).json({ posts });
   } catch (e) {
     console.error(e);
+
     return res.status(400).json({ message: "Bad request!" });
   }
 }

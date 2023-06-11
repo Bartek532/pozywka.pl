@@ -1,21 +1,22 @@
 import { memo, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import styles from "./Layout.module.scss";
+import clsx from "clsx";
+import { NextSeo } from "next-seo";
+import Link from "next/link";
+import Image from "next/image";
+
 import { Navbar } from "components/navbar/Navbar";
 import { Footer } from "components/footer/Footer";
 import { CookiesPopup } from "components/cookiesPopup/CookiesPopup";
 import Logo from "public/svg/logo.svg";
 import HamburgerIcon from "public/svg/hamburger.svg";
 import CloseIcon from "public/svg/close.svg";
-import clsx from "clsx";
-import { NextSeo } from "next-seo";
-import Link from "next/link";
 import type { YoastHead } from "types";
 import { useWindowSize } from "lib/hooks/useWindowSize";
-import Image from "next/image";
 import { playSound } from "utils/functions";
-
 import { titleTemplate as defaultTitleTemplate } from "pages/_app";
+
+import styles from "./Layout.module.scss";
 
 type LayoutProps = {
   readonly children: React.ReactNode;

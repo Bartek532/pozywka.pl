@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import { fetchPosts } from ".";
 
 export const fetchPost = async (slug: string) => {
@@ -7,7 +8,8 @@ export const fetchPost = async (slug: string) => {
     categories,
     tags,
   } = await fetchPosts({ slug });
-  return { post, categories, tags };
+  
+return { post, categories, tags };
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -17,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json(data);
   } catch (e) {
     console.error(e);
-    return res.status(400).json({ message: "Bad request!" });
+    
+return res.status(400).json({ message: "Bad request!" });
   }
 }

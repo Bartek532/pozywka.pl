@@ -1,6 +1,7 @@
+import type { GetStaticPropsContext } from "next";
+
 import { Layout } from "components/layout/Layout";
 import { PrivacyPolicyView } from "views/privacyPolicy/PrivacyPolicy";
-import type { GetStaticPropsContext } from "next";
 import { fetchPage } from "utils/api-helpers";
 import type { InferGetStaticPropsType } from "types";
 
@@ -24,6 +25,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     };
   } catch (e) {
     console.error(e);
+
     return {
       notFound: true as const,
     };

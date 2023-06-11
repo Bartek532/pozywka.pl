@@ -1,5 +1,12 @@
-import { Layout } from "components/layout/Layout";
 import dynamic from "next/dynamic";
+import type { GetStaticPropsContext } from "next";
+
+import { Layout } from "components/layout/Layout";
+import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
+import { fetchPage } from "utils/api-helpers";
+import { fetchPosts } from "pages/api/posts";
+import type { InferGetStaticPropsType } from "types";
 
 const AboutMeView = dynamic<any>(
   () => import("views/aboutMe/AboutMe").then((com) => com.AboutMeView),
@@ -7,13 +14,6 @@ const AboutMeView = dynamic<any>(
     ssr: false,
   },
 );
-
-import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
-import type { GetStaticPropsContext } from "next";
-import { fetchPage } from "utils/api-helpers";
-import { fetchPosts } from "pages/api/posts";
-import type { InferGetStaticPropsType } from "types";
 
 const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -40,6 +40,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     };
   } catch (e) {
     console.error(e);
+
     return {
       notFound: true as const,
     };

@@ -1,8 +1,10 @@
-import styles from "./EmbedPostTile.module.scss";
 import { memo } from "react";
 import Image from "next/image";
+
 import type { Post } from "types";
 import { truncateTextByWordsCount } from "utils/functions";
+
+import styles from "./EmbedPostTile.module.scss";
 
 type EmbedPostTileProps = {
   readonly post: Post;

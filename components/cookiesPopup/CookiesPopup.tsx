@@ -1,7 +1,9 @@
-import styles from "./CookiesPopup.module.scss";
-import { useLocalStorage } from "lib/hooks/useLocalStorage";
 import Link from "next/link";
+
+import { useLocalStorage } from "lib/hooks/useLocalStorage";
 import CookiesIcon from "public/svg/cookies.svg";
+
+import styles from "./CookiesPopup.module.scss";
 
 type CookiesPreference = "accepted" | "not-accepted";
 

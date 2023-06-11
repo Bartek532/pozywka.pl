@@ -1,6 +1,7 @@
-import styles from "./Badge.module.scss";
 import { memo } from "react";
 import clsx from "clsx";
+
+import styles from "./Badge.module.scss";
 
 type BadgeProps = {
   readonly variant: "red" | "green" | "violet" | "black";

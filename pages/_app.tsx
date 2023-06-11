@@ -18,6 +18,7 @@ export const titleTemplate = `%s | ${meta.title}`;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
+
   return (
     <>
       <DefaultSeo

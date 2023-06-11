@@ -1,10 +1,12 @@
-import styles from "./PostTile.module.scss";
 import { memo } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import ArrowIcon from "public/svg/arrow.svg";
 import type { PostTileWithBlur } from "types";
-import Image from "next/image";
 import { truncateTextByWordsCount } from "utils/functions";
+
+import styles from "./PostTile.module.scss";
 
 type PostTileProps = {
   readonly post: PostTileWithBlur;

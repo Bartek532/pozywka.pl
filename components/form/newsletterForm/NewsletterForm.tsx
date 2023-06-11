@@ -1,11 +1,13 @@
-import styles from "./NewsletterForm.module.scss";
-import { Input } from "components/form/input/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { fetcher } from "utils/fetcher";
 import clsx from "clsx";
+
+import { fetcher } from "utils/fetcher";
+import { Input } from "components/form/input/Input";
 import { SubscribeNewsletterInput, subscribeNewsletterSchema } from "utils/validation";
+
+import styles from "./NewsletterForm.module.scss";
 
 type PromiseStatus = "pending" | "loading" | "fullfilled" | "rejected";
 
@@ -28,7 +30,8 @@ export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean })
       setPromiseStatus("rejected");
     }
   };
-  return (
+  
+return (
     <>
       <form className={clsx(styles.form, { [styles.splitted]: isSplitted })} onSubmit={handleSubmit(handleFormSubmit)}>
         <div className={styles.inputs}>

@@ -1,10 +1,11 @@
 import type { GetStaticPropsContext } from "next";
+import { getPlaiceholder } from "plaiceholder";
+
 import { Layout } from "components/layout/Layout";
 import { HomeView } from "views/home/Home";
 import { fetchPosts } from "pages/api/posts";
 import { fetchMostViewedPosts, fetchPage } from "utils/api-helpers";
 import { InferGetStaticPropsType } from "types";
-import { getPlaiceholder } from "plaiceholder";
 
 const Home = ({
   tags,
@@ -84,6 +85,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     };
   } catch (e) {
     console.error(e);
+
     return {
       notFound: true as const,
     };

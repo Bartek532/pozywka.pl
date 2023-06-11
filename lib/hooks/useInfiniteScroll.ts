@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import type { Post } from "types";
 import { POSTS_PER_PAGE } from "utils/consts";
 import { fetcher } from "utils/fetcher";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 
 export const useInfiniteScroll = ({
   page = 1,
@@ -46,6 +47,7 @@ export const useInfiniteScroll = ({
       setFetchedPage(1);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
+
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };

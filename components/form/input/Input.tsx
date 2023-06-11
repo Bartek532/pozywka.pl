@@ -1,6 +1,7 @@
-import styles from "./Input.module.scss";
 import { memo, forwardRef, LegacyRef } from "react";
 import clsx from "clsx";
+
+import styles from "./Input.module.scss";
 
 type InputProps = {
   readonly type?: string;

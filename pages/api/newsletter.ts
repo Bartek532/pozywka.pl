@@ -1,5 +1,6 @@
-import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+import { fetcher } from "utils/fetcher";
 import { subscribeNewsletterSchema } from "utils/validation";
 
 export const subscribeToNewsletter = async (name: string, email: string) => {
@@ -25,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ message: "User has been added to newsletter!" });
     } catch (e: any) {
       console.error(e);
+
       return res.status(e?.status || 400).json({ message: e?.message || "Bad request!" });
     }
   }

@@ -1,9 +1,11 @@
-import styles from "./Banner.module.scss";
 import { memo } from "react";
 import clsx from "clsx";
-import { Badge } from "components/common/badge/Badge";
 import Link from "next/link";
 import Image from "next/image";
+
+import { Badge } from "components/common/badge/Badge";
+
+import styles from "./Banner.module.scss";
 
 type BannerProps = {
   readonly label: string;

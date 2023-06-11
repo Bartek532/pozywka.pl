@@ -1,10 +1,13 @@
-import styles from "./Footer.module.scss";
+import clsx from "clsx";
+import Link from "next/link";
+
 import { NewsletterForm } from "components/form/newsletterForm/NewsletterForm";
 import { SOCIALS } from "utils/consts";
 import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
-import clsx from "clsx";
 import LogoSmall from "public/svg/logo-small.svg";
-import Link from "next/link";
+
+
+import styles from "./Footer.module.scss";
 
 const footerLinks = [
   { path: "/o-mnie", name: "O mnie" },

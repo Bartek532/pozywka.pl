@@ -1,9 +1,11 @@
-import styles from "./SearchInput.module.scss";
 import { useForm } from "react-hook-form";
-import SearchIcon from "public/svg/search.svg";
 import { useState } from "react";
 import clsx from "clsx";
+
+import SearchIcon from "public/svg/search.svg";
 import { useWindowSize } from "lib/hooks/useWindowSize";
+
+import styles from "./SearchInput.module.scss";
 
 export const SearchInput = ({
   onSearch,
@@ -17,7 +19,8 @@ export const SearchInput = ({
     defaultValues: { query: defaultValue || "" },
   });
   const [isInputFocused, setIsInputFocused] = useState(!!defaultValue);
-  return (
+  
+return (
     <form className={styles.form} onSubmit={handleSubmit(onSearch)}>
       <label htmlFor="search">
         <span className="sr-only">Szukaj</span>

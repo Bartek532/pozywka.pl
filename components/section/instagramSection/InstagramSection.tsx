@@ -1,8 +1,10 @@
-import styles from "./InstagramSection.module.scss";
 import { useEffect, useState } from "react";
+
 import { fetcher } from "utils/fetcher";
 import type { InstagramPost } from "types";
 import { Loader } from "components/common/loader/Loader";
+
+import styles from "./InstagramSection.module.scss";
 
 export const InstagramSection = () => {
   const [posts, setPosts] = useState<InstagramPost[]>([]);

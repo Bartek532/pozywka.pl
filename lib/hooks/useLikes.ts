@@ -1,6 +1,7 @@
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
-import { supabase } from "lib/supabase";
 import { useState, useEffect } from "react";
+
+import { supabase } from "lib/supabase";
 
 export const useLikes = (slug: string) => {
   const [userId, setUserId] = useState("");

@@ -1,8 +1,10 @@
-import styles from "./Navbar.module.scss";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
 import { SearchInput } from "components/form/searchInput/SearchInput";
+
+import styles from "./Navbar.module.scss";
 
 const links = [
   { path: "pisze", name: "Piszę" },
@@ -19,7 +21,8 @@ export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
       router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
     }
   };
-  return (
+  
+return (
     <nav className={clsx(styles.nav, { [styles.active]: isHamburgerOpen })}>
       <div className={styles.search}>
         <SearchInput

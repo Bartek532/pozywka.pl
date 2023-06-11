@@ -1,6 +1,7 @@
+import type { GetStaticPropsContext } from "next";
+
 import { Layout } from "components/layout/Layout";
 import { CollaborationView } from "views/collaboration/Collaboration";
-import type { GetStaticPropsContext } from "next";
 import type { InferGetStaticPropsType, ThingIDo } from "types";
 import { fetchPage } from "utils/api-helpers";
 import { fetchPosts } from "pages/api/posts";
@@ -39,6 +40,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     };
   } catch (e) {
     console.error(e);
+
     return {
       notFound: true as const,
     };
