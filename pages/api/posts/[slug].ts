@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json(data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return res.status(400).json({ message: "Bad request!" });
   }
 }

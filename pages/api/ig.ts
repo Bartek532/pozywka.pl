@@ -4,7 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { fetcher } from "utils/fetcher";
 
 const refreshLongLivedAccessToken = async () => {
-  const { data: tokens } = await supabase.from("tokens").select("token").eq("name", "instagram_access_token");
+  const { data: tokens } = await supabase
+    .from("tokens")
+    .select("token")
+    .eq("name", "instagram_access_token");
   const instagramToken = tokens![0].token;
 
   const data = await fetcher(
@@ -12,7 +15,10 @@ const refreshLongLivedAccessToken = async () => {
     { method: "GET" },
   );
 
-  await supabase.from("tokens").update({ token: data.access_token }).eq("name", "instagram_access_token");
+  await supabase
+    .from("tokens")
+    .update({ token: data.access_token })
+    .eq("name", "instagram_access_token");
 
   return data;
 };
@@ -20,13 +26,19 @@ const refreshLongLivedAccessToken = async () => {
 export const fetchMyLastInstagramPosts = async () => {
   await refreshLongLivedAccessToken();
 
-  const { data: tokens } = await supabase.from("tokens").select("token").eq("name", "instagram_access_token");
+  const { data: tokens } = await supabase
+    .from("tokens")
+    .select("token")
+    .eq("name", "instagram_access_token");
   const instagramToken = tokens![0].token;
 
   // fetch array with all ids and permalinks of my posts
-  const { media } = await fetcher(`https://graph.instagram.com/me?fields=id, media&access_token=${instagramToken}`, {
-    method: "GET",
-  });
+  const { media } = await fetcher(
+    `https://graph.instagram.com/me?fields=id, media&access_token=${instagramToken}`,
+    {
+      method: "GET",
+    },
+  );
 
   const posts = await Promise.all(
     media.data.map(async (singlePost: InstagramPost) => {
@@ -51,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const posts = await fetchMyLastInstagramPosts();
     return res.status(200).json({ posts });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return res.status(400).json({ message: "Bad request!" });
   }
 }

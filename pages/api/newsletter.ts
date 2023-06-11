@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(200).json({ message: "User has been added to newsletter!" });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
       return res.status(e?.status || 400).json({ message: e?.message || "Bad request!" });
     }
   }

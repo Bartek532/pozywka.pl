@@ -29,14 +29,17 @@ export const useLikes = (slug: string) => {
     };
 
     const countLikes = async () => {
-      const { count, error } = await supabase.from("likes").select("*", { count: "exact" }).eq("slug", slug);
+      const { count, error } = await supabase
+        .from("likes")
+        .select("*", { count: "exact" })
+        .eq("slug", slug);
 
       if (count) {
         setLikesCount(count);
       }
 
       if (error) {
-        console.log(error);
+        console.error(error);
         setIsError(true);
       }
     };
@@ -59,7 +62,7 @@ export const useLikes = (slug: string) => {
     }
 
     if (error) {
-      console.log(error);
+      console.error(error);
 
       setIsError(true);
     }
@@ -79,7 +82,7 @@ export const useLikes = (slug: string) => {
     }
 
     if (error) {
-      console.log(error);
+      console.error(error);
 
       setIsError(true);
     }

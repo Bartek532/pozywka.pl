@@ -16,7 +16,7 @@ export const InstagramSection = () => {
         setPosts(fetchedPosts);
         setIsError(false);
       } catch (e) {
-        console.log(e);
+        console.error(e);
         setIsError(true);
       } finally {
         setIsLoading(false);
@@ -40,7 +40,13 @@ export const InstagramSection = () => {
       ) : (
         <div className={styles.images}>
           {posts.map(({ permalink, media_url, caption }) => (
-            <a href={permalink} target="_blank" rel="noopener noreferrer" key={permalink} className={styles.link}>
+            <a
+              href={permalink}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={permalink}
+              className={styles.link}
+            >
               <span className="sr-only">{caption}</span>
               <img className={styles.image} src={media_url} alt=""></img>
             </a>

@@ -1,4 +1,13 @@
-type HTTPMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH";
+type HTTPMethod =
+  | "GET"
+  | "HEAD"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "CONNECT"
+  | "OPTIONS"
+  | "TRACE"
+  | "PATCH";
 
 type FetcherConfig<S> = {
   readonly method: HTTPMethod;
@@ -31,7 +40,7 @@ export async function fetcher<S>(
     if (err instanceof ResponseError) {
       throw err;
     }
-    console.log(err);
+    console.error(err);
     throw new ResponseError("Something went wrong during fetching!");
   }
 }
