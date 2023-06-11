@@ -1,13 +1,13 @@
 import styles from "./LoadMore.module.scss";
 import { memo, useEffect } from "react";
-import type { Post } from "types";
+import type { PostTile } from "types";
 import { useRouter } from "next/router";
 import { useInfiniteScroll } from "lib/hooks/useInfiniteScroll";
 import { POSTS_PER_PAGE } from "utils/consts";
 
 type LoadMoreProps = {
-  readonly posts: Post[];
-  readonly setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+  readonly posts: PostTile[];
+  readonly setPosts: React.Dispatch<React.SetStateAction<PostTile[]>>;
   readonly category?: string;
 };
 

@@ -7,7 +7,12 @@ import { fetchPosts } from "pages/api/posts";
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 
-const Collaboration = ({ page, thingsIDo, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Collaboration = ({
+  page,
+  thingsIDo,
+  posts,
+  tags,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title={page.title} head={page.yoast_head_json}>
       <CollaborationView page={page} thingsIDo={thingsIDo} />
@@ -20,8 +25,8 @@ const Collaboration = ({ page, thingsIDo, posts, tags }: InferGetStaticPropsType
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const page = await fetchPage("collaboration");
-    const thingsIDo = Object.entries(page.acf.things_i_do).map(([key, value]) => value) as ThingIDo[];
-    const { posts, tags } = await fetchPosts();
+    const thingsIDo = Object.entries(page.acf.things_i_do).map(([_, value]) => value) as ThingIDo[];
+    const { posts, tags } = await fetchPosts({});
 
     return {
       props: {

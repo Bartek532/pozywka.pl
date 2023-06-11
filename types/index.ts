@@ -14,6 +14,20 @@ export type Post = {
   readonly yoast_head_json: YoastHead;
 };
 
+export type PostTile = {
+  readonly id: number;
+  readonly title: string;
+  readonly slug: string;
+  readonly date: string;
+  readonly excerpt: string;
+  readonly categories: Category[];
+  readonly tags: Tag[];
+  readonly acf: Acf;
+};
+
+export type PostTileWithBlur = PostTile & { blurredImage?: string };
+export type PostWithBlur = Post & { blurredImage?: string };
+
 export type Page = {
   readonly id: number;
   readonly title: string;
@@ -36,11 +50,19 @@ export type Tag = {
   readonly slug: string;
 };
 
-export type APIPostsResponse = {
+export type ApiGetPostsResponse = {
   readonly categories: Category[];
   readonly posts: Post[];
   readonly tags: Tag[];
 };
+
+export type ApiGetPostsTilesResponse = {
+  readonly categories: Category[];
+  readonly posts: PostTile[];
+  readonly tags: Tag[];
+};
+
+export type ApiPostsResponse = ApiGetPostsResponse | ApiGetPostsTilesResponse;
 
 export type InstagramPost = {
   readonly id: string;
@@ -57,7 +79,9 @@ export type ThingIDo = {
 };
 
 export type PromiseValue<T> = T extends PromiseLike<infer R> ? R : T;
-export type InferGetStaticPropsType<T extends (...args: any) => any> = PromiseValue<ReturnType<T>> extends infer Temp
+export type InferGetStaticPropsType<T extends (...args: any) => any> = PromiseValue<
+  ReturnType<T>
+> extends infer Temp
   ? Temp extends {
       readonly props: infer P;
     }

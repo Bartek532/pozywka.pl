@@ -28,7 +28,7 @@ const Post = ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { posts } = await fetchPosts();
+  const { posts } = await fetchPosts({});
 
   return {
     paths: posts.map(({ slug, categories }) => ({

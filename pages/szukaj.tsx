@@ -57,9 +57,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     query: query.q as string,
     perPage: 11,
   });
-  const { posts: newestPosts } = await fetchPosts();
+  const { posts: newestPosts } = await fetchPosts({});
 
-  const searchedTags = tags.filter(({ slug }) => (query.tags as string)?.split(QUERY_SEPARATOR).includes(slug));
+  const searchedTags = tags.filter(({ slug }) =>
+    (query.tags as string)?.split(QUERY_SEPARATOR).includes(slug),
+  );
   const searchedCategories = categories.filter(({ slug }) =>
     (query.categories as string)?.split(QUERY_SEPARATOR).includes(slug),
   );

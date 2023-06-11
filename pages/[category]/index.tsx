@@ -36,7 +36,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       categories: [params!.category! as string],
       perPage: 11,
     });
-    const { posts: newestPosts } = await fetchPosts();
+    const { posts: newestPosts } = await fetchPosts({});
 
     const category = categories.find(({ slug }) => slug === params?.category)!;
 

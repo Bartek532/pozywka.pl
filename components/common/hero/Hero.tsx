@@ -5,13 +5,13 @@ import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
 import { SOCIALS } from "utils/consts";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
-import type { Post } from "types";
+import type { PostTileWithBlur } from "types";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
 type HeroProps = {
   readonly title?: string;
-  readonly post: Post & { blurredImage?: string };
+  readonly post: PostTileWithBlur;
 };
 
 export const Hero = memo<HeroProps>(({ title, post }) => {

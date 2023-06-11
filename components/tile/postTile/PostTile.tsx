@@ -2,12 +2,12 @@ import styles from "./PostTile.module.scss";
 import { memo } from "react";
 import Link from "next/link";
 import ArrowIcon from "public/svg/arrow.svg";
-import type { Post } from "types";
+import type { PostTileWithBlur } from "types";
 import Image from "next/image";
 import { truncateTextByWordsCount } from "utils/functions";
 
 type PostTileProps = {
-  readonly post: Post & { blurredImage?: string };
+  readonly post: PostTileWithBlur;
 };
 
 export const PostTile = memo<PostTileProps>(({ post }) => {
@@ -23,7 +23,9 @@ export const PostTile = memo<PostTileProps>(({ post }) => {
                   alt={post.title}
                   layout="fill"
                   objectFit="cover"
-                  {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
+                  {...(post.blurredImage
+                    ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                    : {})}
                 />
               </div>
             </div>

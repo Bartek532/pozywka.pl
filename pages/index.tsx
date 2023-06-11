@@ -10,23 +10,21 @@ const Home = ({
   tags,
   placesPosts,
   mostViewedPosts,
-  newestPodcast,
+  podcast,
   about,
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <Layout>
-      <HomeView
-        tags={tags}
-        placesPosts={placesPosts}
-        mostViewedPosts={mostViewedPosts}
-        newestPodcast={newestPodcast}
-        about={about}
-        posts={posts}
-      />
-    </Layout>
-  );
-};
+}: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <Layout>
+    <HomeView
+      tags={tags}
+      placesPosts={placesPosts}
+      mostViewedPosts={mostViewedPosts}
+      podcast={podcast}
+      about={about}
+      posts={posts}
+    />
+  </Layout>
+);
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
@@ -75,7 +73,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
         tags,
         placesPosts: placesPostsWithBlurredImages,
         mostViewedPosts: mostViewedPostsWithBlurredImages,
-        newestPodcast: podcasts[0],
+        podcast: podcasts[0],
         about: {
           excerpt: aboutPage.excerpt,
           image: aboutPage.acf.profile_image,

@@ -1,7 +1,12 @@
 import { Layout } from "components/layout/Layout";
 import dynamic from "next/dynamic";
 
-const AboutMeView = dynamic<any>(() => import("views/aboutMe/AboutMe").then((com) => com.AboutMeView), { ssr: false });
+const AboutMeView = dynamic<any>(
+  () => import("views/aboutMe/AboutMe").then((com) => com.AboutMeView),
+  {
+    ssr: false,
+  },
+);
 
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
@@ -23,7 +28,7 @@ const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStatic
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {
     const page = await fetchPage("about-me");
-    const { posts, tags } = await fetchPosts();
+    const { posts, tags } = await fetchPosts({});
 
     return {
       props: {

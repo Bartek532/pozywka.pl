@@ -22,6 +22,17 @@ export const mapToPost = ({
   };
 };
 
+export const mapToPostTile = ({ id, title, slug, excerpt, acf, date }: WPPost) => {
+  return {
+    id,
+    title: title.rendered,
+    date,
+    slug,
+    excerpt: excerpt.rendered,
+    acf,
+  };
+};
+
 export const mapToTag = ({ id, slug, name }: WPTag): Tag => {
   return {
     id,
@@ -38,7 +49,15 @@ export const mapToCategory = ({ id, slug, name }: WPCategory): Category => {
   };
 };
 
-export const mapToPage = ({ id, slug, title, excerpt, content, acf, yoast_head_json }: WPPage): Page => {
+export const mapToPage = ({
+  id,
+  slug,
+  title,
+  excerpt,
+  content,
+  acf,
+  yoast_head_json,
+}: WPPage): Page => {
   return {
     id,
     slug,

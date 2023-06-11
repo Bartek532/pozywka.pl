@@ -1,13 +1,13 @@
 import styles from "./PostsSliderSection.module.scss";
 import { memo } from "react";
-import type { Tag, Post } from "types";
+import type { Tag, PostTileWithBlur } from "types";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import { PostTile } from "components/tile/postTile/PostTile";
 
 type PostsSliderSectionProps = {
   readonly title: string;
-  readonly posts: (Post & { blurredImage?: string })[];
+  readonly posts: PostTileWithBlur[];
   readonly tags: Tag[];
 };
 

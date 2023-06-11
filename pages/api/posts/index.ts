@@ -1,21 +1,46 @@
 import { fetcher } from "utils/fetcher";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { WPPost, APIPostsResponse } from "types";
+import type {
+  WPPost,
+  ApiPostsResponse,
+  ApiGetPostsResponse,
+  ApiGetPostsTilesResponse,
+} from "types";
 import { fetchCategories } from "./categories";
 import { POSTS_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
 import { fetchTags } from "./tags";
 import { buildQuery } from "utils/functions";
-import { mapToPost } from "utils/wp-mappers";
+import { mapToPost, mapToPostTile } from "utils/wp-mappers";
 
-export const fetchPosts = async ({
-  categories = [] as string[],
-  tags = [] as string[],
+type GetPostsParams = {
+  slug?: string;
+  categories?: string[];
+  tags?: string[];
+  query?: string;
+  perPage?: number;
+  page?: number;
+  offset?: number;
+};
+
+export async function fetchPosts({
+  slug,
+}: Pick<GetPostsParams, "slug">): Promise<ApiGetPostsResponse>;
+export async function fetchPosts({
+  categories,
+  tags,
+  query,
+  perPage,
+  page,
+}: Omit<GetPostsParams, "slug">): Promise<ApiGetPostsTilesResponse>;
+export async function fetchPosts({
+  categories = [],
+  tags = [],
   query = "",
   perPage = POSTS_PER_PAGE,
   page = 1,
   slug = "",
   offset = 0,
-} = {}): Promise<APIPostsResponse> => {
+}: GetPostsParams): Promise<ApiPostsResponse> {
   const fetchedCategories = (await fetchCategories()) || DEFAULT_CATEGORIES;
   const fetchedTags = (await fetchTags()) || DEFAULT_TAGS;
 
@@ -23,7 +48,9 @@ export const fetchPosts = async ({
     .map((category) => fetchedCategories.find(({ slug }) => category === slug)?.id)
     .join(",");
 
-  const formattedTags = tags.map((tag) => fetchedTags.find(({ slug }) => tag === slug)?.id).join(",");
+  const formattedTags = tags
+    .map((tag) => fetchedTags.find(({ slug }) => tag === slug)?.id)
+    .join(",");
 
   const apiQuery = buildQuery([
     { key: "page", value: page },
@@ -35,9 +62,14 @@ export const fetchPosts = async ({
     { key: "offset", value: offset },
   ]);
 
-  const posts: WPPost[] = await fetcher(`${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/posts?${apiQuery}`, {
-    method: "GET",
-  });
+  console.log(apiQuery);
+
+  const posts: WPPost[] = await fetcher(
+    `${process.env.WP_API_ENDPOINT}/wp-json/wp/v2/posts?${apiQuery}`,
+    {
+      method: "GET",
+    },
+  );
 
   return {
     posts: posts.map((post) => {
@@ -47,12 +79,15 @@ export const fetchPosts = async ({
       const tags = post.tags.map((tag) => {
         return fetchedTags.find(({ id }) => tag === id)!;
       });
-      return { ...mapToPost(post), categories, tags };
+
+      const mappedPost = slug ? mapToPost(post) : mapToPostTile(post);
+
+      return { ...mappedPost, categories, tags };
     }),
     categories: fetchedCategories,
     tags: fetchedTags,
   };
-};
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
