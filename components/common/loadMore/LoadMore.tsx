@@ -30,7 +30,7 @@ export const LoadMore = memo<LoadMoreProps>(({ posts, setPosts, category }) => {
 
   useEffect(() => {
     setPosts((posts) => [...posts, ...fetchedPosts]);
-  }, [fetchedPosts]);
+  }, [fetchedPosts, setPosts]);
 
   if (posts.length < page * POSTS_PER_PAGE) {
     return null;
