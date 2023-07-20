@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { SearchInput } from "components/form/searchInput/SearchInput";
 
@@ -18,10 +18,11 @@ const links = [
 
 export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSearch = ({ query }: { query: string }) => {
     if (query.trim()) {
-      // router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
+      router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
     }
   };
 
@@ -30,8 +31,9 @@ export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
       <div className={styles.search}>
         <SearchInput
           onSearch={handleSearch}
-          defaultValue=""
-          // defaultValue={router.query.q ? decodeURIComponent(router.query.q as string) : ""}
+          defaultValue={
+            searchParams?.get("q") ? decodeURIComponent(searchParams?.get("q") as string) : ""
+          }
         />
       </div>
       <ul className={styles.list}>

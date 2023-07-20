@@ -1,10 +1,13 @@
-import styles from "./Posts.module.scss";
 import { memo, useState, useEffect } from "react";
-import type { Category, PostTile as PostTileType } from "types";
+
+import { EmptyResults } from "components/blog/emptyResults/EmptyResults";
 import { Hero } from "components/common/hero/Hero";
 import { LoadMore } from "components/common/loadMore/LoadMore";
 import { PostTile } from "components/tile/postTile/PostTile";
-import { EmptyResults } from "components/emptyResults/EmptyResults";
+
+import styles from "./Posts.module.scss";
+
+import type { Category, PostTile as PostTileType } from "types";
 
 type PostsViewProps = {
   readonly posts: PostTileType[];
@@ -27,9 +30,9 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
     <>
       <Hero post={posts[0]} title={title || category?.name} />
       <section className={styles.posts}>
-        {posts.slice(1).map((post) => {
-          return <PostTile post={post} key={post.id} />;
-        })}
+        {posts.slice(1).map((post) => (
+          <PostTile post={post} key={post.id} />
+        ))}
         <div className={styles.load}>
           <LoadMore posts={posts} setPosts={setPosts} category={category?.slug} />
         </div>

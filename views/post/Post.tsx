@@ -1,18 +1,21 @@
-import styles from "./Post.module.scss";
-import React, { memo, useEffect, useState } from "react";
-import type { Tag, Post, Category } from "types";
-import { Hero } from "components/common/hero/Hero";
 import clsx from "clsx";
-import { useViews } from "lib/hooks/useViews";
-import { Explore } from "components/explore/Explore";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { LikesCounter } from "components/likesCounter/LikesCounter";
-import { POST_LINK_REGEX, URL_REGEX } from "utils/consts";
-import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
-import { fetcher } from "utils/fetcher";
+import React, { memo, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+
+import { LikesCounter } from "components/blog/likesCounter/LikesCounter";
+import { Hero } from "components/common/hero/Hero";
+import { Explore } from "components/explore/Explore";
+import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
+import { useViews } from "lib/hooks/useViews";
+import { POST_LINK_REGEX, URL_REGEX } from "utils/consts";
+import { fetcher } from "utils/fetcher";
 import { generateEmbedPostsSelectors } from "utils/functions";
+
+import styles from "./Post.module.scss";
+
+import type { Tag, Post, Category } from "types";
 
 dayjs.extend(customParseFormat);
 
@@ -60,7 +63,10 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
       <Hero post={post} />
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <div className={clsx(styles.content, "content")} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <div
+            className={clsx(styles.content, "content")}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          ></div>
         </div>
         <aside className={styles.aside}>
           <div className={styles.info}>
@@ -90,7 +96,10 @@ export const PostView = memo<PostViewProps>(({ tags, post }) => {
               Facebook
             </a>
             <a
-              href={`https://twitter.com/share?url=${post.title.replace("+", "%2B")} - ${url}%0A %0A&hashtags=pozywka`}
+              href={`https://twitter.com/share?url=${post.title.replace(
+                "+",
+                "%2B",
+              )} - ${url}%0A %0A&hashtags=pozywka`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.social}
