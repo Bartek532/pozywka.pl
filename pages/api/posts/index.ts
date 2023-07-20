@@ -9,7 +9,7 @@ import type {
 } from "types";
 import { POSTS_PER_PAGE, DEFAULT_CATEGORIES, DEFAULT_TAGS } from "utils/consts";
 import { buildQuery } from "utils/functions";
-import { mapToPost, mapToPostTile } from "utils/wp-mappers";
+import { mapToPost, mapToPostTile } from "utils/mappers";
 
 import { fetchTags } from "./tags";
 import { fetchCategories } from "./categories";
@@ -103,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json(data);
   } catch (e) {
     console.error(e);
-    
-return res.status(400).json({ message: "Bad request!" });
+
+    return res.status(400).json({ message: "Bad request!" });
   }
 }

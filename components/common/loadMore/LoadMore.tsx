@@ -2,7 +2,7 @@ import { memo, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import type { PostTile } from "types";
-import { useInfiniteScroll } from "lib/hooks/useInfiniteScroll";
+import { useInfiniteScroll } from "hooks/useInfiniteScroll";
 import { POSTS_PER_PAGE } from "utils/consts";
 
 import styles from "./LoadMore.module.scss";

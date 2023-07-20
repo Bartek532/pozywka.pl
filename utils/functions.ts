@@ -11,9 +11,8 @@ export const buildQuery = (data: { key: string; value?: number | string }[]) => 
   return query;
 };
 
-export const truncateText = (text: string, maxSize: number) => {
-  return text.length > maxSize ? text.slice(0, text.slice(0, maxSize - 3).lastIndexOf(" ")) + "..." : text;
-};
+export const truncateText = (text: string, maxSize: number) =>
+  text.length > maxSize ? text.slice(0, text.slice(0, maxSize - 3).lastIndexOf(" ")) + "..." : text;
 
 export const truncateTextByWordsCount = (text: string, wordsCount: number) => {
   const splittedText = text.split(" ");
@@ -32,9 +31,8 @@ export const playSound = (path: string) => {
   //}
 };
 
-export const random = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+export const random = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const normalizeLikesCount = (likesCount: number) => {
   if (likesCount >= 1_000_000) {
@@ -48,6 +46,7 @@ export const normalizeLikesCount = (likesCount: number) => {
   return likesCount;
 };
 
-export const generateEmbedPostsSelectors = (slug: string, category?: string) => {
-  return [`a[href^="https://www.pozywka.pl/${category}/${slug}"]`, `a[href^="https://www.pozywka.pl/post/${slug}"]`];
-};
+export const generateEmbedPostsSelectors = (slug: string, category?: string) => [
+  `a[href^="https://www.pozywka.pl/${category}/${slug}"]`,
+  `a[href^="https://www.pozywka.pl/post/${slug}"]`,
+];

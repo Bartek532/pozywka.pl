@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { useWindowSize } from "lib/hooks/useWindowSize";
+import { useWindowSize } from "hooks/useWindowSize";
 import CloseIcon from "public/svg/close.svg";
 import HamburgerIcon from "public/svg/hamburger.svg";
 import Logo from "public/svg/logo.svg";

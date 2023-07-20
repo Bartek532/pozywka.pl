@@ -8,7 +8,7 @@ import { LikesCounter } from "components/blog/likesCounter/LikesCounter";
 import { Hero } from "components/common/hero/Hero";
 import { Explore } from "components/explore/Explore";
 import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
-import { useViews } from "lib/hooks/useViews";
+import { useViews } from "hooks/useViews";
 import { POST_LINK_REGEX, URL_REGEX } from "utils/consts";
 import { fetcher } from "utils/fetcher";
 import { generateEmbedPostsSelectors } from "utils/functions";

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { useLocalStorage } from "lib/hooks/useLocalStorage";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import CookiesIcon from "public/svg/cookies.svg";
 
 import styles from "./CookiesPopup.module.scss";

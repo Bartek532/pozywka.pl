@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useWindowSize } from "lib/hooks/useWindowSize";
+import { useWindowSize } from "hooks/useWindowSize";
 import SearchIcon from "public/svg/search.svg";
 
 import styles from "./SearchInput.module.scss";
