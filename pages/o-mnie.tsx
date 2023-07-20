@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import type { GetStaticPropsContext } from "next";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import { fetchPage } from "utils/api-helpers";

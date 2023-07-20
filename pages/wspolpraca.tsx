@@ -1,6 +1,6 @@
 import type { GetStaticPropsContext } from "next";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { CollaborationView } from "views/collaboration/Collaboration";
 import type { InferGetStaticPropsType, ThingIDo } from "types";
 import { fetchPage } from "utils/api-helpers";

@@ -109,7 +109,7 @@
         text-transform: uppercase;
         text-decoration: underline;
         letter-spacing: 0.1em;
-        font-family: "Inconsolata", monospace;
+        font-family: var(--font-inconsolata), monospace;
         margin-top: 25px;
         display: inline-block;
       }

@@ -1,13 +1,12 @@
 import type { GetStaticPropsContext, GetStaticPaths } from "next";
 import { getPlaiceholder } from "plaiceholder";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { fetchPosts } from "pages/api/posts";
 import { fetchCategories } from "pages/api/posts/categories";
 import { InferGetStaticPropsType } from "types";
 import { PostsView } from "views/posts/Posts";
 import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
-
 
 const Posts = ({
   posts,
@@ -77,8 +76,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     };
   } catch (e) {
     console.error(e);
-    
-return {
+
+    return {
       notFound: true as const,
     };
   }

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { PostsView } from "views/posts/Posts";
 import { fetchPosts } from "pages/api/posts";
 import type { Post, Tag, Category } from "types";
@@ -60,11 +60,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
   const { posts: newestPosts } = await fetchPosts({});
 
-  const searchedTags = tags.filter(({ slug }) =>
-    (query.tags as string)?.split(QUERY_SEPARATOR).includes(slug),
+  const searchedTags = tags.filter(
+    ({ slug }) => (query.tags as string)?.split(QUERY_SEPARATOR).includes(slug),
   );
-  const searchedCategories = categories.filter(({ slug }) =>
-    (query.categories as string)?.split(QUERY_SEPARATOR).includes(slug),
+  const searchedCategories = categories.filter(
+    ({ slug }) => (query.categories as string)?.split(QUERY_SEPARATOR).includes(slug),
   );
 
   return {

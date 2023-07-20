@@ -1,7 +1,7 @@
 import type { GetStaticPropsContext } from "next";
 import { getPlaiceholder } from "plaiceholder";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { HomeView } from "views/home/Home";
 import { fetchPosts } from "pages/api/posts";
 import { fetchMostViewedPosts, fetchPage } from "utils/api-helpers";

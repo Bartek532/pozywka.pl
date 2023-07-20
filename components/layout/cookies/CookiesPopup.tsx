@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { useLocalStorage } from "lib/hooks/useLocalStorage";
@@ -8,7 +10,10 @@ import styles from "./CookiesPopup.module.scss";
 type CookiesPreference = "accepted" | "not-accepted";
 
 export const CookiesPopup = () => {
-  const [cookiesSetting, setCookiesSetting] = useLocalStorage<CookiesPreference>("cookies", "not-accepted");
+  const [cookiesSetting, setCookiesSetting] = useLocalStorage<CookiesPreference>(
+    "cookies",
+    "not-accepted",
+  );
 
   if (cookiesSetting === "accepted") {
     return null;
@@ -18,10 +23,11 @@ export const CookiesPopup = () => {
     <div className={styles.cookies}>
       <p className={styles.description}>
         KOCHAM CIASTECZKA, ale dbam też o Twoje bezpieczeństwo. Więcej o ochronie danych przeczytasz{" "}
-        <Link href="/polityka-prywatnosci">
-          <a className={styles.link}>TUTAJ</a>
+        <Link href="/polityka-prywatnosci" className={styles.link}>
+          TUTAJ
         </Link>
-        . Klikając Akceptuj, wyrażasz zgodę na używanie ciasteczek w celu usprawnienia korzystania z witryny.
+        . Klikając Akceptuj, wyrażasz zgodę na używanie ciasteczek w celu usprawnienia korzystania z
+        witryny.
       </p>
       <CookiesIcon />
       <button className={styles.btn} onClick={() => setCookiesSetting("accepted")}>

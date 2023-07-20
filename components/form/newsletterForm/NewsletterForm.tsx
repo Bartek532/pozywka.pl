@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
 import clsx from "clsx";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import { fetcher } from "utils/fetcher";
 import { Input } from "components/form/input/Input";
+import { fetcher } from "utils/fetcher";
 import { SubscribeNewsletterInput, subscribeNewsletterSchema } from "utils/validation";
 
 import styles from "./NewsletterForm.module.scss";
@@ -30,13 +30,26 @@ export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean })
       setPromiseStatus("rejected");
     }
   };
-  
-return (
+
+  return (
     <>
-      <form className={clsx(styles.form, { [styles.splitted]: isSplitted })} onSubmit={handleSubmit(handleFormSubmit)}>
+      <form
+        className={clsx(styles.form, { [styles.splitted]: isSplitted })}
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
         <div className={styles.inputs}>
-          <Input type="text" placeholder="Imię" {...register("name")} isError={!!errors?.name?.message} />
-          <Input type="email" placeholder="Mail" {...register("email")} isError={!!errors?.email?.message} />
+          <Input
+            type="text"
+            placeholder="Imię"
+            {...register("name")}
+            isError={!!errors?.name?.message}
+          />
+          <Input
+            type="email"
+            placeholder="Mail"
+            {...register("email")}
+            isError={!!errors?.email?.message}
+          />
         </div>
         <div className={styles.btnWrapper}>
           <button className={styles.button}>Zapisz się</button>

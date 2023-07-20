@@ -1,6 +1,6 @@
 import type { GetStaticPropsContext } from "next";
 
-import { Layout } from "components/layout/Layout";
+import { Layout } from "components/layout/Layout-old";
 import { PrivacyPolicyView } from "views/privacyPolicy/PrivacyPolicy";
 import { fetchPage } from "utils/api-helpers";
 import type { InferGetStaticPropsType } from "types";

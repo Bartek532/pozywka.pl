@@ -1,52 +1,12 @@
-@import "variables";
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-Regular.ttf");
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-SemiBold.ttf");
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-Bold.ttf");
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-Regular.ttf");
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-SemiBold.ttf");
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-Bold.ttf");
-  font-weight: 700;
-  font-display: swap;
-}
+@use "variables";
+@use "content";
+@use "reset";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Jost, sans-serif;
+  font-family: var(--font-jost), sans-serif;
   font-weight: 300;
   line-height: 1.4;
   overflow-x: hidden;

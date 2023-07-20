@@ -1,9 +1,12 @@
 import { Analytics } from "@vercel/analytics/react";
 import "react-multi-carousel/lib/styles.css";
+
 import "../styles/globals.scss";
 import "../styles/reset.scss";
 import "../styles/content.scss";
+
 import type { AppProps } from "next/app";
+
 import NextNprogress from "nextjs-progressbar";
 import { useRouter } from "next/router";
 import { DefaultSeo } from "next-seo";

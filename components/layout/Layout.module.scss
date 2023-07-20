@@ -13,92 +13,11 @@
   }
 }
 
-.header {
-  padding-left: 128px;
-  width: 100%;
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  right: 0;
-
-  .headerContent {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 32px 8px 16px;
-    width: 100%;
-    background-color: var(--pink-100);
-    color: var(--blue-100);
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Inconsolata", monospace;
-    line-height: 25px;
-    min-height: 95px;
-    position: relative;
-
-    .egg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 50px;
-      height: 50px;
-      border: 0 none;
-      background-color: transparent;
-      color: var(--pink-100);
-    }
-
-    @media (max-width: 1220px) {
-      justify-content: flex-end;
-    }
-
-    &.home {
-      justify-content: flex-end;
-    }
-
-    .logo {
-      width: 237px;
-      display: block;
-    }
-
-    .hamburger,
-    .close {
-      display: none;
-      cursor: pointer;
-    }
-  }
-}
-
 .main {
   margin-top: 95px;
 }
 
 @media (max-width: 992px) {
-  .header {
-    padding-left: 0;
-    height: 60px;
-
-    .headerContent {
-      min-height: 60px;
-      padding-right: 16px;
-      padding-left: 16px;
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      justify-content: space-between;
-
-      .logo {
-        display: block;
-        width: 170px;
-      }
-
-      .hamburger,
-      .close {
-        display: block;
-      }
-    }
-  }
-
   .main {
     margin-top: 60px;
   }
