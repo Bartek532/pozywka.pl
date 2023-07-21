@@ -32,6 +32,9 @@ type ApiPostsResponse = ApiGetPostsResponse | ApiGetPostsTilesResponse;
 export const fetchTags = async () => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/tags`, {
     method: "GET",
+    next: {
+      revalidate: 60,
+    },
   });
 
   const tags: unknown = await response.json();
@@ -46,6 +49,9 @@ export const fetchTags = async () => {
 export const fetchCategories = async () => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/categories`, {
     method: "GET",
+    next: {
+      revalidate: 60,
+    },
   });
 
   const categories: unknown = await response.json();
@@ -99,6 +105,9 @@ export async function fetchPosts({
 
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/posts?${apiQuery}`, {
     method: "GET",
+    next: {
+      revalidate: 60,
+    },
   });
 
   const posts: unknown = await response.json();
@@ -141,6 +150,9 @@ export const fetchPost = async (slug: string) => {
 export const fetchPage = async (slug: string) => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/pages?slug=${slug}`, {
     method: "GET",
+    next: {
+      revalidate: 60,
+    },
   });
 
   const pages: unknown = await response.json();

@@ -1,32 +1,31 @@
-import type { GetStaticPaths, GetStaticPropsContext } from "next";
+import { Layout } from "components/layout/Layout-old";
 import { getPlaiceholder } from "plaiceholder";
 
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPost } from "pages/api/posts/[slug]";
-import type { InferGetStaticPropsType } from "types";
 import { PostView } from "views/post/Post";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
-import { Layout } from "components/layout/Layout-old";
+
+import type { GetStaticPaths, GetStaticPropsContext } from "next";
+import type { InferGetStaticPropsType } from "types";
 
 const Post = ({
   post,
   tags,
   categories,
   newestPosts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <Layout
-      title={post.title}
-      head={{
-        ...post.yoast_head_json,
-        og_image: [{ url: post.acf.image }],
-      }}
-    >
-      <PostView post={post} tags={tags} categories={categories} />
-      <PostsSliderSection title={"Może Cię też zainteresować"} tags={tags} posts={newestPosts} />
-    </Layout>
-  );
-};
+}: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <Layout
+    title={post.title}
+    head={{
+      ...post.yoast_head_json,
+      og_image: [{ url: post.acf.image }],
+    }}
+  >
+    <PostView post={post} tags={tags} categories={categories} />
+    <PostsSliderSection title={"Może Cię też zainteresować"} tags={tags} posts={newestPosts} />
+  </Layout>
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { posts } = await fetchPosts({});

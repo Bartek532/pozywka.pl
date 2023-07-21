@@ -1,11 +1,12 @@
-import dynamic from "next/dynamic";
-import type { GetStaticPropsContext } from "next";
-
 import { Layout } from "components/layout/Layout-old";
+import dynamic from "next/dynamic";
+
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
-import { fetchPage } from "utils/api-helpers";
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
+import { fetchPage } from "utils/api-helpers";
+
+import type { GetStaticPropsContext } from "next";
 import type { InferGetStaticPropsType } from "types";
 
 const AboutMeView = dynamic<any>(
@@ -15,15 +16,13 @@ const AboutMeView = dynamic<any>(
   },
 );
 
-const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <Layout title={page.title} head={page.yoast_head_json}>
-      <AboutMeView page={page} />
-      <PostsSliderSection title="Najnowsze" posts={posts} tags={tags} />
-      <NewsletterSection />
-    </Layout>
-  );
-};
+const AboutMe = ({ page, posts, tags }: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <Layout title={page.title} head={page.yoast_head_json}>
+    <AboutMeView page={page} />
+    <PostsSliderSection title="Najnowsze" posts={posts} tags={tags} />
+    <NewsletterSection />
+  </Layout>
+);
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   try {

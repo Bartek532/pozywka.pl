@@ -3,10 +3,10 @@ import { memo } from "react";
 import { Banner } from "components/common/banner/Banner";
 import { Hero } from "components/common/hero/Hero";
 import { Explore } from "components/explore/Explore";
-import { InstagramSection } from "components/section/instagramSection/InstagramSection";
+import { InstagramSection } from "components/home/instagram/Instagram";
+import { QuoteSection } from "components/home/quote/Quote";
 import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
-import { QuoteSection } from "components/section/quoteSection/QuoteSection";
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
 import { PostTile } from "components/tile/postTile/PostTile";
 
 import styles from "./Home.module.scss";

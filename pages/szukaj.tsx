@@ -1,11 +1,12 @@
+import { Layout } from "components/layout/Layout-old";
 import { GetServerSideProps } from "next";
 
-import { Layout } from "components/layout/Layout-old";
-import { PostsView } from "views/posts/Posts";
+import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
-import type { Post, Tag, Category } from "types";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSliderSection";
 import { QUERY_SEPARATOR } from "utils/consts";
+import { PostsView } from "views/posts/Posts";
+
+import type { Post, Tag, Category } from "types";
 
 const Search = ({
   posts,
@@ -21,9 +22,20 @@ const Search = ({
   newestPosts: Post[];
   searchedTags: Tag[];
   searchedCategories: Category[];
-}) => {
-  return (
-    <Layout
+}) => (
+  <Layout
+    title={
+      query
+        ? `"${query}"`
+        : searchedTags.length
+        ? searchedTags.map((tag) => `#${tag.name.replace(/\s/g, "")}`).join(", ")
+        : searchedCategories.length
+        ? searchedCategories.map((category) => category.name).join(", ")
+        : "Wszystkie artykuły"
+    }
+  >
+    <PostsView
+      posts={posts}
       title={
         query
           ? `"${query}"`
@@ -33,23 +45,10 @@ const Search = ({
           ? searchedCategories.map((category) => category.name).join(", ")
           : "Wszystkie artykuły"
       }
-    >
-      <PostsView
-        posts={posts}
-        title={
-          query
-            ? `"${query}"`
-            : searchedTags.length
-            ? searchedTags.map((tag) => `#${tag.name.replace(/\s/g, "")}`).join(", ")
-            : searchedCategories.length
-            ? searchedCategories.map((category) => category.name).join(", ")
-            : "Wszystkie artykuły"
-        }
-      />
-      <PostsSliderSection title="Najnowsze" posts={newestPosts} tags={tags} />
-    </Layout>
-  );
-};
+    />
+    <PostsSliderSection title="Najnowsze" posts={newestPosts} tags={tags} />
+  </Layout>
+);
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { posts, tags, categories } = await fetchPosts({

@@ -20,8 +20,8 @@ export const Explore = memo<ExploreProps>(({ tags }) => (
       <ul className={styles.tags}>
         {tags.map((tag) => (
           <li key={tag.id}>
-            <Link href={`/szukaj?tags=${tag.slug}`}>
-              <a className={styles.tag}>{tag.name}</a>
+            <Link href={`/szukaj?tags=${tag.slug}`} className={styles.tag}>
+              {tag.name}
             </Link>
           </li>
         ))}

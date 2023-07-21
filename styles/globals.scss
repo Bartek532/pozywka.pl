@@ -22,12 +22,16 @@ a {
 }
 
 .react-multiple-carousel__arrow {
-  background-color: var(--pink-100);
+  background: var(--pink-100) !important;
   transition: none;
   z-index: 10;
 
+  &:hover {
+    filter: brightness(0.85);
+  }
+
   &:before {
-    content: "";
+    content: "" !important;
     height: 16px;
     background: url("/svg/arrow-small.svg") center no-repeat;
   }

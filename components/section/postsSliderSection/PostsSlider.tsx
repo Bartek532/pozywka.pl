@@ -1,13 +1,17 @@
-import { memo } from "react";
-import Link from "next/link";
-import Carousel from "react-multi-carousel";
+"use client";
 
-import type { Tag, PostTileWithBlur } from "types";
+import Link from "next/link";
+import { memo } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import { PostTile } from "components/tile/postTile/PostTile";
 
-import styles from "./PostsSliderSection.module.scss";
+import styles from "./PostsSlider.module.scss";
 
-type PostsSliderSectionProps = {
+import type { Tag, PostTileWithBlur } from "types";
+
+type PostsSliderProps = {
   readonly title: string;
   readonly posts: PostTileWithBlur[];
   readonly tags: Tag[];
@@ -32,29 +36,33 @@ const responsive = {
   },
 };
 
-export const PostsSliderSection = memo<PostsSliderSectionProps>(({ title, posts, tags }) => {
+export const PostsSlider = memo<PostsSliderProps>(({ title, posts, tags }) => {
   const tag = tags.find(({ name }) => name === title);
-  
-return (
+
+  return (
     <section className={styles.section}>
       <h2 className={styles.title}>
-        {tags.map((tag) => tag.name).includes(title) ? (
-          <Link href={`/szukaj?tags=${tag!.slug}`}>
-            <a>#{title}</a>
-          </Link>
+        {tag ? (
+          <Link href={`/szukaj?tags=${tag.slug}`}>#{title}</Link>
         ) : (
           <span className={styles.plain}>{title}</span>
         )}
       </h2>
       <div className={styles.carousel}>
-        <Carousel swipeable draggable responsive={responsive} transitionDuration={500}>
-          {posts.map((post) => {
-            return <PostTile post={post} key={post.id} />;
-          })}
+        <Carousel
+          swipeable
+          draggable
+          responsive={responsive}
+          transitionDuration={500}
+          // removeArrowOnDeviceType={["tablet", "mobile"]}
+        >
+          {posts.map((post) => (
+            <PostTile post={post} key={post.id} />
+          ))}
         </Carousel>
       </div>
     </section>
   );
 });
 
-PostsSliderSection.displayName = "PostsSliderSection";
+PostsSlider.displayName = "PostsSlider";
