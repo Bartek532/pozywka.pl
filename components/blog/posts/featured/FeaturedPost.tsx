@@ -17,7 +17,7 @@ type FeaturedPostProps = {
   readonly isPostView?: boolean;
 };
 
-export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView = true }) => (
+export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView = false }) => (
   <div className={styles.hero}>
     <div className={styles.imageWrapper}>
       {isPostView ? (

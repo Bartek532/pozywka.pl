@@ -28,7 +28,7 @@ export const LoadMore = memo<LoadMoreProps>(
       categories,
       query,
       tags,
-      offset: 11,
+      offset: POSTS_PER_PAGE + 1,
     });
 
     useEffect(() => {

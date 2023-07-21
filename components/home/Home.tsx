@@ -4,17 +4,30 @@ import { PostTile } from "components/blog/posts/tile/PostTile";
 import { Banner } from "components/common/banner/Banner";
 import { Explore } from "components/shared/explore/Explore";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
-import { fetchPage, fetchPosts } from "lib/wordpress";
+import { getTopViews } from "lib/views";
+import { fetchPage, fetchPost, fetchPosts } from "lib/wordpress";
+import { Post } from "types";
 
 import styles from "./Home.module.scss";
 import { Instagram } from "./instagram/Instagram";
 import { Quote } from "./quote/Quote";
 
+const fetchTopPosts = async () => {
+  const slugs = await getTopViews();
+  const posts = await Promise.all(slugs.map(({ slug }: { slug: string }) => fetchPost(slug)));
+  const mappedPosts = posts
+    .map(({ post }) => post)
+    .filter((p): p is Post => !!p)
+    .map(({ content, ...rest }) => rest);
+
+  return { posts: mappedPosts };
+};
+
 export const Home = async () => {
   const [
     { posts, tags },
     { posts: placesPosts },
-    // { posts: mostViewedPosts },
+    { posts: topPosts },
     {
       posts: [podcast],
     },
@@ -22,7 +35,7 @@ export const Home = async () => {
   ] = await Promise.all([
     fetchPosts({ perPage: 3 }),
     fetchPosts({ tags: ["miejsca"] }),
-    // fetchMostViewedPosts(),
+    fetchTopPosts(),
     fetchPosts({ categories: ["mowie"], perPage: 1 }),
     fetchPage("about-me"),
   ]);
@@ -42,7 +55,7 @@ export const Home = async () => {
           ))}
         </div>
       </aside>
-      {podcast && (
+      {podcast && typeof podcast.acf.image === "string" && (
         <Banner
           label="podcast"
           title={podcast.title}
@@ -51,8 +64,8 @@ export const Home = async () => {
           imageSrc={podcast.acf.image}
         />
       )}
-      <PostsSlider title={"Najczęściej czytane"} tags={tags} posts={placesPosts} />
-      {about && (
+      <PostsSlider title={"Najczęściej czytane"} tags={tags} posts={topPosts} />
+      {about && typeof about.acf.profile_image === "string" && (
         <Banner
           label="cześć"
           title="O mnie"
