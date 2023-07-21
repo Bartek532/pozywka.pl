@@ -5,7 +5,7 @@ import { memo } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import { PostTile } from "components/tile/postTile/PostTile";
+import { PostTile } from "components/blog/posts/tile/PostTile";
 
 import styles from "./PostsSlider.module.scss";
 

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { notFound } from "next/navigation";
 
 import { Banner } from "components/common/banner/Banner";
 import { fetchPage } from "lib/wordpress";
@@ -15,7 +16,7 @@ import {
 export const Collaboration = async () => {
   const page = await fetchPage("collaboration");
 
-  if (!page) return null;
+  if (!page) return notFound();
 
   return (
     <>

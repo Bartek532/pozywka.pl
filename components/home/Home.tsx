@@ -1,13 +1,12 @@
+import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
+import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
+import { PostTile } from "components/blog/posts/tile/PostTile";
 import { Banner } from "components/common/banner/Banner";
-import { Hero } from "components/common/hero/Hero";
 import { Explore } from "components/shared/explore/Explore";
-import { PostsSlider } from "components/shared/postsSlider/PostsSlider";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
-import { PostTile } from "components/tile/postTile/PostTile";
 import { fetchPage, fetchPosts } from "lib/wordpress";
 
 import styles from "./Home.module.scss";
-import { fetchMyLastInstagramPosts } from "./instagram/api/instagram";
 import { Instagram } from "./instagram/Instagram";
 import { Quote } from "./quote/Quote";
 
@@ -28,11 +27,9 @@ export const Home = async () => {
     fetchPage("about-me"),
   ]);
 
-  await fetchMyLastInstagramPosts();
-
   return (
     <>
-      {posts[0] && <Hero post={posts[0]} title="logo" />}
+      {posts[0] && <FeaturedPost post={posts[0]} title="logo" />}
       <aside className={styles.wrapper}>
         <div className={styles.explore}>
           <Explore tags={tags} />

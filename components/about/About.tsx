@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 import { fetchPage } from "lib/wordpress";
 
@@ -9,7 +10,7 @@ import { isAboutAcf } from "./utils/validation/validator";
 export const About = async () => {
   const page = await fetchPage("about-me");
 
-  if (!page || !isAboutAcf(page.acf)) return null;
+  if (!page || !isAboutAcf(page.acf)) return notFound();
 
   return (
     <>

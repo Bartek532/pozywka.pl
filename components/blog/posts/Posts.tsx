@@ -1,7 +1,8 @@
-import { memo, useState, useEffect } from "react";
+"use client";
+
+import { memo, useState } from "react";
 
 import { EmptyResults } from "components/blog/empty/EmptyResults";
-import { Hero } from "components/blog/posts/featured/FeaturedPost";
 import { PostTile } from "components/blog/posts/tile/PostTile";
 import { LoadMore } from "components/common/loadMore/LoadMore";
 
@@ -9,18 +10,13 @@ import styles from "./Posts.module.scss";
 
 import type { Category, PostTile as PostTileType } from "types";
 
-type PostsViewProps = {
+type PostsProps = {
   readonly posts: PostTileType[];
-  readonly category?: Category;
-  readonly title?: string;
+  readonly category: Category;
 };
 
-export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, title }) => {
+export const Posts = memo<PostsProps>(({ posts: initialPosts, category }) => {
   const [posts, setPosts] = useState(initialPosts);
-
-  useEffect(() => {
-    setPosts(initialPosts);
-  }, [initialPosts]);
 
   if (!posts.length) {
     return <EmptyResults />;
@@ -28,7 +24,6 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
 
   return (
     <>
-      <Hero post={posts[0]} title={title || category?.name} />
       <section className={styles.posts}>
         {posts.slice(1).map((post) => (
           <PostTile post={post} key={post.id} />
@@ -45,4 +40,4 @@ export const PostsView = memo<PostsViewProps>(({ posts: initialPosts, category, 
   );
 });
 
-PostsView.displayName = "PostsView";
+Posts.displayName = "Posts";

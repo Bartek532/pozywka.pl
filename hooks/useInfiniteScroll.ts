@@ -1,33 +1,45 @@
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 
-import type { Post } from "types";
+import { fetchPosts } from "lib/wordpress";
 import { POSTS_PER_PAGE } from "utils/consts";
-import { fetcher } from "utils/fetcher";
+
+import type { PostTile } from "types";
+
+type UseInfiniteScrollParams = {
+  page?: number;
+  perPage?: number;
+  categories?: string[];
+  tags?: string[];
+  query?: string;
+  offset?: number;
+};
 
 export const useInfiniteScroll = ({
   page = 1,
   perPage = POSTS_PER_PAGE,
-  categories = "",
-  tags = "",
+  categories = [],
+  tags = [],
   query = "",
   offset = 0,
-}) => {
+}: UseInfiniteScrollParams) => {
   const [fetchedPage, setFetchedPage] = useState(page);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostTile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const getPage = async (page: number) => {
     setIsLoading(true);
     try {
-      const { posts: fetchedPosts }: { posts: Post[] } = await fetcher(
-        `/api/posts?per_page=${perPage}&categories=${categories}&tags=${tags}&query=${query}&offset=${
-          (page - 2) * perPage + offset
-        }`,
-        { method: "GET" },
-      );
+      const { posts: fetchedPosts } = await fetchPosts({
+        perPage,
+        categories,
+        tags,
+        query,
+        offset: (page - 2) * perPage + offset,
+      });
 
       setPosts(fetchedPosts);
       setIsError(false);
@@ -43,15 +55,8 @@ export const useInfiniteScroll = ({
   const getPreviousPage = () => getPage(fetchedPage - 1);
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setFetchedPage(1);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+    setFetchedPage(1);
+  }, [pathname, searchParams]);
 
   return {
     posts,

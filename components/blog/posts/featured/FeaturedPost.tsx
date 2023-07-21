@@ -7,17 +7,17 @@ import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
 import { SOCIALS } from "utils/consts";
 
-import styles from "./Hero.module.scss";
+import styles from "./FeaturedPost.module.scss";
 
 import type { PostTileWithBlur } from "types";
 
-type HeroProps = {
+type FeaturedPostProps = {
   readonly title?: string;
   readonly post: PostTileWithBlur;
   readonly isPostView?: boolean;
 };
 
-export const Hero = memo<HeroProps>(({ title, post, isPostView = true }) => (
+export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView = true }) => (
   <div className={styles.hero}>
     <div className={styles.imageWrapper}>
       {isPostView ? (
@@ -85,4 +85,4 @@ export const Hero = memo<HeroProps>(({ title, post, isPostView = true }) => (
   </div>
 ));
 
-Hero.displayName = "Hero";
+FeaturedPost.displayName = "FeaturedPost";

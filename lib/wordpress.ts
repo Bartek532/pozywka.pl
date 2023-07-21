@@ -1,3 +1,5 @@
+"use server";
+
 import { env } from "env/server";
 import { Category, Post, PostTile, Tag } from "types";
 import { DEFAULT_CATEGORIES, DEFAULT_TAGS, POSTS_PER_PAGE } from "utils/consts";
@@ -102,6 +104,8 @@ export async function fetchPosts({
     { key: "tags", value: tags.length && formattedTags },
     { key: "offset", value: offset },
   ]);
+
+  console.log(apiQuery);
 
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/posts?${apiQuery}`, {
     method: "GET",

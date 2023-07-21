@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import clsx from "clsx";
+import { useEffect } from "react";
 
 import { playSound } from "utils/functions";
 
@@ -9,8 +9,8 @@ export const EmptyResults = () => {
   useEffect(() => {
     playSound("/sounds/coffee.mp3");
   }, []);
-  
-return (
+
+  return (
     <div className={styles.notFound}>
       <p className={styles.description}>
         Niestety, nie znaleźliśmy tego, czego szukasz. Zaparz kawę i spróbuj ponownie!
