@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 
+import { NewsletterForm } from "components/shared/newsletter/form/NewsletterForm";
 import { SocialsMenu } from "components/shared/socials/SocialsMenu";
 import LogoSmall from "public/svg/logo-small.svg";
 import { SOCIALS } from "utils/consts";
@@ -41,7 +42,7 @@ export const Footer = () => (
         <FooterNav />
         <div className={styles.newsletter}>
           <span className={styles.title}>bądź na bieżąco</span>
-          {/* <NewsletterForm /> */}
+          <NewsletterForm />
         </div>
       </div>
     </div>

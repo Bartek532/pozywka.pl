@@ -1,7 +1,12 @@
-import styles from "./PrivacyPolicy.module.scss";
-import type { Page } from "types";
+import { fetchPage } from "lib/wordpress";
 
-export const PrivacyPolicyView = ({ page }: { page: Page }) => {
+import styles from "./PrivacyPolicy.module.scss";
+
+export const PrivacyPolicy = async () => {
+  const page = await fetchPage("privacy-policy");
+
+  if (!page) return null;
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Polityka Prywatności</h1>
