@@ -6,7 +6,7 @@ import { createRoot } from "react-dom/client";
 
 import { LikesCounter } from "components/blog/likesCounter/LikesCounter";
 import { Hero } from "components/common/hero/Hero";
-import { Explore } from "components/explore/Explore";
+import { Explore } from "components/shared/explore/Explore";
 import { EmbedPostTile } from "components/tile/embedPostTile/EmbedPostTile";
 import { useViews } from "hooks/useViews";
 import { POST_LINK_REGEX, URL_REGEX } from "utils/consts";

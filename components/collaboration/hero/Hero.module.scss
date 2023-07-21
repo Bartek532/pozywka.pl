@@ -86,6 +86,8 @@
       margin-left: 200px;
       margin-top: -50px;
       line-height: 1.4;
+      z-index: 1;
+      position: relative;
 
       @media (max-width: 1300px) {
         margin-left: 0;

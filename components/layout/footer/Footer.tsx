@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
+import { SocialsMenu } from "components/shared/socials/SocialsMenu";
 import LogoSmall from "public/svg/logo-small.svg";
 import { SOCIALS } from "utils/consts";
 

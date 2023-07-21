@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-import { SocialsMenu } from "components/menu/socialsMenu/SocialsMenu";
+import { SocialsMenu } from "components/shared/socials/SocialsMenu";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
 import { SOCIALS } from "utils/consts";
