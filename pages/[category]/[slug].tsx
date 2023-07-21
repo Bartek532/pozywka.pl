@@ -1,7 +1,7 @@
 import { Layout } from "components/layout/Layout-old";
 import { getPlaiceholder } from "plaiceholder";
 
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
+import { PostsSliderSection } from "components/shared/postsSlider/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPost } from "pages/api/posts/[slug]";
 import { PostView } from "views/post/Post";

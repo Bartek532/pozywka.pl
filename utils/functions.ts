@@ -1,3 +1,13 @@
+import { SyntheticEvent } from "react";
+
+export const onPromise =
+  <T>(promise: (event: SyntheticEvent) => Promise<T>) =>
+  (event: SyntheticEvent) => {
+    promise(event).catch((error) => {
+      console.log("Unexpected error", error);
+    });
+  };
+
 export const buildQuery = (data: { key: string; value?: number | string }[]) => {
   const query = data
     .map(({ key, value }) => {

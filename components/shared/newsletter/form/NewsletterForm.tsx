@@ -1,41 +1,46 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Input } from "components/form/input/Input";
-import { fetcher } from "utils/fetcher";
-import { SubscribeNewsletterInput, subscribeNewsletterSchema } from "utils/validation";
+import { Input } from "components/common/form/input/Input";
+import { onPromise } from "utils/functions";
 
+import { subscribeToNewsletter } from "./api/mailer";
 import styles from "./NewsletterForm.module.scss";
+import { subscriberSchema } from "./utils/validation/schema";
+import { Subscriber } from "./utils/validation/types";
 
-type PromiseStatus = "pending" | "loading" | "fullfilled" | "rejected";
+type FormStatus = "pending" | "loading" | "fullfilled" | "rejected";
 
 export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SubscribeNewsletterInput>({
-    resolver: zodResolver(subscribeNewsletterSchema),
+  } = useForm<Subscriber>({
+    resolver: zodResolver(subscriberSchema),
   });
-  const [promiseStatus, setPromiseStatus] = useState<PromiseStatus>("pending");
+  const [formStatus, setFormStatus] = useState<FormStatus>("pending");
 
-  const handleFormSubmit = async ({ email, name }: { email: string; name: string }) => {
-    setPromiseStatus("loading");
+  const onSubmit = handleSubmit(async ({ email, name }) => {
+    setFormStatus("loading");
     try {
-      await fetcher("/api/newsletter", { method: "POST", body: { email, name } });
-      setPromiseStatus("fullfilled");
+      await subscribeToNewsletter(name, email);
+      setFormStatus("fullfilled");
     } catch {
-      setPromiseStatus("rejected");
+      setFormStatus("rejected");
     }
-  };
+  });
 
   return (
     <>
       <form
-        className={clsx(styles.form, { [styles.splitted]: isSplitted })}
-        onSubmit={handleSubmit(handleFormSubmit)}
+        className={clsx(styles.form, styles.splitted && { [styles.splitted]: isSplitted })}
+        onSubmit={onPromise(onSubmit)}
+        noValidate
       >
         <div className={styles.inputs}>
           <Input
@@ -56,17 +61,21 @@ export const NewsletterForm = ({ isSplitted = false }: { isSplitted?: boolean })
         </div>
       </form>
       <p
-        className={clsx(styles.state, styles[promiseStatus], {
-          [styles.rejected]: !!errors?.name?.message || !!errors?.email?.message,
-        })}
+        className={clsx(
+          styles.state,
+          styles[formStatus],
+          styles.rejected && {
+            [styles.rejected]: !!errors?.name?.message || !!errors?.email?.message,
+          },
+        )}
       >
         {errors?.name?.message ||
           errors?.email?.message ||
-          (promiseStatus === "fullfilled" ? (
+          (formStatus === "fullfilled" ? (
             "Hurra! Teraz sprawdź swoją skrzynkę ;)"
-          ) : promiseStatus === "rejected" ? (
+          ) : formStatus === "rejected" ? (
             "Błąd. Spróbuj ponownie później"
-          ) : promiseStatus === "loading" ? (
+          ) : formStatus === "loading" ? (
             "Ładowanie..."
           ) : (
             <br />

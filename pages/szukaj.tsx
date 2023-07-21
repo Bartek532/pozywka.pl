@@ -1,7 +1,7 @@
 import { Layout } from "components/layout/Layout-old";
 import { GetServerSideProps } from "next";
 
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
+import { PostsSliderSection } from "components/shared/postsSlider/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
 import { QUERY_SEPARATOR } from "utils/consts";
 import { PostsView } from "views/posts/Posts";

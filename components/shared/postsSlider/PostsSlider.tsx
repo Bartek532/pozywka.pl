@@ -54,7 +54,7 @@ export const PostsSlider = memo<PostsSliderProps>(({ title, posts, tags }) => {
           draggable
           responsive={responsive}
           transitionDuration={500}
-          // removeArrowOnDeviceType={["tablet", "mobile"]}
+          removeArrowOnDeviceType={["tablet", "mobile"]}
         >
           {posts.map((post) => (
             <PostTile post={post} key={post.id} />

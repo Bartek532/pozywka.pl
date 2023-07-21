@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 
 import { useWindowSize } from "hooks/useWindowSize";
 import SearchIcon from "public/svg/search.svg";
+import { onPromise } from "utils/functions";
 
 import styles from "./SearchInput.module.scss";
 
@@ -21,7 +22,7 @@ export const SearchInput = ({
   const [isInputFocused, setIsInputFocused] = useState(!!defaultValue);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSearch)}>
+    <form className={styles.form} onSubmit={onPromise(handleSubmit(onSearch))}>
       <label htmlFor="search">
         <span className="sr-only">Szukaj</span>
         <input

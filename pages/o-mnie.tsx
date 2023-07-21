@@ -1,8 +1,8 @@
 import { Layout } from "components/layout/Layout-old";
 import dynamic from "next/dynamic";
 
-import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
+import { NewsletterSection } from "components/shared/newsletter/Newsletter";
+import { PostsSliderSection } from "components/shared/postsSlider/PostsSlider";
 import { fetchPosts } from "pages/api/posts";
 import { fetchPage } from "utils/api-helpers";
 

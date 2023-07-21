@@ -5,8 +5,8 @@ import { Hero } from "components/common/hero/Hero";
 import { Explore } from "components/explore/Explore";
 import { InstagramSection } from "components/home/instagram/Instagram";
 import { QuoteSection } from "components/home/quote/Quote";
-import { NewsletterSection } from "components/section/newsletterSection/NewsletterSection";
-import { PostsSliderSection } from "components/section/postsSliderSection/PostsSlider";
+import { NewsletterSection } from "components/shared/newsletter/Newsletter";
+import { PostsSliderSection } from "components/shared/postsSlider/PostsSlider";
 import { PostTile } from "components/tile/postTile/PostTile";
 
 import styles from "./Home.module.scss";

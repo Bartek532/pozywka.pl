@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { SearchInput } from "components/form/searchInput/SearchInput";
+import { SearchInput } from "components/common/form/search/SearchInput";
 
 import styles from "./Navbar.module.scss";
 
