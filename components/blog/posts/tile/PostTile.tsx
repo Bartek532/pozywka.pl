@@ -22,8 +22,8 @@ export const PostTile = memo<PostTileProps>(({ post }) => (
             <Image
               src={post.acf.image}
               alt={post.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
               {...(post.blurredImage
                 ? { placeholder: "blur", blurDataURL: post.blurredImage }
                 : {})}

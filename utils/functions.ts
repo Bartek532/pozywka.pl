@@ -14,6 +14,8 @@ export const buildQuery = (data: { key: string; value?: number | string }[]) => 
       if (value) {
         return key + "=" + value;
       }
+
+      return null;
     })
     .filter(Boolean)
     .join("&");
@@ -37,23 +39,23 @@ export const truncateTextByWordsCount = (text: string, wordsCount: number) => {
 export const playSound = (path: string) => {
   const audio = new Audio(path);
   //if (localStorage.getItem("sounds") === "enabled") {
-  audio.play();
+  return audio.play();
   //}
 };
 
 export const random = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
-export const normalizeLikesCount = (likesCount: number) => {
-  if (likesCount >= 1_000_000) {
-    return (likesCount / 1_000_000).toFixed(1) + "M";
+export const normalizeNumber = (number: number) => {
+  if (number >= 1_000_000) {
+    return (number / 1_000_000).toFixed(1) + "M";
   }
 
-  if (likesCount >= 1_000) {
-    return (likesCount / 1_000).toFixed(1) + "K";
+  if (number >= 1_000) {
+    return (number / 1_000).toFixed(1) + "K";
   }
 
-  return likesCount;
+  return number;
 };
 
 export const generateEmbedPostsSelectors = (slug: string, category?: string) => [

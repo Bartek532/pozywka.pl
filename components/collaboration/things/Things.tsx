@@ -16,7 +16,7 @@ export const Things = memo<ThingsProps>(({ things }) => (
       {things.map((thing) => (
         <div className={styles.thing} key={thing.title}>
           <div className={styles.image}>
-            <Image src={thing.image} alt="" layout="fill" objectFit="cover" />
+            <Image src={thing.image} alt="" fill style={{ objectFit: "cover" }} />
           </div>
           <p className={styles.description}>
             <strong className={styles.subtitle}>{thing.title} </strong>

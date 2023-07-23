@@ -1,16 +1,13 @@
 import clsx from "clsx";
-import { useState, memo } from "react";
+import { useEffect, useState } from "react";
 
-import { random, playSound, normalizeLikesCount } from "utils/functions";
-import { useLikes } from "hooks/useLikes";
+import { dislike, getLikes, isLikedByVisitor, like } from "lib/likes";
+import { random, playSound, normalizeNumber } from "utils/functions";
 
 import styles from "./LikesCounter.module.scss";
-type LikesCounter = {
-  readonly slug: string;
-};
 
 const confettiAmount = 60;
-const confettiColors = ["#7d32f5", "#f6e434", "#63fdf1", "#e672da", "#295dfe", "#6e57ff"];
+const confettiColors = ["#7d32f5", "#f6e434", "#63fdf1", "#e672da", "#295dfe", "#6e57ff"] as const;
 
 const createConfetti = (to: HTMLElement) => {
   const elem = document.createElement("i");
@@ -18,40 +15,61 @@ const createConfetti = (to: HTMLElement) => {
   elem.style.setProperty("--y", random(-160, 160) + "px");
   elem.style.setProperty("--r", random(0, 360) + "deg");
   elem.style.setProperty("--s", random(0.6, 1).toString());
-  elem.style.setProperty("--b", confettiColors[random(0, 5)]);
+  elem.style.setProperty("--b", confettiColors[random(0, 5)] ?? confettiColors[0]);
   to.appendChild(elem);
 };
 
-export const LikesCounter = memo<LikesCounter>(({ slug }) => {
-  const [isAnimation, setIsAnimation] = useState(false);
+type LikesCounterProps = {
+  readonly slug: string;
+};
+
+export const LikesCounter = ({ slug }: LikesCounterProps) => {
+  const [isAnimated, setIsAnimated] = useState(false);
   const [isConfetti, setIsConfetti] = useState(false);
-  const { likesCount, isLiked, like, dislike, isError } = useLikes(slug);
+  const [isError, setIsError] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const handleLikeChange = async (e: React.MouseEvent) => {
-    if (!isLiked) {
-      setIsAnimation(true);
-
-      for (let i = 0; i < confettiAmount; i++) {
-        createConfetti(e.currentTarget as HTMLElement);
+  useEffect(() => {
+    const fetchLikes = async () => {
+      try {
+        console.log("fetching");
+        const count = await getLikes(slug);
+        console.log(count);
+        const isLiked = await isLikedByVisitor(slug);
+        setCount(count);
+        setIsLiked(isLiked);
+      } catch (e) {
+        console.log(e);
+        setIsError(true);
       }
+    };
 
-      setTimeout(() => {
-        setIsConfetti(true);
-        playSound("/sounds/like.mp3");
-        setTimeout(async () => {
-          await like();
-        }, 200);
-        setTimeout(() => {
-          document.querySelectorAll("i").forEach((i) => i.remove());
-        }, 600);
-      }, 260);
+    void fetchLikes();
+  }, [slug]);
 
+  const handleLikeToggle = async (e: React.MouseEvent) => {
+    if (isLiked) {
+      await dislike(slug);
+      setIsAnimated(false);
+      setIsConfetti(false);
       return;
     }
 
-    await dislike();
-    setIsAnimation(false);
-    setIsConfetti(false);
+    setIsAnimated(true);
+    for (let i = 0; i < confettiAmount; i++) {
+      createConfetti(e.currentTarget as HTMLElement);
+    }
+
+    setTimeout(() => {
+      setIsConfetti(true);
+      void playSound("/sounds/like.mp3");
+      setTimeout(() => {
+        document.querySelectorAll("i").forEach((i) => i.remove());
+      }, 600);
+    }, 260);
+
+    await like(slug);
   };
 
   if (isError) {
@@ -61,11 +79,12 @@ export const LikesCounter = memo<LikesCounter>(({ slug }) => {
   return (
     <button
       className={clsx(styles.pawButton, {
-        [styles.animation]: isAnimation || isLiked,
-        [styles.liked]: isLiked,
-        [styles.confetti]: isConfetti || isLiked,
+        ...(styles.animation ? { [styles.animation]: isAnimated || isLiked } : {}),
+        ...(styles.liked ? { [styles.liked]: isLiked } : {}),
+        ...(styles.confetti ? { [styles.confetti]: isConfetti || isLiked } : {}),
       })}
-      onClick={handleLikeChange}
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onClick={handleLikeToggle}
     >
       <div className={styles.text}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 19">
@@ -88,7 +107,7 @@ export const LikesCounter = memo<LikesCounter>(({ slug }) => {
         </svg>
         <span className={styles.like}>Lubię to!</span>
       </div>
-      <span className={styles.counter}>{normalizeLikesCount(likesCount)}</span>
+      <span className={styles.counter}>{normalizeNumber(count)}</span>
       <div className={styles.paws}>
         <svg className={styles.paw} viewBox="0 0 30 37" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -136,6 +155,4 @@ export const LikesCounter = memo<LikesCounter>(({ slug }) => {
       </div>
     </button>
   );
-});
-
-LikesCounter.displayName = "LikesCounter";
+};

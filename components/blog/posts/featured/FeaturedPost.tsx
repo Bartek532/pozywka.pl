@@ -25,8 +25,8 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
           <Image
             src={post.acf.image}
             alt={post.title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
             priority
           />
@@ -36,8 +36,8 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
           <Image
             src={post.acf.image}
             alt={post.title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
           />
         </Link>

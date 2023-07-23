@@ -31,12 +31,17 @@ export const About = async () => {
         </div>
       </div>
       <div className={styles.banner}>
-        <Image src={page.acf.image} alt="" layout="fill" objectFit="cover" />
+        <Image src={page.acf.image} alt="" fill style={{ objectFit: "cover" }} />
       </div>
       <div className={styles.infos}>
         <div className={clsx(styles.info, styles.first)}>
           <div className={styles.image}>
-            <Image src={page.acf.first_paragraph.image} alt="" layout="fill" objectFit="cover" />
+            <Image
+              src={page.acf.first_paragraph.image}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <div
             className={styles.description}
@@ -45,7 +50,12 @@ export const About = async () => {
         </div>
         <div className={clsx(styles.info, styles.second)}>
           <div className={styles.image}>
-            <Image src={page.acf.second_paragraph.image} alt="" layout="fill" objectFit="cover" />
+            <Image
+              src={page.acf.second_paragraph.image}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <div
             className={styles.description}
@@ -54,7 +64,12 @@ export const About = async () => {
         </div>
         <div className={clsx(styles.info, styles.third)}>
           <div className={styles.image}>
-            <Image src={page.acf.third_paragraph.image} alt="" layout="fill" objectFit="cover" />
+            <Image
+              src={page.acf.third_paragraph.image}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <div
             className={styles.description}

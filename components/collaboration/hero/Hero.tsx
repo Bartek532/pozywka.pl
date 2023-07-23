@@ -25,7 +25,7 @@ export const Hero = memo<HeroProps>(({ title, description, image, newsletterLabe
     </div>
     <div className={clsx(styles.column, styles.second)}>
       <div className={styles.image}>
-        <Image src={image} alt="" layout="fill" objectFit="cover" />
+        <Image src={image} alt="" fill style={{ objectFit: "cover" }} />
       </div>
       <div className={styles.label}>
         <p dangerouslySetInnerHTML={{ __html: newsletterLabel }}></p>

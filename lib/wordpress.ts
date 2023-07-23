@@ -105,8 +105,6 @@ export async function fetchPosts({
     { key: "offset", value: offset },
   ]);
 
-  console.log(apiQuery);
-
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/posts?${apiQuery}`, {
     method: "GET",
     next: {

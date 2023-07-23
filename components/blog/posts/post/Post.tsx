@@ -9,6 +9,8 @@ import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { Explore } from "components/shared/explore/Explore";
 import { addViews } from "lib/views";
 
+import { LikesCounter } from "../likes/LikesCounter";
+
 import styles from "./Post.module.scss";
 
 import type { Tag, PostWithBlur } from "types";
@@ -21,8 +23,8 @@ type PostProps = {
 };
 
 export const Post = memo<PostProps>(({ tags, post }) => {
-  //   const { addViews } = useViews();
-  const url = window.location.href;
+  // const url = window.location.href;
+  const url = "";
   useEffect(() => {
     //   replaceLinksWithEmbed();
     void addViews(post.slug);
@@ -80,7 +82,7 @@ export const Post = memo<PostProps>(({ tags, post }) => {
           <Explore tags={tags} />
         </aside>
         <div className={styles.footer}>
-          {/* <LikesCounter slug={post.slug} /> */}
+          <LikesCounter slug={post.slug} />
           <div className={styles.share}>
             <p className={styles.description}>Udostępnij: </p>
             <a

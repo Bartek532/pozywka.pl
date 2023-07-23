@@ -57,7 +57,7 @@ export const Banner = memo<BannerProps>(
         </Link>
       </div>
       <div className={clsx(styles.image, styles.hidden && { [styles.hidden]: !imageOnMobile })}>
-        <Image src={imageSrc} alt="" layout="fill" objectFit="cover" />
+        <Image src={imageSrc} alt="" fill style={{ objectFit: "cover" }} />
       </div>
     </div>
   ),

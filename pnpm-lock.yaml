@@ -12,7 +12,7 @@ dependencies:
     version: 3.0.0(next@13.4.11)(plaiceholder@3.0.0)(sharp@0.31.2)
   '@supabase/supabase-js':
     specifier: ^2.26.0
-    version: 2.26.0
+    version: 2.26.0(encoding@0.1.13)
   '@vercel/analytics':
     specifier: ^1.0.1
     version: 1.0.1
@@ -64,11 +64,11 @@ devDependencies:
     specifier: 18.0.3
     version: 18.0.3
   '@types/react':
-    specifier: ^18.0.17
-    version: 18.0.17
+    specifier: ^18.2.15
+    version: 18.2.15
   '@types/react-dom':
-    specifier: 18.0.6
-    version: 18.0.6
+    specifier: 18.2.7
+    version: 18.2.7
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.1.0
     version: 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.19.0)(typescript@5.1.6)
@@ -78,6 +78,9 @@ devDependencies:
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
+  encoding:
+    specifier: 0.1.13
+    version: 0.1.13
   eslint:
     specifier: 8.19.0
     version: 8.19.0
@@ -1577,26 +1580,26 @@ packages:
     resolution: {integrity: sha512-V+MvGwaHH03hYhY+k6Ef/xKd6RYlc4q8WBx+2ANmipHJcKuktNcI/NgEsJgdSUF6Lw32njT6OnrRsKYCdgHjYw==}
     dev: true
 
-  /@supabase/functions-js@2.1.2:
+  /@supabase/functions-js@2.1.2(encoding@0.1.13):
     resolution: {integrity: sha512-QCR6pwJs9exCl37bmpMisUd6mf+0SUBJ6mUpiAjEkSJ/+xW8TCuO14bvkWHADd5hElJK9MxNlMQXxSA4DRz9nQ==}
     dependencies:
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@supabase/gotrue-js@2.44.1:
+  /@supabase/gotrue-js@2.44.1(encoding@0.1.13):
     resolution: {integrity: sha512-/6AEWvvGHHFazoiLp8Uf17UfKRYmcOAnY5N4dcpLuUZkvilc8dHpgEngC/XLlZqWsK1r3lcjwROU3I8IBfGwDg==}
     dependencies:
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@supabase/postgrest-js@1.7.2:
+  /@supabase/postgrest-js@1.7.2(encoding@0.1.13):
     resolution: {integrity: sha512-GK80JpRq8l6Qll85erICypAfQCied8tdlXfsDN14W844HqXCSOisk8AaE01DAwGJanieaoN5fuqhzA2yKxDvEQ==}
     dependencies:
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -1611,23 +1614,23 @@ packages:
       - supports-color
     dev: false
 
-  /@supabase/storage-js@2.5.1:
+  /@supabase/storage-js@2.5.1(encoding@0.1.13):
     resolution: {integrity: sha512-nkR0fQA9ScAtIKA3vNoPEqbZv1k5B5HVRYEvRWdlP6mUpFphM9TwPL2jZ/ztNGMTG5xT6SrHr+H7Ykz8qzbhjw==}
     dependencies:
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@supabase/supabase-js@2.26.0:
+  /@supabase/supabase-js@2.26.0(encoding@0.1.13):
     resolution: {integrity: sha512-RXmTPTobaYAwkSobadHZmEVLmzX3SGrtRZIGfLWnLv92VzBRrjuXn0a+bJqKl50GUzsyqPA+j5pod7EwMkcH5A==}
     dependencies:
-      '@supabase/functions-js': 2.1.2
-      '@supabase/gotrue-js': 2.44.1
-      '@supabase/postgrest-js': 1.7.2
+      '@supabase/functions-js': 2.1.2(encoding@0.1.13)
+      '@supabase/gotrue-js': 2.44.1(encoding@0.1.13)
+      '@supabase/postgrest-js': 1.7.2(encoding@0.1.13)
       '@supabase/realtime-js': 2.7.3
-      '@supabase/storage-js': 2.5.1
-      cross-fetch: 3.1.8
+      '@supabase/storage-js': 2.5.1(encoding@0.1.13)
+      cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -1846,7 +1849,7 @@ packages:
   /@types/next-pwa@5.6.4(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.64.0):
     resolution: {integrity: sha512-ysfWc9FO0yFih1qr84kU+3svvUXPdQA9qi4GYJhFWr3Jx+x/TpH0c2cEBcUiUHLdi+pWnotFbpRguReS0Lb+dg==}
     dependencies:
-      '@types/react': 18.0.17
+      '@types/react': 18.2.15
       next: 13.4.11(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.64.0)
       workbox-build: 6.6.0
     transitivePeerDependencies:
@@ -1876,14 +1879,14 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/react-dom@18.0.6:
-    resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
+  /@types/react-dom@18.2.7:
+    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
-      '@types/react': 18.0.17
+      '@types/react': 18.2.15
     dev: true
 
-  /@types/react@18.0.17:
-    resolution: {integrity: sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ==}
+  /@types/react@18.2.15:
+    resolution: {integrity: sha512-oEjE7TQt1fFTFSbf8kkNuc798ahTUzn3Le67/PWjE8MAfYAD/qB7O8hSTcromLFqHCt9bcdOg5GXMokzTjJ5SA==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -2749,10 +2752,10 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /cross-fetch@3.1.8:
+  /cross-fetch@3.1.8(encoding@0.1.13):
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
     dependencies:
-      node-fetch: 2.6.12
+      node-fetch: 2.6.12(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2990,6 +2993,11 @@ packages:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
     engines: {node: '>= 4'}
     dev: false
+
+  /encoding@0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    dependencies:
+      iconv-lite: 0.6.3
 
   /end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -3761,6 +3769,12 @@ packages:
     hasBin: true
     dev: true
 
+  /iconv-lite@0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
+
   /idb@7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
 
@@ -4427,7 +4441,7 @@ packages:
     resolution: {integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==}
     dev: false
 
-  /node-fetch@2.6.12:
+  /node-fetch@2.6.12(encoding@0.1.13):
     resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -4436,6 +4450,7 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
     dev: false
 
@@ -4957,6 +4972,9 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.2.1
       is-regex: 1.1.4
+
+  /safer-buffer@2.1.2:
+    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
   /sass@1.64.0:
     resolution: {integrity: sha512-m7YtAGmQta9uANIUJwXesAJMSncqH+3INc8kdVXs6eV6GUC8Qu2IYKQSN8PRLgiQfpca697G94klm2leYMxSHw==}
