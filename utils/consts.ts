@@ -1,3 +1,19 @@
+import { env } from "env/client";
+
+export const ORIGIN = env.NEXT_PUBLIC_HOST ?? env.NEXT_PUBLIC_VERCEL_URL ?? ("pozywka.pl" as const);
+export const PROTOCOL = process.env.NODE_ENV === "production" ? "https" : "http";
+export const HOST = `${PROTOCOL}://${ORIGIN}` as const;
+
+export const SEPARATOR = " | ";
+
+export const SITE_TITLE = "Pożywka - kulturalnie o kulinariach";
+export const SITE_TITLE_TEMPLATE = `%s ${SEPARATOR} ${SITE_TITLE}`;
+export const DEFAULT_DESCRIPTION =
+  "Cześć, tu Dominika! Jestem antropolożką i dziennikarką, opowiadam o jedzeniu.";
+export const DEFAULT_AUTHOR = "Dominika Zagrodzka";
+
+export const DEFAULT_IMAGE_URL = "/logo_lg.png";
+
 export const POST_LINK_REGEX = /<a.+href=('|")https:\/\/www\.pozywka\.pl\/.+('|").+>.+<\/a>/g;
 export const URL_REGEX = /(https?:\/\/[^\s]+)/g;
 

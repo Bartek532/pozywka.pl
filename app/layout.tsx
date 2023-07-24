@@ -3,8 +3,11 @@ import localFont from "next/font/local";
 
 import { Analytics } from "components/common/analytics/Analytics";
 import { Layout } from "components/layout/Layout";
+import { DEFAULT_METADATA } from "lib/metadata";
 
 import "../styles/globals.scss";
+
+export const metadata = DEFAULT_METADATA;
 
 const inconsolata = localFont({
   src: [

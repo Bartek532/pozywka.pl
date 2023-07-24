@@ -23,6 +23,8 @@ export const buildQuery = (data: { key: string; value?: number | string }[]) => 
   return query;
 };
 
+export const escapeHtml = (text: string) => text.replace(/(<([^>]+)>)/gi, "").trim();
+
 export const truncateText = (text: string, maxSize: number) =>
   text.length > maxSize ? text.slice(0, text.slice(0, maxSize - 3).lastIndexOf(" ")) + "..." : text;
 

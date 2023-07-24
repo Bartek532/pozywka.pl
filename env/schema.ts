@@ -12,6 +12,9 @@ export const serverSchema = z.object({
 
 export const clientSchema = z.object({
   NEXT_PUBLIC_GA_TRACKING_ID: z.string(),
+
+  NEXT_PUBLIC_HOST: z.string().optional(),
+  NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
 });
 
 /**
@@ -22,4 +25,6 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_GA_TRACKING_ID: process.env.NEXT_PUBLIC_GA_TRACKING_ID,
+  NEXT_PUBLIC_HOST: process.env.NEXT_PUBLIC_HOST,
+  NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
 };
