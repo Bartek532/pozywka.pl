@@ -3,96 +3,102 @@ import { useState, useEffect } from "react";
 
 import { supabase } from "lib/supabase";
 
+const getVisitorId = async () => {
+  const fingerprintPromise = await FingerprintJS.load();
+  const result = await fingerprintPromise.get();
+
+  return result.visitorId;
+};
+
+const getIsLiked = async (userId: string, slug: string) => {
+  const { data } = await supabase.from("likes").select().eq("userId", userId).eq("slug", slug);
+
+  return !!data?.length;
+};
+
+const getLikes = async (slug: string) => {
+  const { count } = await supabase.from("likes").select("*", { count: "exact" }).eq("slug", slug);
+
+  return count ?? 0;
+};
+
+const postLike = (userId: string, slug: string) =>
+  supabase.from("likes").insert([{ userId, slug }]);
+
+const postDislike = (userId: string, slug: string) =>
+  supabase.from("likes").delete().match({ userId, slug });
+
 export const useLikes = (slug: string) => {
-  const [userId, setUserId] = useState("");
+  const [visitorId, setVisitorId] = useState("");
   const [isLiked, setIsLiked] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
+  const [error, setError] = useState("");
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const findUserId = async () => {
-      const fingerprintPromise = await FingerprintJS.load();
-      const result = await fingerprintPromise.get();
-      setUserId(result.visitorId);
+      const id = await getVisitorId();
+      setVisitorId(id);
     };
-
-    findUserId();
+    void findUserId();
   }, []);
 
   useEffect(() => {
-    const checkIsLikedByUser = async () => {
-      const { data } = await supabase.from("likes").select().eq("userId", userId).eq("slug", slug);
-
-      if (data?.length) {
-        setIsLiked(true);
-        setIsError(false);
+    const checkIsLiked = async () => {
+      try {
+        const isLiked = await getIsLiked(visitorId, slug);
+        setIsLiked(isLiked);
+      } catch (error) {
+        setError(JSON.stringify(error));
       }
     };
 
-    const countLikes = async () => {
-      const { count, error } = await supabase
-        .from("likes")
-        .select("*", { count: "exact" })
-        .eq("slug", slug);
-
-      if (count) {
-        setLikesCount(count);
-      }
-
-      if (error) {
-        console.error(error);
-        setIsError(true);
+    const getCount = async () => {
+      try {
+        const count = await getLikes(slug);
+        setCount(count);
+      } catch (error) {
+        setError(JSON.stringify(error));
       }
     };
 
-    countLikes();
-    checkIsLikedByUser();
-  }, [slug, userId]);
+    void checkIsLiked();
+    void getCount();
+  }, [slug, visitorId]);
 
   const like = async () => {
-    if (isLiked) {
+    if (isLiked) return;
+
+    const { error } = await postLike(visitorId, slug);
+
+    if (error) {
+      setError(JSON.stringify(error));
       return;
     }
 
-    const { data, error } = await supabase.from("likes").insert([{ userId, slug }]);
-
-    if (data?.length) {
-      setIsLiked(true);
-      setLikesCount((count) => count + 1);
-      setIsError(false);
-    }
-
-    if (error) {
-      console.error(error);
-
-      setIsError(true);
-    }
+    setIsLiked(true);
+    setCount((count) => count + 1);
+    setError("");
   };
 
   const dislike = async () => {
-    if (!isLiked) {
+    if (!isLiked) return;
+
+    const { error } = await postDislike(visitorId, slug);
+
+    if (error) {
+      setError(JSON.stringify(error));
       return;
     }
 
-    const { data, error } = await supabase.from("likes").delete().match({ userId, slug });
-
-    if (data?.length) {
-      setIsLiked(false);
-      setLikesCount((count) => count - 1);
-      setIsError(false);
-    }
-
-    if (error) {
-      console.error(error);
-
-      setIsError(true);
-    }
+    setIsLiked(false);
+    setCount((count) => count - 1);
+    setError("");
   };
 
   return {
-    likesCount,
+    count,
     isLiked,
-    isError,
+    error,
     like,
     dislike,
   };

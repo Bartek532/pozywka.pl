@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { dislike, getLikes, isLikedByVisitor, like } from "lib/likes";
+import { useLikes } from "hooks/useLikes";
 import { random, playSound, normalizeNumber } from "utils/functions";
 
 import styles from "./LikesCounter.module.scss";
@@ -24,33 +24,13 @@ type LikesCounterProps = {
 };
 
 export const LikesCounter = ({ slug }: LikesCounterProps) => {
+  const { isLiked, like, dislike, error, count } = useLikes(slug);
   const [isAnimated, setIsAnimated] = useState(false);
   const [isConfetti, setIsConfetti] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const fetchLikes = async () => {
-      try {
-        console.log("fetching");
-        const count = await getLikes(slug);
-        console.log(count);
-        const isLiked = await isLikedByVisitor(slug);
-        setCount(count);
-        setIsLiked(isLiked);
-      } catch (e) {
-        console.log(e);
-        setIsError(true);
-      }
-    };
-
-    void fetchLikes();
-  }, [slug]);
 
   const handleLikeToggle = async (e: React.MouseEvent) => {
     if (isLiked) {
-      await dislike(slug);
+      await dislike();
       setIsAnimated(false);
       setIsConfetti(false);
       return;
@@ -65,14 +45,16 @@ export const LikesCounter = ({ slug }: LikesCounterProps) => {
       setIsConfetti(true);
       void playSound("/sounds/like.mp3");
       setTimeout(() => {
+        void like();
+      }, 200);
+      setTimeout(() => {
         document.querySelectorAll("i").forEach((i) => i.remove());
       }, 600);
     }, 260);
-
-    await like(slug);
   };
 
-  if (isError) {
+  if (!!error) {
+    console.log(error);
     return null;
   }
 
