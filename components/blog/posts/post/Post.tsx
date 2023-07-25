@@ -67,7 +67,7 @@ export const Post = async ({ tags, post }: PostProps) => {
             </a>
             <a
               href={`https://twitter.com/share?url=${post.title.replace(
-                "+",
+                /\+/g,
                 "%2B",
               )} - ${url}%0A %0A&hashtags=pozywka`}
               target="_blank"
