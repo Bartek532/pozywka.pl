@@ -1,3 +1,4 @@
+import { isString } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
@@ -20,28 +21,34 @@ type FeaturedPostProps = {
 export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView = false }) => (
   <div className={styles.hero}>
     <div className={styles.imageWrapper}>
-      {isPostView ? (
-        <div className={styles.image}>
-          <Image
-            src={post.acf.image}
-            alt={post.title}
-            fill
-            style={{ objectFit: "cover" }}
-            {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
-            priority
-          />
-        </div>
-      ) : (
-        <Link href={`/${post.categories[0]?.slug}/${post.slug}`} className={styles.image}>
-          <Image
-            src={post.acf.image}
-            alt={post.title}
-            fill
-            style={{ objectFit: "cover" }}
-            {...(post.blurredImage ? { placeholder: "blur", blurDataURL: post.blurredImage } : {})}
-          />
-        </Link>
-      )}
+      {isPostView
+        ? isString(post.acf.image) && (
+            <div className={styles.image}>
+              <Image
+                src={post.acf.image}
+                alt={post.title}
+                fill
+                style={{ objectFit: "cover" }}
+                {...(post.blurredImage
+                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                  : {})}
+                priority
+              />
+            </div>
+          )
+        : isString(post.acf.image) && (
+            <Link href={`/${post.categories[0]?.slug}/${post.slug}`} className={styles.image}>
+              <Image
+                src={post.acf.image}
+                alt={post.title}
+                fill
+                style={{ objectFit: "cover" }}
+                {...(post.blurredImage
+                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                  : {})}
+              />
+            </Link>
+          )}
     </div>
     <div className={styles.content}>
       <div className={styles.header}>

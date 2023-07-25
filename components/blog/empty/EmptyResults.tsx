@@ -1,11 +1,16 @@
+"use client";
+
 import clsx from "clsx";
+import { useEffect } from "react";
 
 import { playSound } from "utils/functions";
 
 import styles from "./EmptyResults.module.scss";
 
-export const EmptyResults = async () => {
-  await playSound("/sounds/coffee.mp3");
+export const EmptyResults = () => {
+  useEffect(() => {
+    void playSound("/sounds/coffee.mp3");
+  }, []);
 
   return (
     <div className={styles.notFound}>
