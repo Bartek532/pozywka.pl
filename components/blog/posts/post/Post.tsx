@@ -1,13 +1,12 @@
-"use client";
-
 import clsx from "clsx";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import React, { memo, useEffect } from "react";
+import React from "react";
 
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { Explore } from "components/shared/explore/Explore";
 import { addViews } from "lib/views";
+import { HOST } from "utils/consts";
 
 import { LikesCounter } from "../likes/LikesCounter";
 
@@ -22,37 +21,10 @@ type PostProps = {
   readonly post: PostWithBlur;
 };
 
-export const Post = memo<PostProps>(({ tags, post }) => {
-  // const url = window.location.href;
-  const url = "";
-  useEffect(() => {
-    //   replaceLinksWithEmbed();
-    void addViews(post.slug);
-  }, [post.slug]);
+export const Post = async ({ tags, post }: PostProps) => {
+  await addViews(post.slug);
 
-  // const replaceLinksWithEmbed = async () => {
-  //   const embedLinkMatches = post.content.match(POST_LINK_REGEX);
-  //   if (embedLinkMatches) {
-  //     await Promise.all(
-  //       embedLinkMatches.map(async (match) => {
-  //         const [url] = match.match(URL_REGEX)!;
-  //         const [protocol, host, category, slug] = url
-  //           .split("/")
-  //           .filter(Boolean)
-  //           .map((x) => x.replace(/['"]+/g, ""));
-  //         const { post: embedPost } = await fetcher(`/api/posts/${slug}`, { method: "GET" });
-
-  //         generateEmbedPostsSelectors(slug, category).forEach((selector) => {
-  //           const element = document.querySelector(selector);
-  //           if (element) {
-  //             const root = createRoot(element);
-  //             root.render(<EmbedPostTile post={embedPost} />);
-  //           }
-  //         });
-  //       }),
-  //     );
-  //   }
-  // };
+  const url = `${HOST}/${post.categories[0]?.slug}/${post.slug}`;
 
   return (
     <>
@@ -109,6 +81,4 @@ export const Post = memo<PostProps>(({ tags, post }) => {
       </div>
     </>
   );
-});
-
-Post.displayName = "Post";
+};

@@ -56,11 +56,14 @@
 
   a {
     cursor: pointer;
-    color: var(--violet-100);
 
-    &:not([href^="https://www.pozywka.pl/"]):hover
+    &:not([href^="https://www.pozywka.pl/"], .internal)
     {
-      text-decoration: underline;
+      color: var(--violet-100);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

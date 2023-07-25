@@ -47,7 +47,9 @@
           background-repeat: no-repeat;
           background-position: bottom left;
           background-size: 0% 3px;
-          transition: background-size 400ms ease, background-color 400ms ease-in-out;
+          transition:
+            background-size 400ms ease,
+            background-color 400ms ease-in-out;
         }
       }
 

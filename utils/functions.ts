@@ -59,8 +59,3 @@ export const normalizeNumber = (number: number) => {
 
   return number;
 };
-
-export const generateEmbedPostsSelectors = (slug: string, category?: string) => [
-  `a[href^="https://www.pozywka.pl/${category}/${slug}"]`,
-  `a[href^="https://www.pozywka.pl/post/${slug}"]`,
-];

@@ -1,8 +1,17 @@
 "use server";
 
+import { omit } from "lodash";
+
+import { EmbedPostTile } from "components/blog/posts/embed/EmbedPostTile";
 import { env } from "env/server";
 import { Category, Post, PostTile, Tag } from "types";
-import { DEFAULT_CATEGORIES, DEFAULT_TAGS, POSTS_PER_PAGE } from "utils/consts";
+import {
+  DEFAULT_CATEGORIES,
+  DEFAULT_TAGS,
+  POSTS_PER_PAGE,
+  POST_LINK_REGEX,
+  URL_REGEX,
+} from "utils/consts";
 import { buildQuery } from "utils/functions";
 import { toCategory, toPage, toPost, toPostTile, toTag } from "utils/mappers";
 import { isCategory, isTag, isWordpressPage, isWordpressPost } from "utils/validation/validator";
@@ -139,6 +148,16 @@ export async function fetchPosts({
   };
 }
 
+const fetchPostTile = async (slug: string) => {
+  const {
+    posts: [post],
+    categories,
+    tags,
+  } = await fetchPosts({ slug });
+
+  return { post: post ? omit(post, ["content"]) : post, categories, tags };
+};
+
 export const fetchPost = async (slug: string) => {
   const {
     posts: [post],
@@ -146,7 +165,43 @@ export const fetchPost = async (slug: string) => {
     tags,
   } = await fetchPosts({ slug });
 
-  return { post, categories, tags };
+  if (!post) {
+    return { post, categories, tags };
+  }
+
+  const ReactDOMServer = (await import("react-dom/server")).default;
+  const embedLinkMatches = post.content.match(POST_LINK_REGEX);
+
+  if (!embedLinkMatches) return { post, categories, tags };
+
+  const embedPosts = await Promise.all(
+    embedLinkMatches.map(async (match) => {
+      const url = match.match(URL_REGEX);
+      if (!url || !url[0]) return;
+
+      const [, , category, slug] = url[0]
+        .split("/")
+        .filter(Boolean)
+        .map((x) => x.replace(/['"]+/g, ""));
+      if (!slug || !category) return;
+
+      const { post: embedPost } = await fetchPostTile(slug);
+      if (!embedPost) return;
+
+      const embedPostTile = ReactDOMServer.renderToString(<EmbedPostTile post={embedPost} />);
+
+      return { match, embedPostTile };
+    }),
+  );
+
+  const replacedContent = embedPosts
+    .filter((x): x is { match: string; embedPostTile: string } => !!x)
+    .reduce(
+      (content, { match, embedPostTile }) => content.replace(match, embedPostTile),
+      post.content,
+    );
+
+  return { post: { ...post, content: replacedContent }, categories, tags };
 };
 
 export const fetchPage = async (slug: string) => {
