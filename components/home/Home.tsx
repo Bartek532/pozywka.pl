@@ -5,8 +5,8 @@ import { Banner } from "components/common/banner/Banner";
 import { Explore } from "components/shared/explore/Explore";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
 import { getTopViews } from "lib/views";
-import { fetchPage, fetchPost, fetchPosts } from "lib/wordpress";
-import { Post } from "types";
+import { fetchPage, fetchPostTile, fetchPosts } from "lib/wordpress";
+import { PostTile as PostTileType } from "types";
 
 import styles from "./Home.module.scss";
 import { Instagram } from "./instagram/Instagram";
@@ -14,11 +14,8 @@ import { Quote } from "./quote/Quote";
 
 const fetchTopPosts = async () => {
   const slugs = await getTopViews();
-  const posts = await Promise.all(slugs.map(({ slug }: { slug: string }) => fetchPost(slug)));
-  const mappedPosts = posts
-    .map(({ post }) => post)
-    .filter((p): p is Post => !!p)
-    .map(({ content, ...rest }) => rest);
+  const posts = await Promise.all(slugs.map(({ slug }: { slug: string }) => fetchPostTile(slug)));
+  const mappedPosts = posts.map(({ post }) => post).filter((p): p is PostTileType => !!p);
 
   return { posts: mappedPosts };
 };

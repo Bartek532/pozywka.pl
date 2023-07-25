@@ -1,7 +1,7 @@
+import { isString } from "lodash";
 import { memo } from "react";
 
 import { truncateTextByWordsCount } from "utils/functions";
-import { isString } from "utils/validation/validator";
 
 import styles from "./EmbedPostTile.module.scss";
 

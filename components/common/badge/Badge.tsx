@@ -1,5 +1,5 @@
-import { memo } from "react";
 import clsx from "clsx";
+import { memo } from "react";
 
 import styles from "./Badge.module.scss";
 
@@ -9,8 +9,8 @@ type BadgeProps = {
   readonly direction: "left" | "right";
 };
 
-export const Badge = memo<BadgeProps>(({ variant, text, direction }) => {
-  return <div className={clsx(styles.badge, styles[variant], styles[direction])}>{text}</div>;
-});
+export const Badge = memo<BadgeProps>(({ variant, text, direction }) => (
+  <div className={clsx(styles.badge, styles[variant], styles[direction])}>{text}</div>
+));
 
 Badge.displayName = "Badge";

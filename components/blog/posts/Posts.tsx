@@ -8,14 +8,16 @@ import { LoadMore } from "components/common/loadMore/LoadMore";
 
 import styles from "./Posts.module.scss";
 
-import type { Category, PostTile as PostTileType } from "types";
+import type { Category, PostTile as PostTileType, Tag } from "types";
 
 type PostsProps = {
   readonly posts: PostTileType[];
-  readonly category: Category;
+  readonly categories?: Category[];
+  readonly tags?: Tag[];
+  readonly query?: string;
 };
 
-export const Posts = memo<PostsProps>(({ posts: initialPosts, category }) => {
+export const Posts = memo<PostsProps>(({ posts: initialPosts, categories, tags, query }) => {
   const [posts, setPosts] = useState(initialPosts);
 
   if (!posts.length) {
@@ -32,7 +34,9 @@ export const Posts = memo<PostsProps>(({ posts: initialPosts, category }) => {
           <LoadMore
             posts={posts}
             setPosts={setPosts}
-            {...(category ? { categories: [category.slug] } : {})}
+            {...(categories ? { categories: categories.map(({ slug }) => slug) } : {})}
+            {...(tags ? { tags: tags.map(({ slug }) => slug) } : {})}
+            {...(query ? { query } : {})}
           />
         </div>
       </section>

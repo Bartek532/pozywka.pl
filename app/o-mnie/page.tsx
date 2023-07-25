@@ -1,10 +1,11 @@
+import { isString } from "lodash";
+
 import { About } from "components/about/About";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchPage, fetchPosts } from "lib/wordpress";
 import { escapeHtml } from "utils/functions";
-import { isString } from "utils/validation/validator";
 
 export async function generateMetadata() {
   const page = await fetchPage("about-me");

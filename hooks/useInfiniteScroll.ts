@@ -1,4 +1,4 @@
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { fetchPosts } from "lib/wordpress";
@@ -28,7 +28,6 @@ export const useInfiniteScroll = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const getPage = async (page: number) => {
     setIsLoading(true);
@@ -56,7 +55,7 @@ export const useInfiniteScroll = ({
 
   useEffect(() => {
     setFetchedPage(1);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return {
     posts,

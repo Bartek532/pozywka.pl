@@ -148,7 +148,7 @@ export async function fetchPosts({
   };
 }
 
-const fetchPostTile = async (slug: string) => {
+export const fetchPostTile = async (slug: string) => {
   const {
     posts: [post],
     categories,

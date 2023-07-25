@@ -1,3 +1,4 @@
+import { isString } from "lodash";
 import { notFound } from "next/navigation";
 
 import { Post } from "components/blog/posts/post/Post";
@@ -5,7 +6,6 @@ import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchPost, fetchPosts } from "lib/wordpress";
 import { escapeHtml } from "utils/functions";
-import { isString } from "utils/validation/validator";
 
 interface PostParams {
   params: {

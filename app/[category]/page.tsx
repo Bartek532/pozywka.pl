@@ -40,7 +40,7 @@ const BlogPage = async ({ params }: BlogParams) => {
   return (
     <>
       {posts[0] && <FeaturedPost post={posts[0]} title={category?.name ?? "logo"} />}
-      <Posts posts={posts} category={category} />
+      <Posts posts={posts} categories={[category]} />
       <PostsSlider title="Najnowsze" posts={newestPosts} tags={tags} />
     </>
   );

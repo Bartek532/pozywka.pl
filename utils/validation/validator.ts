@@ -20,5 +20,3 @@ export const isWordpressPost = (maybePost: unknown): maybePost is WordpressPost 
   wordpressPostSchema.safeParse(maybePost).success;
 export const isWordpressPage = (maybePage: unknown): maybePage is WordpressPage =>
   wordpressPageSchema.safeParse(maybePage).success;
-export const isString = (maybeString: unknown): maybeString is string =>
-  typeof maybeString === "string" && !!maybeString;

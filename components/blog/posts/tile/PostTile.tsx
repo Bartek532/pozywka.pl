@@ -1,3 +1,4 @@
+import { isString } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
@@ -17,19 +18,21 @@ export const PostTile = memo<PostTileProps>(({ post }) => (
   <article className={styles.post} key={post.id}>
     <Link href={`/${post.categories[0]?.slug}/${post.slug}`}>
       <div className={styles.wrapper}>
-        <div className={styles.imageWrapper}>
-          <div className={styles.image}>
-            <Image
-              src={post.acf.image}
-              alt={post.title}
-              fill
-              style={{ objectFit: "cover" }}
-              {...(post.blurredImage
-                ? { placeholder: "blur", blurDataURL: post.blurredImage }
-                : {})}
-            />
+        {isString(post.acf.image) && (
+          <div className={styles.imageWrapper}>
+            <div className={styles.image}>
+              <Image
+                src={post.acf.image}
+                alt={post.title}
+                fill
+                style={{ objectFit: "cover" }}
+                {...(post.blurredImage
+                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                  : {})}
+              />
+            </div>
           </div>
-        </div>
+        )}
         {post.tags.length ? <span className={styles.category}>{post.tags[0]?.name}</span> : null}
         <div className={styles.content}>
           <h3 className={styles.title}>

@@ -1,10 +1,11 @@
+import { isString } from "lodash";
+
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { Collaboration } from "components/collaboration/Collaboration";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchPage, fetchPosts } from "lib/wordpress";
 import { escapeHtml } from "utils/functions";
-import { isString } from "utils/validation/validator";
 
 export async function generateMetadata() {
   const page = await fetchPage("collaboration");
