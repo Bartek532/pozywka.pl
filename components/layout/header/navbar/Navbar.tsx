@@ -1,12 +1,11 @@
-"use client";
-
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, memo } from "react";
 
-import { SearchInput } from "components/common/form/search/SearchInput";
+import { Loader } from "components/common/loader/Loader";
 
 import styles from "./Navbar.module.scss";
+import { SearchBox } from "./SearchBox";
 
 const links = [
   { path: "pisze", name: "Piszę" },
@@ -16,35 +15,31 @@ const links = [
   { path: "wspolpraca", name: "Współpraca" },
 ];
 
-export const Navbar = ({ isHamburgerOpen }: { isHamburgerOpen: boolean }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+interface NavbarProps {
+  isHamburgerOpen: boolean;
+}
 
-  const handleSearch = ({ query }: { query: string }) => {
-    if (query.trim()) {
-      router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
-    }
-  };
-
-  return (
-    <nav className={clsx(styles.nav, styles.active && { [styles.active]: isHamburgerOpen })}>
-      <div className={styles.search}>
-        <SearchInput
-          onSearch={handleSearch}
-          defaultValue={
-            searchParams?.get("q") ? decodeURIComponent(searchParams?.get("q") as string) : ""
-          }
-        />
-      </div>
-      <ul className={styles.list}>
-        {links.map((link) => (
-          <li className={styles.item} key={link.path}>
-            <Link href={`/${link.path}`}>{link.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+export const Navbar = memo<NavbarProps>(({ isHamburgerOpen }) => (
+  <nav className={clsx(styles.nav, styles.active && { [styles.active]: isHamburgerOpen })}>
+    <div className={styles.search}>
+      <Suspense
+        fallback={
+          <div className={styles.loader}>
+            <Loader />
+          </div>
+        }
+      >
+        <SearchBox />
+      </Suspense>
+    </div>
+    <ul className={styles.list}>
+      {links.map((link) => (
+        <li className={styles.item} key={link.path}>
+          <Link href={`/${link.path}`}>{link.name}</Link>
+        </li>
+      ))}
+    </ul>
+  </nav>
+));
 
 Navbar.displayName = "Navbar";

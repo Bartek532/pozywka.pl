@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { Analytics } from "components/common/analytics/Analytics";
 import { Layout } from "components/layout/Layout";
+import { Providers } from "components/shared/providers/Providers";
 import { DEFAULT_METADATA } from "lib/metadata";
 
 import "../styles/globals.scss";
@@ -56,7 +57,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={clsx(inconsolata.variable, jost.variable)}
     >
       <body>
-        <Layout>{children}</Layout>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
         <Analytics />
       </body>
     </html>

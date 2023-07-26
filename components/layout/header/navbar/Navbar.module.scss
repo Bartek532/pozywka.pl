@@ -7,6 +7,16 @@
 
   .search {
     margin-right: 15px;
+
+    .loader {
+      min-width: 20px;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: -5px;
+      color: var(--blue-100);
+    }
   }
 
   .list {
@@ -54,6 +64,13 @@
 
     &.active {
       display: flex;
+    }
+
+    .search {
+      .loader {
+        margin-right: -15px;
+        margin-bottom: 5px;
+      }
     }
 
     .list {

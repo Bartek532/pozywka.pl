@@ -35,7 +35,7 @@ export const LoadMore = memo<LoadMoreProps>(
       setPosts((posts) => [...posts, ...fetchedPosts]);
     }, [fetchedPosts, setPosts]);
 
-    if (posts.length < page * POSTS_PER_PAGE) {
+    if (posts.length - 1 < page * POSTS_PER_PAGE) {
       return null;
     }
 

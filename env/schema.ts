@@ -10,7 +10,7 @@ export const serverSchema = z.object({
 export const clientSchema = z.object({
   NEXT_PUBLIC_GA_TRACKING_ID: z.string(),
 
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url().default("https://example.supabase.co"),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_KEY: z.string(),
 
   NEXT_PUBLIC_HOST: z.string().optional(),

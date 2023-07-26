@@ -30,8 +30,12 @@ const responsive = {
     breakpoint: { max: 1140, min: 993 },
     items: 1.5,
   },
+  tabletSmall: {
+    breakpoint: { max: 992, min: 701 },
+    items: 2,
+  },
   mobile: {
-    breakpoint: { max: 992, min: 0 },
+    breakpoint: { max: 700, min: 0 },
     items: 1,
   },
 };

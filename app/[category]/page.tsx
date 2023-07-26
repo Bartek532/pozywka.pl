@@ -12,6 +12,8 @@ interface BlogParams {
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: BlogParams) {
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);

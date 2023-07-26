@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { DEFAULT_METADATA } from "lib/metadata";
+
+export const metadata = DEFAULT_METADATA;
+
 const NotFoundPage = () => (
   <div className="error-page">
     <Link href="/">
