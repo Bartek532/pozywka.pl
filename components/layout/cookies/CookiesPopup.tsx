@@ -29,7 +29,7 @@ export const CookiesPopup = () => {
         . Klikając Akceptuj, wyrażasz zgodę na używanie ciasteczek w celu usprawnienia korzystania z
         witryny.
       </p>
-      <CookiesIcon />
+      <CookiesIcon className={styles.icon} />
       <button className={styles.btn} onClick={() => setCookiesSetting("accepted")}>
         Akceptuję!
       </button>

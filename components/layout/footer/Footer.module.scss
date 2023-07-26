@@ -5,7 +5,7 @@
   .main {
     background-color: var(--green-100);
     color: var(--pink-100);
-    padding: 30px 70px 30px 30px;
+    padding: 35px 70px 30px 30px;
     width: 100%;
     display: flex;
 
@@ -86,9 +86,12 @@
 @media (max-width: 992px) {
   .footer {
     .main {
+      padding-top: 50px;
+
       .column {
         .logo {
           width: 200px;
+          margin-bottom: 20px;
         }
 
         .copyright {

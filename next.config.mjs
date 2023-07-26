@@ -26,10 +26,10 @@ const nextConfig = {
   images: {
     domains: ["admin.pozywka.pl"],
   },
-  i18n: {
-    locales: ["pl"],
-    defaultLocale: "pl",
-  },
+  // i18n: {
+  //   locales: ["pl"],
+  //   defaultLocale: "pl",
+  // },
 };
 
 export default withPWA(withPlaiceholder(nextConfig));

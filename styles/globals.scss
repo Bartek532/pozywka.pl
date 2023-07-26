@@ -24,7 +24,7 @@ a {
 .react-multiple-carousel__arrow {
   background: var(--pink-100) !important;
   transition: none;
-  z-index: 10;
+  z-index: 10 !important;
 
   &:hover {
     filter: brightness(0.85);
@@ -59,11 +59,23 @@ a {
   }
 }
 
-.error-page {
+.error {
   display: grid;
   place-items: center;
   width: 100%;
-  padding: 0 3rem;
+  padding: 10rem 3rem;
+
+  .link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 70%;
+    max-width: 65rem;
+    aspect-ratio: 1319/498;
+  }
 }
 
 /*
