@@ -1,0 +1,119 @@
+.things {
+  .title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 45px;
+    margin-bottom: 55px;
+    position: relative;
+    display: inline-block;
+
+    &:before {
+      content: "";
+      position: absolute;
+      height: 8px;
+      width: 100%;
+      bottom: 0px;
+      background-color: var(--pink-100);
+      z-index: -1;
+    }
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5rem;
+    counter-reset: h3counter;
+
+    .thing {
+      position: relative;
+      .image {
+        width: 100%;
+        height: calc(100% - 50px);
+        position: relative;
+      }
+
+      &::before {
+        counter-increment: h3counter;
+        content: "0" counter(h3counter);
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        transform: translateY(-50%);
+        font-size: 3.7rem;
+        color: var(--pink-100);
+        font-family: Inconsolata, monospace;
+        font-weight: 700;
+        z-index: 1;
+      }
+
+      &:first-child::before,
+      &:last-child::before {
+        color: var(--violet-100);
+      }
+
+      &:first-child {
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 3;
+
+        .image {
+          min-height: 550px;
+        }
+      }
+
+      &:nth-child(2) {
+        grid-column: 3 / span 3;
+        grid-row: 1 / span 2;
+      }
+
+      &:nth-child(3) {
+        grid-column: 1 / span 3;
+        grid-row: 4 / span 2;
+      }
+
+      &:nth-child(4) {
+        grid-column: 4 / span 2;
+        grid-row: 3 / span 3;
+      }
+
+      .description {
+        margin-top: 15px;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .things {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    .title {
+      text-align: center;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column wrap;
+      gap: 3.5rem;
+
+      .thing {
+        max-width: 350px;
+
+        .image {
+          width: 100%;
+          aspect-ratio: 1/1;
+          height: auto;
+          min-height: auto;
+
+          &:first-child {
+            min-height: auto;
+          }
+        }
+      }
+    }
+  }
+}

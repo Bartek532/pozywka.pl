@@ -1,52 +1,12 @@
-@import "variables";
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-Regular.ttf");
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-SemiBold.ttf");
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inconsolata";
-  src: url("../public/fonts/Inconsolata-Bold.ttf");
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-Regular.ttf");
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-SemiBold.ttf");
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Jost";
-  src: url("../public/fonts/Jost-Bold.ttf");
-  font-weight: 700;
-  font-display: swap;
-}
+@use "variables";
+@use "content";
+@use "reset";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Jost, sans-serif;
+  font-family: var(--font-jost), sans-serif;
   font-weight: 300;
   line-height: 1.4;
   overflow-x: hidden;
@@ -62,12 +22,16 @@ a {
 }
 
 .react-multiple-carousel__arrow {
-  background-color: var(--pink-100);
+  background: var(--pink-100) !important;
   transition: none;
-  z-index: 10;
+  z-index: 10 !important;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 
   &:before {
-    content: "";
+    content: "" !important;
     height: 16px;
     background: url("/svg/arrow-small.svg") center no-repeat;
   }
@@ -83,20 +47,35 @@ a {
   }
 }
 
-.react-multi-carousel-item {
-  @media (max-width: 992px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.react-multi-carousel-track {
+  align-items: flex-start;
+
+  .react-multi-carousel-item {
+    @media (max-width: 992px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 
-.error-page {
-  min-height: 100vh;
+.error {
   display: grid;
   place-items: center;
   width: 100%;
-  padding: 0 3rem;
+  padding: 10rem 3rem;
+
+  .link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 70%;
+    max-width: 65rem;
+    aspect-ratio: 1319/498;
+  }
 }
 
 /*

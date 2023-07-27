@@ -10,11 +10,11 @@
     position: absolute;
     width: 80%;
     height: 80%;
-    border: 2px solid var(--violet-100);
+    border: 2px solid currentColor;
     margin: 1px;
     border-radius: 50%;
     animation: ring 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--violet-100) transparent transparent transparent;
+    border-color: currentColor transparent transparent transparent;
 
     &:nth-child(1) {
       animation-delay: -0.25s;

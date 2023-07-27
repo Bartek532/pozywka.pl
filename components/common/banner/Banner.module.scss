@@ -53,7 +53,7 @@
     }
 
     .link {
-      font-family: "Inconsolata", monospace;
+      font-family: var(--font-inconsolata), monospace;
       font-weight: 300;
       font-size: 16px;
       letter-spacing: 0.1em;
@@ -100,6 +100,10 @@
     .image {
       width: 100%;
       position: relative;
+
+      &.hidden {
+        display: none;
+      }
 
       &:after {
         content: "";

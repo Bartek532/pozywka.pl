@@ -1,0 +1,38 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 640px;
+  max-width: 100%;
+
+  &.big {
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-bottom: 160px;
+    width: 100%;
+    max-width: 1170px;
+  }
+
+  &.texts {
+    padding-top: 25px;
+    border-top: 2px solid var(--violet-100);
+    margin-top: 80px;
+  }
+
+  @media (max-width: 1220px) {
+    width: 530px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    &.big {
+      padding-left: 0;
+      padding-right: 0;
+      margin-bottom: 100px;
+    }
+  }
+}

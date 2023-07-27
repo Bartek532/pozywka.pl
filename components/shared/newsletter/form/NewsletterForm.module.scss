@@ -1,0 +1,86 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  gap: 10px;
+
+  .inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &.splitted {
+    flex-flow: row nowrap;
+    align-items: flex-end;
+
+    .inputs {
+      width: 300px;
+    }
+
+    .btnWrapper {
+      width: 300px;
+      .button {
+        width: 250px;
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .btnWrapper {
+    width: 100%;
+
+    .button {
+      font: inherit;
+      padding: 8px 32px;
+      background-color: var(--pink-100);
+      color: var(--violet-100);
+      font-size: 16px;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      line-height: 1.2;
+    }
+  }
+}
+
+.state {
+  font-size: 14px;
+  margin-top: 10px;
+  color: var(--white-100);
+  font-weight: 500;
+
+  &.fullfilled {
+    color: var(--green-200);
+  }
+
+  &.rejected {
+    color: var(--red-100);
+  }
+}
+
+@media (max-width: 992px) {
+  .form {
+    &.splitted {
+      align-items: center;
+      flex-flow: column wrap;
+
+      .inputs {
+        width: 100%;
+      }
+
+      .btnWrapper {
+        width: 100%;
+        .button {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
