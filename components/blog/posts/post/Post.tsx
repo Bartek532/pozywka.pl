@@ -12,13 +12,13 @@ import { LikesCounter } from "../likes/LikesCounter";
 
 import styles from "./Post.module.scss";
 
-import type { Tag, PostWithBlur } from "types";
+import type { Tag, PostWithPlaceholder } from "types";
 
 dayjs.extend(customParseFormat);
 
 type PostProps = {
   readonly tags: Tag[];
-  readonly post: PostWithBlur;
+  readonly post: PostWithPlaceholder;
 };
 
 export const Post = async ({ tags, post }: PostProps) => {

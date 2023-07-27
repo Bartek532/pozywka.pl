@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Post } from "components/blog/posts/post/Post";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
+import { getPlaceholder } from "lib/images";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchPost, fetchPosts } from "lib/wordpress";
 import { escapeHtml } from "utils/functions";
@@ -35,12 +36,19 @@ const PostPage = async ({ params }: PostParams) => {
 
   if (!post) return notFound();
 
-  const { posts, tags } = await fetchPosts({ perPage: 10 });
+  const { posts, tags } = await fetchPosts({ perPage: 11 });
+
+  const isInNewestPosts = posts.some(({ slug }) => slug === params.slug);
+  const newestPosts = isInNewestPosts
+    ? posts.filter(({ slug }) => slug !== params.slug)
+    : posts.slice(0, 10);
+
+  const postWithPlaceholder = await getPlaceholder(post);
 
   return (
     <>
-      <Post post={post} tags={tags} />
-      <PostsSlider posts={posts} tags={tags} title="Może Cię też zainteresować" />
+      <Post post={postWithPlaceholder} tags={tags} />
+      <PostsSlider posts={newestPosts} tags={tags} title="Może Cię też zainteresować" />
     </>
   );
 };
