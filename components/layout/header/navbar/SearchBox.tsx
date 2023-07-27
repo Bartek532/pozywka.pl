@@ -10,7 +10,7 @@ export const SearchBox = () => {
 
   const handleSearch = ({ query }: { query: string }) => {
     if (query.trim()) {
-      router.replace(`/szukaj?q=${encodeURIComponent(query.trim())}`);
+      router.push(`/szukaj?q=${encodeURIComponent(query.trim())}`);
     }
   };
 

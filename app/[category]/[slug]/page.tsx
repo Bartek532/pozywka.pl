@@ -26,8 +26,9 @@ export async function generateMetadata({ params }: PostParams) {
   });
 }
 
-export async function generateStaticParams() {
-  const { posts } = await fetchPosts({ perPage: 10 });
+export async function generateStaticParams({ params }: { params: { category: string } }) {
+  const { posts } = await fetchPosts({ perPage: 10, categories: [params.category] });
+  console.log(params);
   return posts.map(({ slug }) => ({ slug }));
 }
 
