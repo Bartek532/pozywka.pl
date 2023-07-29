@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import NProgress from "nprogress";
 
 import { SearchInput } from "components/common/form/search/SearchInput";
 
@@ -10,6 +11,7 @@ export const SearchBox = () => {
 
   const handleSearch = ({ query }: { query: string }) => {
     if (query.trim()) {
+      NProgress.start();
       router.push(`/szukaj?q=${encodeURIComponent(query.trim())}`);
     }
   };

@@ -25,12 +25,15 @@ dependencies:
   next:
     specifier: 13.4.8
     version: 13.4.8(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.64.0)
-  next-nprogress-bar:
-    specifier: 2.0.3
-    version: 2.0.3
   next-pwa:
     specifier: ^5.6.0
     version: 5.6.0(@babel/core@7.22.9)(next@13.4.8)(webpack@5.88.2)
+  nextjs-toploader:
+    specifier: 1.4.2
+    version: 1.4.2(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
+  nprogress:
+    specifier: 0.2.0
+    version: 0.2.0
   plaiceholder:
     specifier: 3.0.0
     version: 3.0.0(sharp@0.31.2)
@@ -69,6 +72,9 @@ devDependencies:
   '@types/node':
     specifier: 18.0.3
     version: 18.0.3
+  '@types/nprogress':
+    specifier: 0.2.0
+    version: 0.2.0
   '@types/react':
     specifier: ^18.2.15
     version: 18.2.15
@@ -1971,6 +1977,9 @@ packages:
 
   /@types/node@18.0.3:
     resolution: {integrity: sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==}
+
+  /@types/nprogress@0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
 
   /@types/phoenix@1.6.0:
     resolution: {integrity: sha512-qwfpsHmFuhAS/dVd4uBIraMxRd56vwBUYQGZ6GpXnFuM2XMRFJbIyruFKKlW2daQliuYZwe0qfn/UjFCDKic5g==}
@@ -4442,12 +4451,6 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
-  /next-nprogress-bar@2.0.3:
-    resolution: {integrity: sha512-G2K+76ZT56sZeEGrxaS5AU40s4OzqYy0NUU971Hs3uz77kkArd/GhOLkq5TYcIGBznMHXvKyrCDYdyJPZV2S7A==}
-    dependencies:
-      nprogress: 0.2.0
-    dev: false
-
   /next-pwa@5.6.0(@babel/core@7.22.9)(next@13.4.8)(webpack@5.88.2):
     resolution: {integrity: sha512-XV8g8C6B7UmViXU8askMEYhWwQ4qc/XqJGnexbLV68hzKaGHZDMtHsm2TNxFcbR7+ypVuth/wwpiIlMwpRJJ5A==}
     peerDependencies:
@@ -4560,6 +4563,21 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nextjs-toploader@1.4.2(next@13.4.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-FS5+zCdNHLq0YA+SijkbDifOMFNayKfxkCLTiM6TIrvSaf6kAzCGlNjwgVpoG3zpampVMQSVf5L/jrWFJgs23g==}
+    peerDependencies:
+      next: '>= 6.0.0'
+      react: '>= 16.0.0'
+      react-dom: '>= 16.0.0'
+    dependencies:
+      '@types/nprogress': 0.2.0
+      next: 13.4.8(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.64.0)
+      nprogress: 0.2.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /no-case@3.0.4:
@@ -4883,7 +4901,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -4934,7 +4951,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-multi-carousel@2.8.4:
     resolution: {integrity: sha512-7Is5Wr+m2ebkR+oq2Su2tjUdBwpVtB2O6Tjb74KDNfxWe/FrsTQwezTJTk/r9cKCrRp9Li308v822/5bZm7XKg==}
