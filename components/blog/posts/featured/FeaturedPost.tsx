@@ -10,11 +10,11 @@ import { SOCIALS } from "utils/consts";
 
 import styles from "./FeaturedPost.module.scss";
 
-import type { PostTileWithBlur } from "types";
+import type { PostTileWithPlaceholder } from "types";
 
 type FeaturedPostProps = {
   readonly title?: string;
-  readonly post: PostTileWithBlur;
+  readonly post: PostTileWithPlaceholder;
   readonly isPostView?: boolean;
 };
 
@@ -29,8 +29,8 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
                 alt={post.title}
                 fill
                 style={{ objectFit: "cover" }}
-                {...(post.blurredImage
-                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                {...(post.placeholder
+                  ? { placeholder: "blur", blurDataURL: post.placeholder }
                   : {})}
                 priority
               />
@@ -43,8 +43,8 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
                 alt={post.title}
                 fill
                 style={{ objectFit: "cover" }}
-                {...(post.blurredImage
-                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                {...(post.placeholder
+                  ? { placeholder: "blur", blurDataURL: post.placeholder }
                   : {})}
               />
             </Link>

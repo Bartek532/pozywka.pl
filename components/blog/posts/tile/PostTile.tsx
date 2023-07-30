@@ -8,10 +8,10 @@ import { truncateTextByWordsCount } from "utils/functions";
 
 import styles from "./PostTile.module.scss";
 
-import type { PostTileWithBlur } from "types";
+import type { PostTileWithPlaceholder } from "types";
 
 type PostTileProps = {
-  readonly post: PostTileWithBlur;
+  readonly post: PostTileWithPlaceholder;
 };
 
 export const PostTile = memo<PostTileProps>(({ post }) => (
@@ -26,8 +26,8 @@ export const PostTile = memo<PostTileProps>(({ post }) => (
                 alt={post.title}
                 fill
                 style={{ objectFit: "cover" }}
-                {...(post.blurredImage
-                  ? { placeholder: "blur", blurDataURL: post.blurredImage }
+                {...(post.placeholder
+                  ? { placeholder: "blur", blurDataURL: post.placeholder }
                   : {})}
               />
             </div>

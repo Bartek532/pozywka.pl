@@ -59,7 +59,7 @@ export const fetchMyLastInstagramPosts = async () => {
   const token = await getLongLivedToken();
 
   const response = await fetch(
-    `https://graph.instagram.com/me?fields=id, media&access_token=${token}`,
+    `https://graph.instagram.com/me?fields=id,media&access_token=${token}`,
     {
       method: "GET",
       next: {
@@ -77,7 +77,7 @@ export const fetchMyLastInstagramPosts = async () => {
   const posts = await Promise.all(
     data.media.data.map(async ({ id }) => {
       const response = await fetch(
-        `https://graph.instagram.com/${id}?fields=id, media_url, media_type, username, caption, permalink&access_token=${token}`,
+        `https://graph.instagram.com/${id}?fields=id,media_url,media_type,username,caption,permalink&access_token=${token}`,
         {
           method: "GET",
           next: {

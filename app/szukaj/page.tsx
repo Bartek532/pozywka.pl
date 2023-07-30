@@ -1,6 +1,7 @@
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { Posts } from "components/blog/posts/Posts";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
+import { getPlaceholders } from "lib/images";
 import { getMetadata } from "lib/metadata";
 import { fetchCategories, fetchPosts, fetchTags } from "lib/wordpress";
 import { Category, Tag } from "types";
@@ -61,16 +62,21 @@ const SearchPage = async ({
   const { posts: newestPosts } = await fetchPosts({ perPage: 10 });
   const title = getTitle(desiredCategories, desiredTags, searchParams?.q);
 
+  const [postsWithPlaceholders, newestPostsWithPlaceholders] = await Promise.all([
+    getPlaceholders(posts),
+    getPlaceholders(newestPosts),
+  ]);
+
   return (
     <>
-      {posts[0] && <FeaturedPost post={posts[0]} title={title} />}
+      {postsWithPlaceholders[0] && <FeaturedPost post={postsWithPlaceholders[0]} title={title} />}
       <Posts
         posts={posts}
         tags={desiredTags}
         categories={desiredCategories}
         {...(searchParams?.q ? { query: searchParams?.q } : {})}
       />
-      <PostsSlider title="Najnowsze" posts={newestPosts} tags={tags} />
+      <PostsSlider title="Najnowsze" posts={newestPostsWithPlaceholders} tags={tags} />
     </>
   );
 };

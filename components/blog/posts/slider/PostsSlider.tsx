@@ -9,11 +9,11 @@ import { PostTile } from "components/blog/posts/tile/PostTile";
 
 import styles from "./PostsSlider.module.scss";
 
-import type { Tag, PostTileWithBlur } from "types";
+import type { Tag, PostTileWithPlaceholder } from "types";
 
 type PostsSliderProps = {
   readonly title: string;
-  readonly posts: PostTileWithBlur[];
+  readonly posts: PostTileWithPlaceholder[];
   readonly tags: Tag[];
 };
 

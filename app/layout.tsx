@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import localFont from "next/font/local";
+import NextTopLoader from "nextjs-toploader";
 
 import { Analytics } from "components/common/analytics/Analytics";
 import { Layout } from "components/layout/Layout";
-import { Providers } from "components/shared/providers/Providers";
 import { DEFAULT_METADATA } from "lib/metadata";
 
 import "../styles/globals.scss";
@@ -57,9 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={clsx(inconsolata.variable, jost.variable)}
     >
       <body>
-        <Providers>
-          <Layout>{children}</Layout>
-        </Providers>
+        <NextTopLoader color="#ec5946" height={4} showSpinner={false} />
+        <Layout>{children}</Layout>
         <Analytics />
       </body>
     </html>
