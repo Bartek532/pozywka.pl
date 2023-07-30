@@ -24,11 +24,6 @@ export async function generateMetadata({ params }: BlogParams) {
   });
 }
 
-export async function generateStaticParams() {
-  const categories = await fetchCategories();
-  return categories.map(({ slug }) => ({ category: slug }));
-}
-
 const BlogPage = async ({ params }: BlogParams) => {
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);
