@@ -18,10 +18,19 @@ const getPosts = async () => {
   }
 };
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <section className={styles.section}>
+    <span className={styles.title}>instagram</span>
+    {children}
+  </section>
+);
+
 const LoadingFallback = () => (
-  <div className={styles.loading}>
-    <Loader />
-  </div>
+  <Wrapper>
+    <div className={styles.loading}>
+      <Loader />
+    </div>
+  </Wrapper>
 );
 
 const InstagramPosts = async () => {
@@ -31,8 +40,7 @@ const InstagramPosts = async () => {
   if (!data) return <LoadingFallback />;
 
   return (
-    <section className={styles.section}>
-      <span className={styles.title}>instagram</span>
+    <Wrapper>
       <div className={styles.images}>
         {data.map(({ permalink, media_url, caption }) => (
           <a
@@ -47,7 +55,7 @@ const InstagramPosts = async () => {
           </a>
         ))}
       </div>
-    </section>
+    </Wrapper>
   );
 };
 
