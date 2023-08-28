@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { Posts } from "components/blog/posts/Posts";
@@ -24,21 +25,30 @@ export async function generateMetadata({ params }: BlogParams) {
   });
 }
 
-const BlogPage = async ({ params }: BlogParams) => {
+const Blog = async ({ params }: BlogParams) => {
+  console.time("start");
+  console.log("start");
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);
 
   if (!category) return notFound();
+
+  console.log("category");
 
   const [{ posts }, { posts: newestPosts, tags }] = await Promise.all([
     fetchPosts({ categories: [params.category], perPage: 11 }),
     fetchPosts({ perPage: 10 }),
   ]);
 
+  console.log("posts");
+
   const [postsWithPlaceholders, newestPostsWithPlaceholders] = await Promise.all([
     getPlaceholders(posts),
     getPlaceholders(newestPosts),
   ]);
+
+  console.log("placeholders");
+  console.timeEnd("start");
 
   return (
     <>
@@ -50,5 +60,11 @@ const BlogPage = async ({ params }: BlogParams) => {
     </>
   );
 };
+
+const BlogPage = ({ params }: BlogParams) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Blog params={params} />
+  </Suspense>
+);
 
 export default BlogPage;
