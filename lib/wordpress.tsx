@@ -74,6 +74,8 @@ export const fetchCategories = async () => {
   return [];
 };
 
+let counter = 0;
+
 export async function fetchPosts({
   slug,
 }: Pick<GetPostsParams, "slug">): Promise<ApiGetPostsResponse>;
@@ -93,6 +95,7 @@ export async function fetchPosts({
   slug = "",
   offset = 0,
 }: GetPostsParams): Promise<ApiPostsResponse> {
+  console.time(`fetchPosts ${++counter}`);
   const fetchedCategories = (await fetchCategories()) || DEFAULT_CATEGORIES;
   const fetchedTags = (await fetchTags()) || DEFAULT_TAGS;
 
@@ -140,6 +143,8 @@ export async function fetchPosts({
       tags: fetchedTags,
     } as ApiPostsResponse;
   }
+
+  console.timeEnd(`fetchPosts ${counter}`);
 
   return {
     posts: [],

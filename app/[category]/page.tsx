@@ -35,28 +35,26 @@ const Blog = async ({ params }: BlogParams) => {
 
   console.log("category");
 
+  console.time("posts");
+
   const [{ posts }, { posts: newestPosts, tags }] = await Promise.all([
     fetchPosts({ categories: [params.category], perPage: 11 }),
     fetchPosts({ perPage: 10 }),
   ]);
 
-  console.log("posts");
+  console.timeEnd("posts");
+  console.time("placeholders");
 
-  const [postsWithPlaceholders, newestPostsWithPlaceholders] = await Promise.all([
-    getPlaceholders(posts),
-    getPlaceholders(newestPosts),
-  ]);
+  await Promise.all([getPlaceholders(posts)]);
 
-  console.log("placeholders");
+  console.timeEnd("placeholders");
   console.timeEnd("start");
 
   return (
     <>
-      {postsWithPlaceholders[0] && (
-        <FeaturedPost post={postsWithPlaceholders[0]} title={category?.name ?? "logo"} />
-      )}
-      <Posts posts={postsWithPlaceholders} categories={[category]} />
-      <PostsSlider title="Najnowsze" posts={newestPostsWithPlaceholders} tags={tags} />
+      {posts[0] && <FeaturedPost post={posts[0]} title={category?.name ?? "logo"} />}
+      <Posts posts={posts} categories={[category]} />
+      <PostsSlider title="Najnowsze" posts={newestPosts} tags={tags} />
     </>
   );
 };

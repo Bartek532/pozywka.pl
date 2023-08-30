@@ -26,7 +26,11 @@ export const getPlaceholder = async <T extends PostTile>(
     : {}),
 });
 
-export const getPlaceholders = <T extends PostTile>(
+export const getPlaceholders = async <T extends PostTile>(
   posts: T[],
-): Promise<(T & { placeholder?: string })[]> =>
-  Promise.all(posts.map(async (post) => getPlaceholder(post)));
+): Promise<(T & { placeholder?: string })[]> => {
+  console.time("placeholders");
+  const promises = await Promise.all(posts.map(async (post) => getPlaceholder(post)));
+  console.timeEnd("placeholders");
+  return promises;
+};
