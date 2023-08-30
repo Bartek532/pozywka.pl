@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { Posts } from "components/blog/posts/Posts";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
-import { getPlaceholders } from "lib/images";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchCategories, fetchPosts } from "lib/wordpress";
 
@@ -25,30 +23,16 @@ export async function generateMetadata({ params }: BlogParams) {
   });
 }
 
-const Blog = async ({ params }: BlogParams) => {
-  console.time("start");
-  console.log("start");
+const BlogPage = async ({ params }: BlogParams) => {
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);
 
   if (!category) return notFound();
 
-  console.log("category");
-
-  console.time("posts");
-
   const [{ posts }, { posts: newestPosts, tags }] = await Promise.all([
     fetchPosts({ categories: [params.category], perPage: 11 }),
     fetchPosts({ perPage: 10 }),
   ]);
-
-  console.timeEnd("posts");
-  console.time("placeholders");
-
-  await Promise.all([getPlaceholders(posts)]);
-
-  console.timeEnd("placeholders");
-  console.timeEnd("start");
 
   return (
     <>
@@ -58,11 +42,5 @@ const Blog = async ({ params }: BlogParams) => {
     </>
   );
 };
-
-const BlogPage = ({ params }: BlogParams) => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <Blog params={params} />
-  </Suspense>
-);
 
 export default BlogPage;
