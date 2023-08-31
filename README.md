@@ -8,18 +8,21 @@ Basically, it's a blog with personal website for food journalist and antropologi
 
 ## Tech/framework used 🧰
 
-| Tech                                                      | Description                               |
-| --------------------------------------------------------- | ----------------------------------------- |
-| [TypeScript](https://www.typescriptlang.org/)             | Static type-checking programming language |
-| [Next.js](https://nextjs.org/)                            | The React Framework for Production        |
-| [React](https://reactjs.org/)                             | Library for building user interfaces      |
-| [PWA](https://web.dev/i18n/pl/progressive-web-apps/)      | Progressive Web Apps                      |
-| [Supabase](https://supabase.com/)                         | Open source database                      |
-| [React Hook Form](https://react-hook-form.com)            | Forms with easy-to-use validation         |
-| [SCSS](https://sass-lang.com)                             | CSS with superpowers                      |
-| [CSS Modules](https://github.com/css-modules/css-modules) | Styles convention in React                |
-| [ESLint](https://eslint.org/)                             | TypeScript linting                        |
-| [Prettier](https://prettier.io/)                          | Code formatter                            |
+| Tech                                                      | Description                                                   |
+| --------------------------------------------------------- | ------------------------------------------------------------- |
+| [TypeScript](https://www.typescriptlang.org/)             | Static type-checking programming language                     |
+| [Next.js 13](https://nextjs.org/)                         | The React Framework for Production                            |
+| [React](https://reactjs.org/)                             | Library for building user interfaces                          |
+| [PWA](https://web.dev/i18n/pl/progressive-web-apps/)      | Progressive Web Apps                                          |
+| [Github Actions](https://github.com/features/actions)     | Automations for workflow improvements                         |
+| [Supabase](https://supabase.com/)                         | Open source database                                          |
+| [React Hook Form](https://react-hook-form.com)            | Forms with easy-to-use validation                             |
+| [SCSS](https://sass-lang.com)                             | CSS with superpowers                                          |
+| [CSS Modules](https://github.com/css-modules/css-modules) | Styles convention in React                                    |
+| [Zod](https://zod.dev)                                    | TypeScript-first schema validation with static type inference |
+| [Husky](https://github.comtypicode/husky)                 | Git hooks                                                     |
+| [ESLint](https://eslint.org/)                             | TypeScript linting                                            |
+| [Prettier](https://prettier.io/)                          | Code formatter                                                |
 
 ## Performance 💨
 
