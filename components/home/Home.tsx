@@ -1,3 +1,5 @@
+import { isString } from "lodash";
+
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { PostTile } from "components/blog/posts/tile/PostTile";
@@ -52,7 +54,7 @@ export const Home = async () => {
           ))}
         </div>
       </aside>
-      {podcast && typeof podcast.acf.image === "string" && (
+      {podcast && isString(podcast.acf.image) && (
         <Banner
           label="podcast"
           title={podcast.title}
@@ -62,7 +64,7 @@ export const Home = async () => {
         />
       )}
       <PostsSlider title={"Najczęściej czytane"} tags={tags} posts={topPosts} />
-      {about && typeof about.acf.profile_image === "string" && (
+      {about && isString(about.acf.profile_image) && (
         <Banner
           label="cześć"
           title="O mnie"

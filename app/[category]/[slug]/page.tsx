@@ -13,6 +13,12 @@ interface PostParams {
   };
 }
 
+// export async function generateStaticParams({ params }: PostParams) {
+//   const { posts } = await fetchPosts({ categories: [params.category], perPage: 10 });
+
+//   return posts.map(({ slug }) => ({ slug }));
+// }
+
 export async function generateMetadata({ params }: PostParams) {
   const { post } = await fetchPost(params.slug);
 

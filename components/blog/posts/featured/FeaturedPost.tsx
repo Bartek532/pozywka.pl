@@ -46,6 +46,7 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
                 {...(post.placeholder
                   ? { placeholder: "blur", blurDataURL: post.placeholder }
                   : {})}
+                priority
               />
             </Link>
           )}

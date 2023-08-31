@@ -1,4 +1,3 @@
-import withPlaiceholder from "@plaiceholder/next";
 import pwa from "next-pwa";
 
 const withPWA = pwa({
@@ -32,4 +31,4 @@ const nextConfig = {
   // },
 };
 
-export default withPWA(withPlaiceholder(nextConfig));
+export default withPWA(nextConfig);
