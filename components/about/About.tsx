@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import { Image } from "components/common/image/Image";
 import { fetchPage } from "lib/wordpress";
 
 import styles from "./About.module.scss";
