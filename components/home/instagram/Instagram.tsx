@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { Image } from "components/common/image/Image";
 import { Loader } from "components/common/loader/Loader";
 
 import { fetchMyLastInstagramPosts } from "./api/instagram";
@@ -51,7 +52,9 @@ const InstagramPosts = async () => {
             className={styles.link}
           >
             <span className="sr-only">{caption}</span>
-            <img className={styles.image} src={media_url} alt="" />
+            <div className={styles.image}>
+              <Image src={media_url} alt="" fill />
+            </div>
           </a>
         ))}
       </div>

@@ -24,11 +24,17 @@ const nextConfig = {
   },
   images: {
     domains: ["admin.pozywka.pl"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.cdninstagram.com",
+      },
+    ],
   },
-  // i18n: {
-  //   locales: ["pl"],
-  //   defaultLocale: "pl",
-  // },
+  i18n: {
+    locales: ["pl"],
+    defaultLocale: "pl",
+  },
 };
 
 export default withPWA(nextConfig);
