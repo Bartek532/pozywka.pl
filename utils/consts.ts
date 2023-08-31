@@ -14,7 +14,7 @@ export const DEFAULT_AUTHOR = "Dominika Zagrodzka";
 
 export const DEFAULT_IMAGE_URL = "/logo_lg.png";
 
-export const POST_LINK_REGEX = /<a.+href=('|")https:\/\/www\.pozywka\.pl\/.+('|").*>.*<\/a>/g;
+export const POST_LINK_REGEX = /<a.+href=('|")https:\/\/(www\.)?pozywka\.pl\/.+('|").*>.*<\/a>/g;
 export const URL_REGEX = /(https?:\/\/[^\s'"]+)/g;
 
 export const QUERY_SEPARATOR = " ";

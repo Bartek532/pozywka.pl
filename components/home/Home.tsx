@@ -1,10 +1,11 @@
+import { isString } from "lodash";
+
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
 import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { PostTile } from "components/blog/posts/tile/PostTile";
 import { Banner } from "components/common/banner/Banner";
 import { Explore } from "components/shared/explore/Explore";
 import { Newsletter } from "components/shared/newsletter/Newsletter";
-import { getPlaceholders } from "lib/images";
 import { getTopViews } from "lib/views";
 import { fetchPage, fetchPostTile, fetchPosts } from "lib/wordpress";
 import { PostTile as PostTileType } from "types";
@@ -38,27 +39,22 @@ export const Home = async () => {
     fetchPage("about-me"),
   ]);
 
-  const [postsWithPlaceholders, topPostsWithPlaceholders] = await Promise.all([
-    getPlaceholders(posts),
-    getPlaceholders(topPosts),
-  ]);
-
   return (
     <>
-      {postsWithPlaceholders[0] && <FeaturedPost post={postsWithPlaceholders[0]} title="logo" />}
+      {posts[0] && <FeaturedPost post={posts[0]} title="logo" />}
       <aside className={styles.wrapper}>
         <div className={styles.explore}>
           <Explore tags={tags} />
         </div>
         <div className={styles.posts}>
-          {postsWithPlaceholders.slice(1, 3).map((post) => (
+          {posts.slice(1, 3).map((post) => (
             <div className={styles.post} key={post.id}>
               <PostTile post={post} />
             </div>
           ))}
         </div>
       </aside>
-      {podcast && typeof podcast.acf.image === "string" && (
+      {podcast && isString(podcast.acf.image) && (
         <Banner
           label="podcast"
           title={podcast.title}
@@ -67,8 +63,8 @@ export const Home = async () => {
           imageSrc={podcast.acf.image}
         />
       )}
-      <PostsSlider title={"Najczęściej czytane"} tags={tags} posts={topPostsWithPlaceholders} />
-      {about && typeof about.acf.profile_image === "string" && (
+      <PostsSlider title={"Najczęściej czytane"} tags={tags} posts={topPosts} />
+      {about && isString(about.acf.profile_image) && (
         <Banner
           label="cześć"
           title="O mnie"

@@ -30,7 +30,6 @@
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^3.4.2",
     "@hookform/resolvers": "^3.1.1",
-    "@plaiceholder/next": "3.0.0",
     "@supabase/supabase-js": "^2.26.0",
     "@vercel/analytics": "^1.0.1",
     "dayjs": "^1.11.9",
@@ -39,13 +38,11 @@
     "next-pwa": "^5.6.0",
     "nextjs-toploader": "1.4.2",
     "nprogress": "0.2.0",
-    "plaiceholder": "3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.33.1",
     "react-multi-carousel": "^2.8.4",
     "server-only": "0.0.1",
-    "sharp": "^0.31.2",
     "zod": "^3.20.2"
   },
   "devDependencies": {

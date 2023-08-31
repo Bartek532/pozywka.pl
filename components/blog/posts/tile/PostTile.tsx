@@ -1,8 +1,8 @@
 import { isString } from "lodash";
-import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
+import { Image } from "components/common/image/Image";
 import ArrowIcon from "public/svg/arrow.svg";
 import { truncateTextByWordsCount } from "utils/functions";
 

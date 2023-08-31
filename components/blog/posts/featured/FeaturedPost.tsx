@@ -1,8 +1,8 @@
 import { isString } from "lodash";
-import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
+import { Image } from "components/common/image/Image";
 import { SocialsMenu } from "components/shared/socials/SocialsMenu";
 import ArrowIcon from "public/svg/arrow.svg";
 import Logo from "public/svg/logo.svg";
@@ -46,6 +46,7 @@ export const FeaturedPost = memo<FeaturedPostProps>(({ title, post, isPostView =
                 {...(post.placeholder
                   ? { placeholder: "blur", blurDataURL: post.placeholder }
                   : {})}
+                priority
               />
             </Link>
           )}

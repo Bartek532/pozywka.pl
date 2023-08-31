@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { isString } from "lodash";
 import React from "react";
 
 import { FeaturedPost } from "components/blog/posts/featured/FeaturedPost";
@@ -42,7 +43,7 @@ export const Post = async ({ tags, post }: PostProps) => {
               OPUBLIKOWANO <time>{dayjs(post.date).format("DD.MM.YYYY")}</time>
             </span>
             <hr className={styles.line} />
-            {typeof post.acf.read_more === "string" && (
+            {isString(post.acf.read_more) && (
               <div
                 className={styles.readmore}
                 dangerouslySetInnerHTML={{

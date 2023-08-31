@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import Image from "next/image";
 import { memo } from "react";
 
 import { Badge } from "components/common/badge/Badge";
+import { Image } from "components/common/image/Image";
 
 import styles from "./Hero.module.scss";
 
