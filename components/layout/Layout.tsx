@@ -13,9 +13,6 @@ export const Layout = memo<LayoutProps>(({ children }) => (
   <>
     <div className={styles.content}>
       <CookiesPopup />
-      {/* <div className={clsx(styles.imageEgg, { [styles.active]: counter >= 3 })}>
-        <Image src="/svg/zmn.png" width="500" height="500" alt="" />
-      </div> */}
       <Header />
       <main className={styles.main}>{children}</main>
       <Footer />
