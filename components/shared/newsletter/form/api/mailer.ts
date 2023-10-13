@@ -8,6 +8,8 @@ export const subscribeToNewsletter = async (name: string, email: string) => {
     body: JSON.stringify({ fields: { name }, email, groups: [env.MAILER_LITE_GROUP_ID] }),
     headers: {
       Authorization: "Bearer " + env.MAILER_LITE_API_KEY,
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
   });
 };
