@@ -6,19 +6,9 @@ import { PostsSlider } from "components/blog/posts/slider/PostsSlider";
 import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchCategories, fetchPosts } from "lib/wordpress";
 
-interface BlogParams {
-  params: {
-    category: string;
-  };
-}
+import { CategoryParams } from "./layout";
 
-// export async function generateStaticParams() {
-//   const categories = await fetchCategories();
-
-//   return categories.map(({ slug }) => ({ slug }));
-// }
-
-export async function generateMetadata({ params }: BlogParams) {
+export async function generateMetadata({ params }: CategoryParams) {
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);
 
@@ -29,7 +19,7 @@ export async function generateMetadata({ params }: BlogParams) {
   });
 }
 
-const BlogPage = async ({ params }: BlogParams) => {
+const BlogPage = async ({ params }: CategoryParams) => {
   const categories = await fetchCategories();
   const category = categories.find(({ slug }) => slug === params.category);
 
