@@ -7,17 +7,19 @@ import { DEFAULT_METADATA, getMetadata } from "lib/metadata";
 import { fetchPost, fetchPosts } from "lib/wordpress";
 import { escapeHtml } from "utils/functions";
 
+import { CategoryParams } from "../layout";
+
 interface PostParams {
   params: {
     slug: string;
   };
 }
 
-// export async function generateStaticParams({ params }: PostParams) {
-//   const { posts } = await fetchPosts({ categories: [params.category], perPage: 10 });
+export async function generateStaticParams({ params }: CategoryParams) {
+  const { posts } = await fetchPosts({ categories: [params.category] });
 
-//   return posts.map(({ slug }) => ({ slug }));
-// }
+  return posts.map(({ slug }) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: PostParams) {
   const { post } = await fetchPost(params.slug);
