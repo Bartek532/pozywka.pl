@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
 import {
   DEFAULT_AUTHOR,
@@ -73,6 +73,9 @@ export const DEFAULT_METADATA: Metadata = {
       { url: "/regular-apple-icon-180x180.png", sizes: "180x180" },
     ],
   },
+};
+
+export const DEFAULT_VIEWPORT: Viewport = {
   themeColor: "#fcccdc",
 };
 
