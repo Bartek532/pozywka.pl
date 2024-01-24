@@ -60,6 +60,11 @@ export const DEFAULT_METADATA: Metadata = {
         url: "/favicon-96x96.png",
         sizes: "96x96",
       },
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#5bbad5",
+      },
     ],
     apple: [
       { url: "/regular-apple-icon-57x57.png", sizes: "57x57" },
