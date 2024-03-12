@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import styles from "./Image.module.scss";
 
-export const Image = (props: Omit<ImageProps, "onLoadingComplete">) => {
+export const Image = (props: Omit<ImageProps, "onLoad">) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSkeleton, setIsSkeleton] = useState(true);
 
@@ -17,7 +17,7 @@ export const Image = (props: Omit<ImageProps, "onLoadingComplete">) => {
         data-loaded={isLoaded}
         onTransitionEnd={(event) => event.propertyName === "opacity" && setIsSkeleton(false)}
       >
-        <NextImage {...props} onLoadingComplete={() => setIsLoaded(true)} />
+        <NextImage {...props} onLoad={() => setIsLoaded(true)} />
       </div>
     </div>
   );
