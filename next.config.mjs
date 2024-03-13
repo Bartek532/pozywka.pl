@@ -22,6 +22,7 @@ const nextConfig = {
     return config;
   },
   images: {
+    unoptimized: true,
     domains: ["admin.pozywka.pl"],
     remotePatterns: [
       {
