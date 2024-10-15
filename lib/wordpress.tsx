@@ -16,6 +16,12 @@ import { buildQuery } from "utils/functions";
 import { toCategory, toPage, toPost, toPostTile, toTag } from "utils/mappers";
 import { isCategory, isTag, isWordpressPage, isWordpressPost } from "utils/validation/validator";
 
+const headers = {
+  "Content-Type": "application/json",
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+};
+
 type GetPostsParams = {
   slug?: string;
   categories?: string[];
@@ -43,6 +49,7 @@ type ApiPostsResponse = ApiGetPostsResponse | ApiGetPostsTilesResponse;
 export const fetchTags = async () => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/tags`, {
     method: "GET",
+    headers,
     next: {
       revalidate: 60,
     },
@@ -60,6 +67,7 @@ export const fetchTags = async () => {
 export const fetchCategories = async () => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/categories`, {
     method: "GET",
+    headers,
     next: {
       revalidate: 60,
     },
@@ -116,6 +124,7 @@ export async function fetchPosts({
 
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/posts?${apiQuery}`, {
     method: "GET",
+    headers,
     next: {
       revalidate: 60,
     },
@@ -207,6 +216,7 @@ export const fetchPost = async (slug: string) => {
 export const fetchPage = async (slug: string) => {
   const response = await fetch(`${env.WP_API_URL}/wp-json/wp/v2/pages?slug=${slug}`, {
     method: "GET",
+    headers,
     next: {
       revalidate: 60,
     },
